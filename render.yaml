@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: axiom-yield-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: API_KEY_DAT
+        sync: false
