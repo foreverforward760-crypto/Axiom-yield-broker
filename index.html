@@ -3,742 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Axiom Yield Broker — SAP-Powered Logistics Intelligence</title>
+<title>Axiom Yield Broker — Carrier Risk Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0f0e0c;
-    --bg-2: #1a1916;
-    --bg-3: #222120;
-    --bg-4: #2c2b28;
-    --border: rgba(255,255,255,0.08);
-    --border-2: rgba(255,255,255,0.14);
-    --text: #f0ede8;
-    --text-2: #a09c94;
-    --text-3: #6b6760;
-    --gold: #c8841a;
-    --gold-light: #f0aa40;
-    --gold-dim: rgba(200,132,26,0.15);
-    --teal: #1d9e75;
-    --teal-dim: rgba(29,158,117,0.15);
-    --coral: #d85a30;
-    --coral-dim: rgba(216,90,48,0.15);
-    --red: #e24b4a;
-    --red-dim: rgba(226,75,74,0.15);
-    --blue: #378add;
-    --blue-dim: rgba(55,138,221,0.15);
-    --purple: #7f77dd;
-    --purple-dim: rgba(127,119,221,0.15);
-    --green: #3b9e4a;
-    --green-dim: rgba(59,158,74,0.15);
-    --amber: #ef9f27;
-    --amber-dim: rgba(239,159,39,0.15);
-    --radius: 10px;
-    --radius-sm: 6px;
-    --radius-lg: 16px;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .app-shell {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    grid-template-rows: 56px 1fr;
-    min-height: 100vh;
-  }
-
-  .topbar {
-    grid-column: 1 / -1;
-    background: var(--bg-2);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-  }
-
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .brand-icon {
-    width: 30px;
-    height: 30px;
-    border-radius: 8px;
-    background: var(--gold);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 600;
-    color: #000;
-    letter-spacing: -0.5px;
-  }
-
-  .brand-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.3px;
-  }
-
-  .brand-tag {
-    font-size: 11px;
-    color: var(--text-3);
-    font-weight: 300;
-  }
-
-  .topbar-right {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--teal);
-    box-shadow: 0 0 6px var(--teal);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  .status-label {
-    font-size: 11px;
-    color: var(--text-3);
-  }
-
-  .version-badge {
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 20px;
-    background: var(--gold-dim);
-    color: var(--gold-light);
-    border: 1px solid rgba(200,132,26,0.3);
-    font-family: 'DM Mono', monospace;
-  }
-
-  .sidebar {
-    background: var(--bg-2);
-    border-right: 1px solid var(--border);
-    padding: 20px 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .sidebar-section-label {
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--text-3);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 12px 8px 6px;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 10px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text-2);
-    transition: background 0.15s, color 0.15s;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-  }
-
-  .nav-item:hover { background: var(--bg-3); color: var(--text); }
-  .nav-item.active { background: var(--gold-dim); color: var(--gold-light); }
-
-  .nav-icon {
-    width: 18px;
-    height: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .nav-badge {
-    margin-left: auto;
-    font-size: 10px;
-    padding: 1px 6px;
-    border-radius: 20px;
-    background: var(--red-dim);
-    color: var(--red);
-  }
-
-  .main {
-    overflow-y: auto;
-    padding: 28px 32px;
-    background: var(--bg);
-  }
-
-  .page { display: none; }
-  .page.active { display: block; animation: fadeIn 0.2s ease; }
-
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-
-  .page-header {
-    margin-bottom: 24px;
-  }
-
-  .page-title {
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--text);
-    letter-spacing: -0.5px;
-    margin-bottom: 4px;
-  }
-
-  .page-sub {
-    font-size: 13px;
-    color: var(--text-3);
-  }
-
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .metric-card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 16px;
-  }
-
-  .metric-label {
-    font-size: 11px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 8px;
-  }
-
-  .metric-value {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: -1px;
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-sub {
-    font-size: 11px;
-    color: var(--text-3);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .up { color: var(--teal); }
-  .down { color: var(--red); }
-  .warn { color: var(--amber); }
-  .gold { color: var(--gold-light); }
-
-  .table-wrap {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-
-  .table-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .table-head-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .table-head-sub {
-    font-size: 11px;
-    color: var(--text-3);
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  thead th {
-    text-align: left;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding: 10px 18px;
-    background: var(--bg-3);
-    border-bottom: 1px solid var(--border);
-  }
-
-  tbody td {
-    padding: 13px 18px;
-    font-size: 13px;
-    color: var(--text);
-    border-bottom: 1px solid var(--border);
-    vertical-align: middle;
-  }
-
-  tbody tr:last-child td { border-bottom: none; }
-  tbody tr:hover td { background: rgba(255,255,255,0.02); }
-
-  .stage-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 500;
-    padding: 4px 9px;
-    border-radius: 20px;
-  }
-
-  .s-void    { background: rgba(136,135,128,0.15); color: #888780; }
-  .s-1       { background: var(--blue-dim); color: #7ab8f0; }
-  .s-2       { background: var(--blue-dim); color: #7ab8f0; }
-  .s-3       { background: var(--amber-dim); color: var(--amber); }
-  .s-4       { background: var(--green-dim); color: #6fcd80; }
-  .s-5       { background: var(--amber-dim); color: var(--amber); }
-  .s-6       { background: var(--teal-dim); color: #3fd9a8; }
-  .s-7       { background: var(--purple-dim); color: #b0aaff; }
-  .s-8       { background: var(--red-dim); color: #f07a79; }
-  .s-9       { background: var(--teal-dim); color: #3fd9a8; }
-
-  .risk-badge {
-    font-size: 10px;
-    font-weight: 500;
-    padding: 3px 8px;
-    border-radius: 20px;
-  }
-
-  .r-low  { background: var(--green-dim); color: #6fcd80; }
-  .r-med  { background: var(--amber-dim); color: var(--amber); }
-  .r-high { background: var(--red-dim); color: #f07a79; }
-  .r-trap { background: var(--purple-dim); color: #b0aaff; border: 1px solid rgba(127,119,221,0.3); }
-  .r-watch { background: var(--gold-dim); color: var(--gold-light); }
-
-  .yield-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .yield-track {
-    width: 72px;
-    height: 5px;
-    background: var(--bg-4);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .yield-fill {
-    height: 100%;
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
-
-  .yield-num {
-    font-size: 12px;
-    font-weight: 500;
-    font-family: 'DM Mono', monospace;
-    min-width: 28px;
-  }
-
-  .card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 20px;
-    margin-bottom: 18px;
-  }
-
-  .card-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 14px;
-  }
-
-  .math-row {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--text-3);
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 7px 11px;
-    margin: 8px 0;
-  }
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .inv-box {
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    font-size: 12px;
-    line-height: 1.5;
-  }
-
-  .inv-stable   { background: var(--green-dim); border: 1px solid rgba(59,158,74,0.2); }
-  .inv-unstable { background: var(--red-dim);   border: 1px solid rgba(226,75,74,0.2); }
-  .inv-both     { background: var(--teal-dim);  border: 1px solid rgba(29,158,117,0.3); }
-
-  .inv-label {
-    font-size: 10px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 4px;
-  }
-
-  .inv-stable   .inv-label { color: #6fcd80; }
-  .inv-unstable .inv-label { color: #f07a79; }
-  .inv-both     .inv-label { color: #3fd9a8; }
-
-  .inv-body { color: var(--text-2); }
-
-  .tension-wrap { margin-top: 12px; }
-  .tension-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 11px;
-    color: var(--text-3);
-    margin-bottom: 5px;
-  }
-
-  .tension-track {
-    height: 4px;
-    background: var(--bg-4);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .tension-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.4s;
-  }
-
-  .input-group { margin-bottom: 18px; }
-
-  .input-top {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: var(--text-2);
-    margin-bottom: 6px;
-  }
-
-  .input-val {
-    font-family: 'DM Mono', monospace;
-    color: var(--gold-light);
-    font-size: 12px;
-  }
-
-  input[type="range"] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 4px;
-    background: var(--bg-4);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    background: var(--gold);
-    border: 2px solid var(--bg);
-    cursor: pointer;
-    transition: transform 0.15s;
-  }
-
-  input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
-
-  .score-result {
-    background: var(--bg-3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 24px;
-    text-align: center;
-    margin-top: 18px;
-  }
-
-  .score-num {
-    font-size: 64px;
-    font-weight: 600;
-    letter-spacing: -3px;
-    line-height: 1;
-    font-family: 'DM Mono', monospace;
-    margin-bottom: 6px;
-  }
-
-  .score-stage {
-    font-size: 13px;
-    color: var(--text-2);
-    margin-bottom: 16px;
-  }
-
-  .score-analysis-box {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px 14px;
-    font-size: 12px;
-    color: var(--text-2);
-    line-height: 1.7;
-    text-align: left;
-  }
-
-  .fractal-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .fractal-item:last-child { border-bottom: none; }
-
-  .fractal-info .f-name { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
-  .fractal-info .f-meta { font-size: 11px; color: var(--text-3); }
-  .fractal-info .f-math { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text-3); margin-top: 5px; }
-
-  .fractal-score-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 5px;
-  }
-
-  .fractal-score-num {
-    font-size: 22px;
-    font-weight: 600;
-    font-family: 'DM Mono', monospace;
-    letter-spacing: -1px;
-  }
-
-  .lane-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .lane-card {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    cursor: pointer;
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .lane-card:hover { border-color: var(--border-2); background: var(--bg-3); }
-  .lane-card.selected { border-color: var(--gold); background: var(--gold-dim); }
-
-  .lane-name { font-size: 13px; font-weight: 600; margin-bottom: 3px; color: var(--text); }
-  .lane-stage { font-size: 11px; color: var(--text-3); margin-bottom: 8px; }
-
-  .entropy-dots { display: flex; gap: 3px; margin-bottom: 8px; }
-  .e-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--bg-4); }
-  .e-dot.on  { background: var(--gold); }
-  .e-dot.hot { background: var(--coral); box-shadow: 0 0 4px var(--coral); }
-
-  .lane-trend {
-    font-size: 10px;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-  }
-
-  .sap-flow {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
-    padding: 18px 0;
-    margin-bottom: 16px;
-  }
-
-  .sap-node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-  }
-
-  .sap-circle {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    border: 2px solid transparent;
-    transition: transform 0.15s, border-color 0.15s;
-    position: relative;
-  }
-
-  .sap-circle:hover { transform: scale(1.12); }
-  .sap-circle.active-node { border-color: var(--gold); box-shadow: 0 0 10px var(--gold-dim); }
-
-  .sap-node-label {
-    font-size: 9px;
-    color: var(--text-3);
-    text-align: center;
-    max-width: 44px;
-    line-height: 1.2;
-  }
-
-  .sap-arrow { font-size: 12px; color: var(--text-3); margin-bottom: 20px; flex-shrink: 0; }
-
-  .stage-detail {
-    background: var(--bg-2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    animation: fadeIn 0.2s ease;
-  }
-
-  .stage-detail-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-  }
-
-  .stage-detail-name {
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: -0.3px;
-    color: var(--text);
-  }
-
-  .btn {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--border-2);
-    background: transparent;
-    color: var(--text-2);
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .btn:hover { background: var(--bg-4); color: var(--text); }
-
-  .btn-gold {
-    background: var(--gold);
-    color: #000;
-    border-color: var(--gold);
-    font-weight: 600;
-  }
-
-  .btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
-
-  .alert {
-    border-radius: var(--radius-sm);
-    padding: 12px 14px;
-    font-size: 12px;
-    line-height: 1.6;
-    margin-top: 12px;
-  }
-
-  .alert strong { font-weight: 500; }
-
-  .alert-warn { background: var(--amber-dim); border: 1px solid rgba(239,159,39,0.25); color: var(--text-2); }
-  .alert-warn strong { color: var(--amber); }
-
-  .alert-danger { background: var(--red-dim); border: 1px solid rgba(226,75,74,0.25); color: var(--text-2); }
-  .alert-danger strong { color: #f07a79; }
-
-  .alert-success { background: var(--teal-dim); border: 1px solid rgba(29,158,117,0.25); color: var(--text-2); }
-  .alert-success strong { color: #3fd9a8; }
-
-  .alert-gold { background: var(--gold-dim); border: 1px solid rgba(200,132,26,0.25); color: var(--text-2); }
-  .alert-gold strong { color: var(--gold-light); }
-
-  .section-divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 24px 0 18px;
-  }
-
-  .section-divider-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-3);
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    white-space: nowrap;
-  }
-
-  .section-divider-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--bg); }
-  ::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 3px; }
-
-  @media (max-width: 900px) {
-    .app-shell { grid-template-columns: 1fr; grid-template-rows: 56px auto 1fr; }
-    .sidebar { grid-row: 2; flex-direction: row; flex-wrap: wrap; padding: 8px; border-right: none; border-bottom: 1px solid var(--border); gap: 2px; }
-    .sidebar-section-label { display: none; }
-    .nav-item { width: auto; }
-    .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-    .lane-grid { grid-template-columns: repeat(2, 1fr); }
-    .main { padding: 18px; }
+    --bg: #0f0e0c; --bg-2: #1a1916; --bg-3: #222120; --bg-4: #2c2b28;
+    --border: rgba(255,255,255,0.08); --border-2: rgba(255,255,255,0.14);
+    --text: #f0ede8; --text-2: #a09c94; --text-3: #6b6760;
+    --gold: #c8841a; --gold-light: #f0aa40; --gold-dim: rgba(200,132,26,0.15);
+    --teal: #1d9e75; --teal-dim: rgba(29,158,117,0.15);
+    --coral: #d85a30; --coral-dim: rgba(216,90,48,0.15);
+    --red: #e24b4a; --red-dim: rgba(226,75,74,0.15);
+    --blue: #378add; --blue-dim: rgba(55,138,221,0.15);
+    --purple: #7f77dd; --purple-dim: rgba(127,119,221,0.15);
+    --green: #3b9e4a; --green-dim: rgba(59,158,74,0.15);
+    --amber: #ef9f27; --amber-dim: rgba(239,159,39,0.15);
+    --radius: 10px; --radius-sm: 6px; --radius-lg: 16px;
+  }
+  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:14px; line-height:1.6; }
+  .app-shell { display:grid; grid-template-columns:220px 1fr; grid-template-rows:56px 1fr; min-height:100vh; }
+  .topbar { grid-column:1/-1; background:var(--bg-2); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 24px; }
+  .brand { display:flex; align-items:center; gap:12px; }
+  .brand-icon { width:30px; height:30px; border-radius:8px; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600; color:#000; letter-spacing:-0.5px; }
+  .brand-name { font-size:15px; font-weight:600; color:var(--text); letter-spacing:-0.3px; }
+  .brand-tag { font-size:11px; color:var(--text-3); font-weight:300; }
+  .topbar-right { display:flex; align-items:center; gap:10px; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 6px var(--teal); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .status-label { font-size:11px; color:var(--text-3); }
+  .version-badge { font-size:10px; padding:3px 8px; border-radius:20px; background:var(--gold-dim); color:var(--gold-light); border:1px solid rgba(200,132,26,0.3); font-family:'DM Mono',monospace; }
+  .sidebar { background:var(--bg-2); border-right:1px solid var(--border); padding:20px 12px; display:flex; flex-direction:column; gap:4px; }
+  .sidebar-section-label { font-size:10px; font-weight:500; color:var(--text-3); letter-spacing:0.08em; text-transform:uppercase; padding:12px 8px 6px; }
+  .nav-item { display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-2); transition:background 0.15s,color 0.15s; border:none; background:none; width:100%; text-align:left; }
+  .nav-item:hover { background:var(--bg-3); color:var(--text); }
+  .nav-item.active { background:var(--gold-dim); color:var(--gold-light); }
+  .nav-icon { width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+  .nav-badge { margin-left:auto; font-size:10px; padding:1px 6px; border-radius:20px; background:var(--red-dim); color:var(--red); }
+  .main { overflow-y:auto; padding:28px 32px; background:var(--bg); }
+  .page { display:none; }
+  .page.active { display:block; animation:fadeIn 0.2s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
+  .page-header { margin-bottom:24px; }
+  .page-title { font-size:22px; font-weight:600; color:var(--text); letter-spacing:-0.5px; margin-bottom:4px; }
+  .page-sub { font-size:13px; color:var(--text-3); }
+  .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
+  .metric-card { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
+  .metric-label { font-size:11px; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
+  .metric-value { font-size:28px; font-weight:600; letter-spacing:-1px; line-height:1; margin-bottom:6px; }
+  .metric-sub { font-size:11px; color:var(--text-3); display:flex; align-items:center; gap:5px; }
+  .up{color:var(--teal)} .down{color:var(--red)} .warn{color:var(--amber)} .gold{color:var(--gold-light)}
+  .table-wrap { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:24px; }
+  .table-head { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--border); }
+  .table-head-title { font-size:13px; font-weight:500; color:var(--text); }
+  .table-head-sub { font-size:11px; color:var(--text-3); }
+  table { width:100%; border-collapse:collapse; }
+  thead th { text-align:left; font-size:10px; font-weight:500; color:var(--text-3); text-transform:uppercase; letter-spacing:0.06em; padding:10px 18px; background:var(--bg-3); border-bottom:1px solid var(--border); }
+  tbody td { padding:13px 18px; font-size:13px; color:var(--text); border-bottom:1px solid var(--border); vertical-align:middle; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover td { background:rgba(255,255,255,0.02); }
+  .stage-pill { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; padding:4px 9px; border-radius:20px; }
+  .s-void{background:rgba(136,135,128,0.15);color:#888780}
+  .s-1{background:var(--blue-dim);color:#7ab8f0}
+  .s-2{background:var(--blue-dim);color:#7ab8f0}
+  .s-3{background:var(--amber-dim);color:var(--amber)}
+  .s-4{background:var(--green-dim);color:#6fcd80}
+  .s-5{background:var(--amber-dim);color:var(--amber)}
+  .s-6{background:var(--teal-dim);color:#3fd9a8}
+  .s-7{background:var(--purple-dim);color:#b0aaff}
+  .s-8{background:var(--red-dim);color:#f07a79}
+  .s-9{background:var(--teal-dim);color:#3fd9a8}
+  .risk-badge { font-size:10px; font-weight:500; padding:3px 8px; border-radius:20px; }
+  .r-low{background:var(--green-dim);color:#6fcd80}
+  .r-med{background:var(--amber-dim);color:var(--amber)}
+  .r-high{background:var(--red-dim);color:#f07a79}
+  .r-trap{background:var(--purple-dim);color:#b0aaff;border:1px solid rgba(127,119,221,0.3)}
+  .r-watch{background:var(--gold-dim);color:var(--gold-light)}
+  .yield-wrap { display:flex; align-items:center; gap:8px; }
+  .yield-track { width:72px; height:5px; background:var(--bg-4); border-radius:3px; overflow:hidden; }
+  .yield-fill { height:100%; border-radius:3px; transition:width 0.4s ease; }
+  .yield-num { font-size:12px; font-weight:500; font-family:'DM Mono',monospace; min-width:28px; }
+  .card { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:18px; }
+  .card-title { font-size:13px; font-weight:500; color:var(--text); margin-bottom:14px; }
+  .math-row { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-3); background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 11px; margin:8px 0; }
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .inv-box { border-radius:var(--radius-sm); padding:12px 14px; font-size:12px; line-height:1.5; }
+  .inv-stable{background:var(--green-dim);border:1px solid rgba(59,158,74,0.2)}
+  .inv-unstable{background:var(--red-dim);border:1px solid rgba(226,75,74,0.2)}
+  .inv-both{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.3)}
+  .inv-label { font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; }
+  .inv-stable .inv-label{color:#6fcd80} .inv-unstable .inv-label{color:#f07a79} .inv-both .inv-label{color:#3fd9a8}
+  .inv-body{color:var(--text-2)}
+  .tension-wrap{margin-top:12px}
+  .tension-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:5px}
+  .tension-track{height:4px;background:var(--bg-4);border-radius:2px;overflow:hidden}
+  .tension-fill{height:100%;border-radius:2px;transition:width 0.4s}
+  .input-group{margin-bottom:18px}
+  .input-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text-2);margin-bottom:6px}
+  .input-val{font-family:'DM Mono',monospace;color:var(--gold-light);font-size:12px}
+  input[type="range"]{-webkit-appearance:none;width:100%;height:4px;background:var(--bg-4);border-radius:2px;outline:none;cursor:pointer}
+  input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);cursor:pointer;transition:transform 0.15s}
+  input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
+  .score-result{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center;margin-top:18px}
+  .score-num{font-size:64px;font-weight:600;letter-spacing:-3px;line-height:1;font-family:'DM Mono',monospace;margin-bottom:6px}
+  .score-stage{font-size:13px;color:var(--text-2);margin-bottom:16px}
+  .score-analysis-box{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;font-size:12px;color:var(--text-2);line-height:1.7;text-align:left}
+  .fractal-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+  .fractal-item:last-child{border-bottom:none}
+  .fractal-info .f-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+  .fractal-info .f-meta{font-size:11px;color:var(--text-3)}
+  .fractal-info .f-math{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);margin-top:5px}
+  .fractal-score-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .fractal-score-num{font-size:22px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-1px}
+  .lane-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .lane-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color 0.15s,background 0.15s}
+  .lane-card:hover{border-color:var(--border-2);background:var(--bg-3)}
+  .lane-card.selected{border-color:var(--gold);background:var(--gold-dim)}
+  .lane-name{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--text)}
+  .lane-stage{font-size:11px;color:var(--text-3);margin-bottom:8px}
+  .entropy-dots{display:flex;gap:3px;margin-bottom:8px}
+  .e-dot{width:8px;height:8px;border-radius:50%;background:var(--bg-4)}
+  .e-dot.on{background:var(--gold)} .e-dot.hot{background:var(--coral);box-shadow:0 0 4px var(--coral)}
+  .lane-trend{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em}
+  .sap-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:18px 0;margin-bottom:16px}
+  .sap-node{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+  .sap-circle{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid transparent;transition:transform 0.15s,border-color 0.15s;position:relative}
+  .sap-circle:hover{transform:scale(1.12)}
+  .sap-circle.active-node{border-color:var(--gold);box-shadow:0 0 10px var(--gold-dim)}
+  .sap-node-label{font-size:9px;color:var(--text-3);text-align:center;max-width:44px;line-height:1.2}
+  .sap-arrow{font-size:12px;color:var(--text-3);margin-bottom:20px;flex-shrink:0}
+  .stage-detail{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;animation:fadeIn 0.2s ease}
+  .stage-detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .stage-detail-name{font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--text)}
+  .btn{font-size:12px;font-weight:500;padding:8px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;transition:background 0.15s,color 0.15s;font-family:'DM Sans',sans-serif}
+  .btn:hover{background:var(--bg-4);color:var(--text)}
+  .btn-gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+  .btn-gold:hover{background:var(--gold-light);border-color:var(--gold-light)}
+  .alert{border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;line-height:1.6;margin-top:12px}
+  .alert strong{font-weight:500}
+  .alert-warn{background:var(--amber-dim);border:1px solid rgba(239,159,39,0.25);color:var(--text-2)}
+  .alert-warn strong{color:var(--amber)}
+  .alert-danger{background:var(--red-dim);border:1px solid rgba(226,75,74,0.25);color:var(--text-2)}
+  .alert-danger strong{color:#f07a79}
+  .alert-success{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.25);color:var(--text-2)}
+  .alert-success strong{color:#3fd9a8}
+  .alert-gold{background:var(--gold-dim);border:1px solid rgba(200,132,26,0.25);color:var(--text-2)}
+  .alert-gold strong{color:var(--gold-light)}
+  .section-divider{display:flex;align-items:center;gap:12px;margin:24px 0 18px}
+  .section-divider-label{font-size:11px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap}
+  .section-divider-line{flex:1;height:1px;background:var(--border)}
+  .glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .gloss-item{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
+  .gloss-term{font-size:12px;font-weight:600;color:var(--gold-light);margin-bottom:4px;font-family:'DM Mono',monospace}
+  .gloss-def{font-size:12px;color:var(--text-2);line-height:1.6}
+  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--bg-4);border-radius:3px}
+  @media(max-width:900px){
+    .app-shell{grid-template-columns:1fr;grid-template-rows:56px auto 1fr}
+    .sidebar{grid-row:2;flex-direction:row;flex-wrap:wrap;padding:8px;border-right:none;border-bottom:1px solid var(--border);gap:2px}
+    .sidebar-section-label{display:none} .nav-item{width:auto}
+    .metrics-grid{grid-template-columns:repeat(2,1fr)} .lane-grid{grid-template-columns:repeat(2,1fr)}
+    .main{padding:18px} .glossary-grid{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -750,7 +175,7 @@
       <div class="brand-icon">AY</div>
       <div>
         <div class="brand-name">Axiom Yield Broker</div>
-        <div class="brand-tag">Stanfield's Axiom of Perpetuity — Logistics Intelligence Engine</div>
+        <div class="brand-tag">SAP Carrier Risk Intelligence — Freight &amp; Logistics Edition</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -761,361 +186,293 @@
   </header>
 
   <nav class="sidebar">
+    <div class="sidebar-section-label">Operations</div>
+    <button class="nav-item active" onclick="nav('dashboard',this)"><span class="nav-icon">◈</span> Carrier Board</button>
+    <button class="nav-item" onclick="nav('calculator',this)"><span class="nav-icon">⊛</span> Yield Calculator</button>
+    <button class="nav-item" onclick="nav('ghost',this)"><span class="nav-icon">◎</span> Ghost Filter <span class="nav-badge">2</span></button>
+    <button class="nav-item" onclick="nav('lanes',this)"><span class="nav-icon">⊞</span> Lane Pressure</button>
     <div class="sidebar-section-label">Intelligence</div>
-    <button class="nav-item active" onclick="nav('dashboard', this)">
-      <span class="nav-icon">◈</span> Dashboard
-    </button>
-    <button class="nav-item" onclick="nav('calculator', this)">
-      <span class="nav-icon">⊛</span> Yield Calculator
-    </button>
-    <button class="nav-item" onclick="nav('ghost', this)">
-      <span class="nav-icon">◎</span> Ghost Filter
-      <span class="nav-badge">2</span>
-    </button>
-    <button class="nav-item" onclick="nav('lanes', this)">
-      <span class="nav-icon">⊞</span> Lane Entropy
-    </button>
-    <div class="sidebar-section-label">Framework</div>
-    <button class="nav-item" onclick="nav('sap', this)">
-      <span class="nav-icon">∞</span> SAP Stages
-    </button>
-    <button class="nav-item" onclick="nav('math', this)">
-      <span class="nav-icon">∑</span> SAP Mathematics
-    </button>
+    <button class="nav-item" onclick="nav('sap',this)"><span class="nav-icon">∞</span> Risk Stage Index</button>
+    <button class="nav-item" onclick="nav('glossary',this)"><span class="nav-icon">▦</span> Glossary</button>
     <div class="sidebar-section-label">About</div>
-    <button class="nav-item" onclick="nav('about', this)">
-      <span class="nav-icon">◉</span> About / Docs
-    </button>
+    <button class="nav-item" onclick="nav('about',this)"><span class="nav-icon">◉</span> About / Docs</button>
   </nav>
 
   <main class="main">
 
+    <!-- DASHBOARD -->
     <div id="page-dashboard" class="page active">
       <div class="page-header">
-        <div class="page-title">Carrier Axiom Monitor</div>
-        <div class="page-sub">Real-time SAP stage tracking — entropy accumulation, yield scores, and predictive risk flags</div>
+        <div class="page-title">Active Carrier Board</div>
+        <div class="page-sub">SAP risk stage · Asset density · Signal integrity · Axiom Yield score — updated per dispatch cycle</div>
       </div>
-
       <div class="metrics-grid">
         <div class="metric-card">
-          <div class="metric-label">Active loads</div>
+          <div class="metric-label">Active Loads</div>
           <div class="metric-value up">47</div>
-          <div class="metric-sub"><span class="up">↑ 3</span> assigned today</div>
+          <div class="metric-sub"><span class="up">↑ 3</span> dispatched today</div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Stage 8 trap alerts</div>
-          <div class="metric-value down" id="s8-count">3</div>
-          <div class="metric-sub"><span class="down">⚠</span> false stability risk</div>
+          <div class="metric-label">Stage 8 — Do Not Dispatch</div>
+          <div class="metric-value down">3</div>
+          <div class="metric-sub"><span class="down">⚠</span> Eye-of-storm carriers flagged</div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Avg axiom yield</div>
+          <div class="metric-label">Fleet Avg Yield Score</div>
           <div class="metric-value gold" id="avg-yield-display">71</div>
-          <div class="metric-sub"><span class="gold">●</span> Stage 4 range</div>
+          <div class="metric-sub"><span class="gold">●</span> Stage 4 — Prime dispatch range</div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Ghost flags</div>
+          <div class="metric-label">Ghost Flags</div>
           <div class="metric-value warn">2</div>
-          <div class="metric-sub"><span class="warn">◌</span> Stage 0 pattern detected</div>
+          <div class="metric-sub"><span class="warn">◌</span> Unverifiable MC pattern</div>
         </div>
       </div>
-
       <div class="table-wrap">
         <div class="table-head">
           <div>
-            <div class="table-head-title">Carrier SAP Index</div>
-            <div class="table-head-sub">Stage position · Inversion tension · Axiom yield score</div>
+            <div class="table-head-title">Carrier Risk Index</div>
+            <div class="table-head-sub">SAP stage · Yield score · Dispatch recommendation</div>
           </div>
         </div>
         <table>
           <thead>
             <tr>
-              <th>Carrier</th>
-              <th>SAP Stage</th>
-              <th>Axiom Yield</th>
-              <th>Tension (P/C)</th>
-              <th>Risk</th>
-              <th>Dispatch Guidance</th>
+              <th>Carrier / MC#</th>
+              <th>Risk Stage</th>
+              <th>Yield Score</th>
+              <th>Operating Metrics</th>
+              <th>Risk Flag</th>
+              <th>Dispatch Action</th>
             </tr>
           </thead>
           <tbody id="carrier-tbody"></tbody>
         </table>
       </div>
-
       <div class="alert alert-gold">
-        <strong>SAP inversion principle:</strong> Carriers who appear physically stable (Stage 8) are consciously unstable — highest failure risk. Do not assign tight-window loads to Stage 8 carriers regardless of their surface metrics. Entropy has already accumulated beyond safe thresholds.
+        <strong>Blind Spot Alert — Stage 8 Carriers:</strong> Carriers scoring into Stage 8 present peak surface compliance but maximum hidden risk. HOS looks good. Communication checks out. Paperwork is clean. That is the trap. Entropy has maxed out below the surface. Do not assign time-sensitive or high-value loads to any Stage 8 carrier regardless of their DAT history or surface metrics.
       </div>
     </div>
 
+    <!-- CALCULATOR -->
     <div id="page-calculator" class="page">
       <div class="page-header">
         <div class="page-title">Axiom Yield Calculator</div>
-        <div class="page-sub">Input three carrier tension metrics → SAP stage position + predictive yield score</div>
+        <div class="page-sub">Enter four carrier operating metrics to generate SAP risk stage + Axiom Yield score</div>
       </div>
-
       <div class="grid-2">
         <div class="card">
-          <div class="card-title">Tension Metric Inputs</div>
-
+          <div class="card-title">Carrier Operating Inputs</div>
           <div class="input-group">
-            <div class="input-top">
-              <span>Hours of service remaining (physical capacity)</span>
-              <span class="input-val" id="hos-v">6 hrs</span>
-            </div>
+            <div class="input-top"><span>Hours of Service remaining (HOS)</span><span class="input-val" id="hos-v">6 hrs</span></div>
             <input type="range" min="0" max="11" value="6" step="1" id="sl-hos" oninput="updateCalc()">
-            <div class="math-row">P.Stable index = HOS / 11 × 100</div>
+            <div class="math-row">Asset Density index = HOS / 11 × 100</div>
           </div>
-
           <div class="input-group">
-            <div class="input-top">
-              <span>Route volatility — weather + traffic entropy</span>
-              <span class="input-val" id="vol-v">4 / 10</span>
-            </div>
+            <div class="input-top"><span>Route volatility — weather + traffic severity</span><span class="input-val" id="vol-v">4 / 10</span></div>
             <input type="range" min="0" max="10" value="4" step="1" id="sl-vol" oninput="updateCalc()">
-            <div class="math-row">Entropy accumulation = volatility / 10 × 100</div>
+            <div class="math-row">Entropy load = volatility / 10 × 100</div>
           </div>
-
           <div class="input-group">
-            <div class="input-top">
-              <span>Communication coherence — dispatcher quality index</span>
-              <span class="input-val" id="comm-v">7 / 10</span>
-            </div>
+            <div class="input-top"><span>Signal Integrity — dispatcher communication quality</span><span class="input-val" id="comm-v">7 / 10</span></div>
             <input type="range" min="0" max="10" value="7" step="1" id="sl-comm" oninput="updateCalc()">
-            <div class="math-row">C.Stable proxy = comm / 10 × 100</div>
+            <div class="math-row">Signal Integrity index = comm / 10 × 100</div>
           </div>
-
           <div class="input-group">
-            <div class="input-top">
-              <span>Days since restoration load — recovery debt</span>
-              <span class="input-val" id="rest-v">3 days</span>
-            </div>
+            <div class="input-top"><span>Days since last recovery run / home time</span><span class="input-val" id="rest-v">3 days</span></div>
             <input type="range" min="0" max="14" value="3" step="1" id="sl-rest" oninput="updateCalc()">
             <div class="math-row">Recovery debt = days / 14 × 100 → accumulates toward Stage 8/9</div>
           </div>
         </div>
-
         <div>
           <div class="score-result">
             <div class="score-num" id="calc-score-num">71</div>
-            <div class="score-stage" id="calc-stage-label">Stage 4 — Foundation · P.Stable / C.Unstable</div>
+            <div class="score-stage" id="calc-stage-label">Stage 4 — Prime Carrier · Full operational capacity</div>
             <div class="score-analysis-box" id="calc-analysis">Analysis appears here...</div>
           </div>
-
           <div class="card" style="margin-top:14px;">
-            <div class="card-title">SAP index breakdown</div>
+            <div class="card-title">Score breakdown</div>
             <div id="calc-breakdown"></div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- GHOST FILTER -->
     <div id="page-ghost" class="page">
       <div class="page-header">
-        <div class="page-title">Ghost-Carrier Fractal Filter</div>
-        <div class="page-sub">Stage 0 artificial stability detection — SAP non-fractal pattern analysis using MC number fingerprinting</div>
+        <div class="page-title">Ghost-Carrier Detection Filter</div>
+        <div class="page-sub">Fraudulent MC pattern screening — absence of operational history is the signal</div>
       </div>
-
       <div class="card">
-        <div class="card-title">The fractal principle</div>
+        <div class="card-title">How ghost carrier detection works</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px;">
-          Real companies grow in natural, messy, stage-like patterns — they oscillate between P.Unstable and P.Stable phases just like all dynamic systems in the SAP framework. Fraudulent carriers exhibit <strong style="color:var(--text);font-weight:500;">Stage 0 Inertia</strong>: artificially clean histories with no fractal growth signature. The absence of natural oscillation is the signal.
+          Legitimate carriers build operational history through natural growth cycles — periods of high volume followed by capacity contraction, route changes, and recovery. This creates a measurable variance pattern. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued, zero growth variance, suspiciously high contact responsiveness. The Axiom Ghost Filter scores that absence as the primary fraud signal.
         </p>
-        <div class="math-row">Fractal score = (age_entropy × 0.30) + (growth_variance × 0.40) + (contact_coherence_inv × 0.30)</div>
-        <div class="math-row">age_entropy = min(carrier_age_years × 12, 100)  ·  growth_variance = normalized load volume variance</div>
-        <div class="math-row">contact_coherence_inv = (10 - contact_quality) × 10  ·  Ghost threshold: score &lt; 35 → Stage 0 pattern</div>
+        <div class="math-row">Ghost Score = (age_score × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
+        <div class="math-row">age_score = min(carrier_age_yrs × 20, 100)  ·  volume_variance = normalized load history variance (0–100)</div>
+        <div class="math-row">contact_anomaly = (10 − contact_quality) × 10  ·  Flag threshold: score &lt; 35 → Ghost pattern confirmed</div>
         <div class="alert alert-warn" style="margin-top:10px;">
-          <strong>Why Stage 0?</strong> In SAP, Stage 0 (Void) has no physical/conscious duality — it exists outside the inversion cycle. Scam entities mimic Stage 0 by having no authentic P.Unstable growth phases. Everything is synthetic stability.
+          <strong>Key indicator:</strong> A carrier answering every call on the first ring with perfect availability across all lanes is a red flag, not a green one. Legitimate owner-operators have limited capacity windows. Unlimited availability = synthetic operation.
         </div>
       </div>
-
       <div class="table-wrap">
-        <div class="table-head">
-          <div class="table-head-title">MC number fractal analysis</div>
-        </div>
+        <div class="table-head"><div class="table-head-title">MC Number Screening Results</div></div>
         <div id="ghost-list" style="padding:0 4px 4px;"></div>
       </div>
     </div>
 
+    <!-- LANE PRESSURE -->
     <div id="page-lanes" class="page">
       <div class="page-header">
-        <div class="page-title">Lane Entropy Map</div>
-        <div class="page-sub">Market tension by freight corridor — SAP stage tracking for predictive pricing and capacity forecasting</div>
+        <div class="page-title">Lane Pressure Map</div>
+        <div class="page-sub">Freight corridor risk staging — capacity forecasting and rate multiplier guidance by lane</div>
       </div>
-
       <div class="card">
-        <div class="card-title">Lane rhythm principle</div>
+        <div class="card-title">Reading lane pressure stages</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          Every freight corridor has a SAP stage. A lane entering <strong style="color:var(--text);font-weight:500;">Stage 8 (False Stability)</strong> appears to have abundant capacity on load boards while entropy accumulates invisibly. The SAP engine detects this 24–48 hours before the collapse. Quote higher now, not when capacity vanishes.
+          Every freight corridor moves through predictable pressure cycles. A lane entering <strong style="color:var(--text);font-weight:500;">Stage 8 (Eye of the Storm)</strong> shows strong load board availability and flat spot rates — right before a capacity collapse. The SAP engine identifies this inflection point 24–48 hours ahead of the market. Quote the multiplier now. When everyone else sees the shortage, it's already too late.
         </p>
-        <div class="math-row">Lane entropy = (demand_vol / 10 × 60) + (inverse_capacity / 10 × 40)  →  maps to SAP stage</div>
-        <div class="math-row">Pricing multiplier = 1 + (tension_score / 100 × 0.25)  ·  Stage 8 lanes → 1.15x–1.25x base rate</div>
+        <div class="math-row">Lane pressure index = (demand_vol / 10 × 60) + (inverse_capacity / 10 × 40)</div>
+        <div class="math-row">Rate multiplier = 1 + (pressure_score / 100 × 0.25)  ·  Stage 8 lanes → 1.15x–1.25x base rate</div>
       </div>
-
       <div class="lane-grid" id="lane-grid"></div>
-
       <div id="lane-detail-card" class="card" style="display:none;">
         <div class="card-title" id="lane-detail-title">Lane analysis</div>
         <div id="lane-detail-content"></div>
       </div>
     </div>
 
+    <!-- RISK STAGE INDEX -->
     <div id="page-sap" class="page">
       <div class="page-header">
-        <div class="page-title">SAP Stage Framework</div>
-        <div class="page-sub">Stanfield's Axiom of Perpetuity — complete 9-stage inversion cycle with logistics translation</div>
+        <div class="page-title">SAP Risk Stage Index</div>
+        <div class="page-sub">10-stage carrier risk framework — dispatch guidance, failure prediction, and recovery routing</div>
       </div>
-
       <div class="card">
-        <div class="card-title">The inversion principle — core mechanism</div>
+        <div class="card-title">The Blind Spot Metric — why surface compliance masks real risk</div>
         <div class="grid-2">
           <div class="inv-box inv-stable">
-            <div class="inv-label">P.Stable (even: 2, 4, 6, 8)</div>
-            <div class="inv-body">Material form creates conscious seeking. Physical comfort generates spiritual unrest. Structure creates yearning. "I have everything materially, but feel empty spiritually."</div>
+            <div class="inv-label">High Asset Density (Even stages: 2, 4, 6, 8)</div>
+            <div class="inv-body">Carrier has trucks on the road, active authority, strong HOS availability. Physical capacity is present. Signal Integrity pressure builds underneath — driver is overextended, comms are going through the motions.</div>
           </div>
           <div class="inv-box inv-unstable">
-            <div class="inv-label">P.Unstable (odd: 1, 3, 5, 7)</div>
-            <div class="inv-body">Material chaos creates conscious clarity. Physical discomfort generates spiritual certainty. Crisis creates understanding. "I have nothing materially, but feel clear spiritually."</div>
+            <div class="inv-label">Low Asset Density (Odd stages: 1, 3, 5, 7)</div>
+            <div class="inv-body">Physical capacity is constrained or in flux — scaling, recovering, or restructuring. Signal Integrity is stronger. Driver or dispatcher is engaged, honest about limitations, communicating proactively.</div>
           </div>
         </div>
         <div class="inv-box inv-both" style="margin-top:0;">
-          <div class="inv-label">Stage 9 Exception — both aspects accepted, no inversion, no tension, dissolution possible</div>
-          <div class="inv-body">Only stage where P.Unstable AND C.Stable are accepted simultaneously. No tension to drive seeking. Tumbling stops. Resolution becomes possible.</div>
+          <div class="inv-label">Stage 9 — Exit / Reset: Both conditions present simultaneously. Pressure neutralized. Carrier is restructuring or exiting.</div>
+          <div class="inv-body">This is the only stage where Asset Density and Signal Integrity are both acknowledged as limited. No hidden tension. The carrier is transparent about their exit or transition. Plan your replacement now.</div>
         </div>
       </div>
-
       <div class="section-divider">
-        <span class="section-divider-label">Select a stage</span>
+        <span class="section-divider-label">Select a risk stage</span>
         <div class="section-divider-line"></div>
       </div>
-
       <div class="sap-flow" id="sap-flow"></div>
-
       <div id="sap-stage-detail"></div>
     </div>
 
-    <div id="page-math" class="page">
+    <!-- GLOSSARY -->
+    <div id="page-glossary" class="page">
       <div class="page-header">
-        <div class="page-title">SAP Mathematical Architecture</div>
-        <div class="page-sub">Digital root sequences, inversion tensors, 3-6-9 thresholds, and the pivot/flip mechanism</div>
+        <div class="page-title">SAP Glossary — Freight &amp; Logistics Edition</div>
+        <div class="page-sub">Industry translation of all Axiom Yield Broker terminology</div>
       </div>
-
       <div class="card">
-        <div class="card-title">The sequence: 0, 9, 18, 27, 36, 45, 54, 63, 72, 81, 90</div>
-        <div class="math-row">Digital root proof: 9→9  18→1+8=9  27→2+7=9  36→3+6=9  45→4+5=9  54→5+4=9  63→6+3=9  72→7+2=9  81→8+1=9  90→9+0=9</div>
-        <div class="math-row">All stage values reduce to 9 — divine essence maintained at every stage of manifestation</div>
-        <div class="alert alert-gold" style="margin-top:10px;">
-          <strong>Simultaneous descent and ascent:</strong> Numbers increase (0→90) representing deepening manifestation, while all reduce to 9 representing maintained connection to source. Both happen simultaneously.
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">3-6-9 Threshold resonance</div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;">
-          <div style="background:var(--bg-3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);">
-            <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">First threshold</div>
-            <div style="font-size:22px;font-weight:600;font-family:'DM Mono',monospace;color:var(--amber);margin-bottom:4px;">27</div>
-            <div style="font-size:12px;color:var(--text-2);">Stage 3 · 3×9<br>Spirit grounding in matter<br>Triangle — first stable form</div>
+        <div class="card-title">Core scoring terms</div>
+        <div class="glossary-grid">
+          <div class="gloss-item">
+            <div class="gloss-term">Axiom Yield Score (AYS)</div>
+            <div class="gloss-def">A composite 0–100 risk score calculated from four carrier operating metrics: HOS availability, route volatility, Signal Integrity, and recovery debt. Higher scores indicate safer dispatch windows. Scores below 40 trigger Stage 8 or Stage 9 flags — do not dispatch.</div>
           </div>
-          <div style="background:var(--bg-3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);">
-            <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Second threshold</div>
-            <div style="font-size:22px;font-weight:600;font-family:'DM Mono',monospace;color:var(--teal);margin-bottom:4px;">54</div>
-            <div style="font-size:12px;color:var(--text-2);">Stage 6 · 6×9<br>Peak integration, flip point<br>Hexagon — perfect harmony</div>
+          <div class="gloss-item">
+            <div class="gloss-term">Asset Density (P.Stable)</div>
+            <div class="gloss-def">The physical capacity of a carrier at the current moment — trucks available, HOS banked, authority active, equipment on the road. High asset density means a carrier has the physical infrastructure to execute the load. Also referred to as "trailer count," "fleet density," or "capacity depth" in standard freight terminology.</div>
           </div>
-          <div style="background:var(--bg-3);border-radius:var(--radius-sm);padding:14px;border:1px solid var(--border);">
-            <div style="font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px;">Third threshold</div>
-            <div style="font-size:22px;font-weight:600;font-family:'DM Mono',monospace;color:var(--gold-light);margin-bottom:4px;">81</div>
-            <div style="font-size:12px;color:var(--text-2);">Stage 9 · 9×9 = 9²<br>Dissolution and return<br>Nonagon — approaching void</div>
+          <div class="gloss-item">
+            <div class="gloss-term">Signal Integrity (C.Stable)</div>
+            <div class="gloss-def">The honesty, clarity, and reliability of communication from the driver or dispatcher. High Signal Integrity means check calls are accurate, ETAs are realistic, and problems are disclosed proactively. Low Signal Integrity — drivers going silent, dispatchers overpromising — is a primary failure predictor regardless of surface capacity metrics.</div>
           </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">The Pivot (Stage 5) and Flip (Stage 6)</div>
-        <div class="math-row">Stage 5 (45) = 4 (P.Stable) + 5 (P.Unstable)  →  stable meets unstable at the exact middle of 0–90</div>
-        <div class="math-row">Stage 6 (54) = 5 (P.Unstable) + 4 (P.Stable)  →  digits reverse, dominance inverts</div>
-        <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-top:14px;">
-          <div style="background:var(--bg-3);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid rgba(239,159,39,0.3);">
-            <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;">Stage 5 (45)</div>
-            <div style="display:flex;justify-content:center;gap:4px;align-items:center;">
-              <span style="background:var(--green-dim);color:#6fcd80;padding:4px 10px;border-radius:4px;font-size:12px;font-family:'DM Mono',monospace;">4 STABLE</span>
-              <span style="font-size:11px;color:var(--text-3);">+</span>
-              <span style="background:var(--red-dim);color:#f07a79;padding:4px 10px;border-radius:4px;font-size:12px;font-family:'DM Mono',monospace;">5 UNSTABLE</span>
-            </div>
-            <div style="font-size:11px;color:var(--amber);margin-top:6px;">Stable dominant → pivot</div>
+          <div class="gloss-item">
+            <div class="gloss-term">Blind Spot Metric (Inversion Principle)</div>
+            <div class="gloss-def">The core risk mechanism behind Stage 8 detection. When Asset Density is high (carrier looks great on paper), Signal Integrity pressure accumulates invisibly underneath. The carrier's surface compliance score is inversely correlated with their true failure risk at Stage 8. This is the metric load boards cannot see — and the reason AYS was built.</div>
           </div>
-          <div style="font-size:20px;color:var(--gold);">→</div>
-          <div style="background:var(--bg-3);border-radius:var(--radius-sm);padding:12px;text-align:center;border:1px solid rgba(29,158,117,0.3);">
-            <div style="font-size:11px;color:var(--text-3);margin-bottom:6px;">Stage 6 (54)</div>
-            <div style="display:flex;justify-content:center;gap:4px;align-items:center;">
-              <span style="background:var(--red-dim);color:#f07a79;padding:4px 10px;border-radius:4px;font-size:12px;font-family:'DM Mono',monospace;">5 UNSTABLE</span>
-              <span style="font-size:11px;color:var(--text-3);">+</span>
-              <span style="background:var(--green-dim);color:#6fcd80;padding:4px 10px;border-radius:4px;font-size:12px;font-family:'DM Mono',monospace;">4 STABLE</span>
-            </div>
-            <div style="font-size:11px;color:var(--teal);margin-top:6px;">Unstable dominant → peak (unsustainable)</div>
+          <div class="gloss-item">
+            <div class="gloss-term">Recovery Debt</div>
+            <div class="gloss-def">Accumulated operational fatigue measured in days since the carrier's last recovery run — a light, short-haul load with home time or extended rest. High recovery debt is the primary driver of Stage 8 failure events: breakdowns, service failures, and sudden carrier dropout.</div>
+          </div>
+          <div class="gloss-item">
+            <div class="gloss-term">Entropy Load</div>
+            <div class="gloss-def">The aggregate pressure applied to a carrier by route difficulty: weather severity, traffic density, dock delays, and urban congestion. High entropy load accelerates stage progression — moving carriers toward Stage 8 faster than recovery debt alone.</div>
+          </div>
+          <div class="gloss-item">
+            <div class="gloss-term">Ghost Score</div>
+            <div class="gloss-def">A fraud detection composite score derived from MC age, load volume variance, and contact anomaly index. Scores below 35 indicate a synthetic carrier operation — no authentic growth history, perfect availability, and a recently issued authority number.</div>
+          </div>
+          <div class="gloss-item">
+            <div class="gloss-term">Lane Pressure Index</div>
+            <div class="gloss-def">A corridor-level risk score tracking demand volume against available capacity on a given freight lane. Used to set rate multipliers 24–48 hours ahead of market-visible capacity shortages. Stage 8 lanes warrant 1.15x–1.25x base rate.</div>
           </div>
         </div>
       </div>
-
-      <div class="card">
-        <div class="card-title">Number inversion map — physical vs conscious aspects</div>
-        <div id="inversion-table"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Axiom Yield scoring formula</div>
-        <div class="math-row">P_stable  = (HOS / 11) × 100</div>
-        <div class="math-row">entropy   = (route_volatility / 10) × 100</div>
-        <div class="math-row">C_stable  = (comm_quality / 10) × 100</div>
-        <div class="math-row">rec_debt  = (days_since_restore / 14) × 100</div>
-        <div class="math-row">yield     = (P_stable × 0.30) + (C_stable × 0.25) + ((100 − entropy) × 0.25) + ((100 − rec_debt) × 0.20)</div>
-        <div class="math-row">stage_map: yield ≥85→S6  ≥72→S4  ≥58→S2  ≥45→S7  ≥30→S5  ≥15→S8  else→S9</div>
-        <div class="alert alert-success" style="margin-top:10px;">
-          <strong>Why this formula works:</strong> It weights physical capacity (HOS) and recovery debt as the primary material stability indicators (P.Stable proxy), while communication quality serves as the conscious stability proxy (C.Stable). Route volatility represents entropy accumulation — the inversion engine core.
+      <div class="card" style="margin-top:4px;">
+        <div class="card-title">Risk stage quick-reference</div>
+        <div class="glossary-grid">
+          <div class="gloss-item"><div class="gloss-term">Stage 0 — Ghost / No Authority</div><div class="gloss-def">No verifiable operational history. MC number not traceable to authentic freight activity. Do not use under any circumstances.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 1 — New Entrant</div><div class="gloss-def">Recently issued authority. Clear intent, limited track record. Pilot loads only — short haul, forgiving windows, high-touch dispatch.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 2 — Established / Building</div><div class="gloss-def">Active authority, growing load history. Reliable for standard volume lanes. Not yet ready for time-critical or high-value freight.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 3 — Scaling / Volatile Growth</div><div class="gloss-def">Carrier expanding rapidly — adding trucks, routes, drivers. Over-extension risk is elevated. Monitor load volume against stated capacity closely.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 4 — Prime Carrier</div><div class="gloss-def">Peak operational reliability. Strong HOS, high Signal Integrity, low recovery debt. Assign your highest-value, tightest-window loads here. This is the dispatch sweet spot.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 5 — Threshold / Point of No Return</div><div class="gloss-def">Carrier is at the operational breakpoint. Recovery is still possible — a light load with home time can pull them back to Stage 4. Miss this window and the carrier progresses to Stage 6 or 7. Do not assign hard-deadline freight. This is the last off-ramp before irreversible degradation.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 6 — Peak Performance Window</div><div class="gloss-def">Brief window of maximum output following a recovery cycle. Carrier is executing at their highest capability. Assign your most complex or highest-value load now — this window closes within hours to days. Rotate the next carrier into position immediately.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 7 — Solo Operator / Peak Isolation</div><div class="gloss-def">Carrier is withdrawing from regular communication cycles. Demonstrated mastery of their routes and equipment — execution quality is high when engaged, but check-call responsiveness is declining. Assign solo, long-haul runs with minimal dispatch touchpoints. Individuation phase: this carrier operates best with autonomy. Watch for fragmentation if over-managed.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 8 — Eye of the Storm / Do Not Dispatch</div><div class="gloss-def">The highest-risk stage in the framework. Surface metrics are clean — HOS looks fine, paperwork is current, the carrier answers calls. This is the illusion of permanence. Peak rigidity has set in: the carrier is no longer adapting to route conditions, fatigue signals, or load demands. A service failure, breakdown, or sudden dropout is imminent. The Blind Spot Metric is maxed. Do not assign regardless of load board history.</div></div>
+          <div class="gloss-item"><div class="gloss-term">Stage 9 — Exit / Dissolution</div><div class="gloss-def">Carrier is deactivating, restructuring, or in process of authority surrender. May also represent a forced reset following a Stage 8 failure event. Begin replacement carrier sourcing immediately. Rare exception: Stage 9 can signal a breakthrough reset — a carrier who has fully acknowledged their operational limits and is rebuilding with clarity.</div></div>
         </div>
       </div>
     </div>
 
+    <!-- ABOUT -->
     <div id="page-about" class="page">
       <div class="page-header">
         <div class="page-title">About Axiom Yield Broker</div>
-        <div class="page-sub">Built on Stanfield's Axiom of Perpetuity — logistics translated through consciousness mapping mathematics</div>
+        <div class="page-sub">Predictive carrier risk intelligence for freight brokers, 3PLs, and dispatch operations</div>
       </div>
-
       <div class="card">
         <div class="card-title">What this is</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:12px;">
-          Axiom Yield Broker applies the <strong style="color:var(--text);font-weight:500;">Stanfield Axiom of Perpetuity (SAP)</strong> — a geometric consciousness mapping framework built on the inversion principle — to freight logistics and trucking risk analysis. Standard logistics software looks at historical GPS data. SAP looks at <em>where the system is going</em> by reading current tension states.
+          Axiom Yield Broker is a carrier risk scoring platform built on the <strong style="color:var(--text);font-weight:500;">Stanfield Axiom of Perpetuity (SAP)</strong> — a proprietary 10-stage operational risk framework applied to freight logistics. Standard load board tools look at historical compliance data. AYB looks at <em>where the carrier is going</em> by scoring current operating conditions against a predictive risk model.
         </p>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;">
-          The core insight: every dynamic system — from a human nervous system to a freight carrier to an entire freight lane — moves through 9 predictable stages. Physical stability and conscious stability are always inverted except at Stage 9. By measuring this inversion tension, we can predict failure 24–48 hours before it happens.
+          The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–48 hours from a service failure — before the load is tendered. It also flags ghost carrier patterns, tracks lane-level capacity pressure ahead of market visibility, and provides dispatch-ready guidance for every risk stage.
         </p>
       </div>
-
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px;">
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊛ Axiom Yield Score</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">A 0–100 composite score derived from HOS, route volatility, communication coherence, and recovery debt. Maps to SAP stage. Scores below 40 indicate Stage 8 trap or Stage 9 dissolution risk.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">0–100 composite risk score from four dispatch metrics. Maps directly to SAP risk stage. Any score below 40 is a do-not-dispatch signal. Replaces gut-feel carrier selection with a repeatable, data-driven protocol.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-title">◎ Fractal Fingerprint</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Ghost carriers exhibit Stage 0 inertia — no authentic P.Unstable growth oscillation. The fractal score detects absence of natural messiness in carrier history, flagging synthetic stability before loads are assigned.</p>
+          <div class="card-title">◎ Ghost Carrier Filter</div>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier patterns. Fraudulent operators show no authentic operational variance — perfect availability, zero growth history, newly issued authority. The filter scores the absence of legitimate freight activity as the primary flag.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-title">⊞ Lane Entropy</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Freight corridors follow SAP stages. A lane entering Stage 8 false stability warrants a pricing multiplier of 1.15x–1.25x because capacity collapse is imminent — even while load boards show availability.</p>
+          <div class="card-title">⊞ Lane Pressure Intelligence</div>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Corridor-level capacity forecasting staged 24–48 hours ahead of load board visibility. Stage 8 lanes get a 1.15x–1.25x rate multiplier recommendation before the shortage is visible. Quote now. Negotiate later.</p>
         </div>
       </div>
-
       <div class="card">
-        <div class="card-title">Framework author</div>
+        <div class="card-title">Platform author</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          <strong style="color:var(--text);font-weight:500;">Richard Leroy Stanfield Jr.</strong> — Founder, Meridian Axiom Alignment Technologies<br>
-          SAP v3.0 · Inversion Principle Integrated · January 2026<br>
-          <span style="color:var(--text-3);font-size:12px;">LUMINARK ecosystem · Digitized Demons manuscript · NSDT five-dimensional analysis engine</span>
+          <strong style="color:var(--text);font-weight:500;">Richard Leroy Stanfield Jr.</strong> — Founder, Meridian Axiom Alignment Technologies (MAAT)<br>
+          SAP v3.0 · Axiom Yield Broker · April 2026<br>
+          <span style="color:var(--text-3);font-size:12px;">LUMINARK ecosystem · NSDT five-dimensional analysis engine · contact: LuminarkMeridian@gmail.com</span>
         </p>
       </div>
-
       <div style="text-align:center;margin-top:24px;">
-        <a href="mailto:LuminarkMeridian@gmail.com?subject=Axiom%20Yield%20Demo%20Request" 
+        <a href="mailto:LuminarkMeridian@gmail.com?subject=Axiom%20Yield%20Demo%20Request"
            style="display:inline-block;padding:12px 24px;background:var(--gold);color:#000;text-decoration:none;border-radius:var(--radius);font-weight:600;">
           Request Demo — $299/month
         </a>
@@ -1125,9 +482,9 @@
   </main>
 </div>
 
-<!-- FLOATING WAITLIST BUTTON -->
+<!-- WAITLIST BUTTON -->
 <div style="position:fixed;bottom:20px;right:20px;z-index:1000;">
-  <a href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank" 
+  <a href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank"
      style="display:inline-block;padding:15px 30px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#000;text-decoration:none;border-radius:8px;font-weight:700;font-size:1rem;box-shadow:0 4px 20px rgba(200,132,26,0.4);text-transform:uppercase;letter-spacing:2px;">
     Join Beta Waitlist
   </a>
@@ -1135,36 +492,36 @@
 
 <script>
 const STAGES = [
-  { n:0,  geo:'●', label:'Void / Plenara', math:'0',   p:'beyond', c:'beyond', tension:0,  colorHex:'#888780',
-    desc:'The substrate. Canvas on which light paints realities. Always present at every stage. All things happen within the void.',
-    logistics:'No business history. Pure absence. Stage 0 signature = ghost carrier.' },
-  { n:1,  geo:'·', label:'Navigation',     math:'9',   p:'Unstable',c:'Stable',   tension:28, colorHex:'#85B7EB',
-    desc:'First impulse from void. Clear spiritual awareness without stable vehicle. Seeks physical stability to express clarity.',
-    logistics:'New carrier, emerging. Clear intent, no verifiable track record. Pilot load only.' },
-  { n:2,  geo:'—', label:'Polarity',       math:'18',  p:'Stable',  c:'Unstable', tension:42, colorHex:'#B5D4F4',
-    desc:'Stable form established. Duality manifest. Seeking conscious clarity despite physical foundation.',
-    logistics:'Carrier established but seeking growth. Reliable but restless. Good for standard runs.' },
-  { n:3,  geo:'△', label:'Expression',     math:'27',  p:'Unstable',c:'Stable',   tension:55, colorHex:'#FAC775',
-    desc:'First 3-6-9 threshold. Spirit grounding in matter. Defiant creativity. Breakthrough energy despite physical chaos.',
-    logistics:'Scaling fast — creative chaos. Over-extension risk. Monitor load volume vs capacity.' },
-  { n:4,  geo:'□', label:'Foundation',     math:'36',  p:'Stable',  c:'Unstable', tension:22, colorHex:'#97C459',
-    desc:'Healthiest stage. Maximum physical foundation. Sustainable rhythms. Slight restless seeking beneath stability.',
-    logistics:'Prime carrier zone. Maximum reliability. Assign high-value, tight-window loads here.' },
-  { n:5,  geo:'⬠', label:'Threshold',      math:'45',  p:'Unstable',c:'Stable',   tension:88, colorHex:'#EF9F27',
-    desc:'Pivot point. Exact middle between 0 and 90. Point of no return. Three possible outcomes: Stage 6, regression to 4, or skip to 7.',
-    logistics:'Driver burnout threshold. Assign restoration load (easy miles, home time) to guide toward Stage 6. Do NOT assign tight deadlines.' },
-  { n:6,  geo:'⬡', label:'Integration',    math:'54', p:'Stable',c:'Unstable', tension:38, colorHex:'#5DCAA5',
-    desc:'Second threshold and flip point. Peak performance. Digits reverse from Stage 5 (45→54). Unstable now leads. Unsustainable peak — hours to days.',
-    logistics:'Peak window. Assign your most complex load NOW. Will not last — rotate next carrier quickly.' },
-  { n:7,  geo:'⬢', label:'Analysis',       math:'63',  p:'Unstable',c:'Stable',   tension:62, colorHex:'#AFA9EC',
-    desc:'Isolation and deep pattern recognition. ~60–70% of systems reach maximum here. Wisdom in separation. Risk of mental loops.',
-    logistics:'Carrier withdrawing. Deep but isolated. Assign solo runs, low communication demand. Watch for fragmentation.' },
-  { n:8,  geo:'∞', label:'Unity / Trap',   math:'72',  p:'Stable',  c:'Unstable', tension:92, colorHex:'#F09595',
-    desc:'HIGHEST TRAP RISK. Complete material form claiming complete conscious attainment (false). 72=7(unstable)dominating+2(stable). Denying inversion = trapped.',
-    logistics:'FALSE STABILITY. Carrier looks perfect on paper. Do NOT assign. Entropy maxed. Stage 9 failure (breakdown/quit/fraud) imminent.' },
-  { n:9,  geo:'◎', label:'Release',        math:'81', p:'Unstable',c:'Stable', tension:14, colorHex:'#3fd9a8',
-    desc:'Third threshold. Resolution. Both aspects accepted. No inversion tension. Tumbling stops. Dissolution into void or position 90.',
-    logistics:'Dissolution state. Carrier exiting, restructuring, or breakthrough clarity. Plan contingency. May also signal exceptional restoration.' },
+  { n:0, geo:'●', label:'Ghost / No Authority', math:'0', assetDensity:'None', signalIntegrity:'None', tension:0, colorHex:'#888780',
+    desc:'No verifiable operational history. Authority cannot be traced to authentic freight activity. MC number shows no legitimate load patterns.',
+    logistics:'Do not use under any circumstances. Cannot assign loads. No operational baseline exists.' },
+  { n:1, geo:'·', label:'New Entrant', math:'9', assetDensity:'Low', signalIntegrity:'High', tension:28, colorHex:'#85B7EB',
+    desc:'Recently issued authority. Intent is clear, track record is not. Single-truck or early-fleet operator entering the market with limited freight history.',
+    logistics:'Pilot loads only. Short-haul, forgiving delivery windows, high-touch dispatch required. Do not assign time-sensitive LTL or temperature-controlled freight.' },
+  { n:2, geo:'—', label:'Established / Building', math:'18', assetDensity:'Moderate', signalIntegrity:'Variable', tension:42, colorHex:'#B5D4F4',
+    desc:'Active authority with a growing load history. Carrier is building operational consistency — reliability is present but not yet predictable under pressure.',
+    logistics:'Standard volume lanes. Dry van, low-urgency FTL. Avoid HAZMAT, expedited, or high-liability freight until Stage 4 confirmation.' },
+  { n:3, geo:'△', label:'Scaling / Volatile Growth', math:'27', assetDensity:'Growing', signalIntegrity:'Strong', tension:55, colorHex:'#FAC775',
+    desc:'Carrier is expanding rapidly — adding drivers, equipment, or lanes. Operational energy is high but capacity commitments may be outpacing actual fleet depth.',
+    logistics:'Monitor load volume against confirmed asset count. Verify equipment before dispatch. Watch for over-booking across multiple brokers simultaneously.' },
+  { n:4, geo:'□', label:'Prime Carrier', math:'36', assetDensity:'High', signalIntegrity:'High', tension:22, colorHex:'#97C459',
+    desc:'Peak operational reliability. Strong HOS, high Signal Integrity, and low recovery debt. This carrier is executing at maximum sustainable output with stable communication.',
+    logistics:'Assign highest-value and tightest-window loads. Time-sensitive LTL, temperature-controlled, high-liability FTL. This is the dispatch sweet spot.' },
+  { n:5, geo:'⬠', label:'Threshold — Point of No Return', math:'45', assetDensity:'Declining', signalIntegrity:'Elevated', tension:88, colorHex:'#EF9F27',
+    desc:'The operational breakpoint. Recovery is still possible — a light load with home time can pull this carrier back to Stage 4. The hidden duality: this carrier may appear capable but the pressure beneath the surface is at maximum. Miss this window and degradation becomes irreversible.',
+    logistics:'This is the last off-ramp. Assign recovery run — short-haul, flexible window, guaranteed home time. Do NOT assign hard-deadline or multi-stop freight. Failure to route correctly here results in Stage 6 peak followed by rapid Stage 7–8 collapse.' },
+  { n:6, geo:'⬡', label:'Peak Performance Window', math:'54', assetDensity:'High', signalIntegrity:'Variable', tension:38, colorHex:'#5DCAA5',
+    desc:'Brief window of maximum output following a recovery cycle. Carrier is executing at peak capacity. This window closes within hours to days — it is not a sustainable state.',
+    logistics:'Assign your most complex or highest-value load immediately. Do not wait. Rotate the next carrier into the queue now — this window will close before the next dispatch cycle.' },
+  { n:7, geo:'⬢', label:'Solo Operator / Peak Isolation', math:'63', assetDensity:'Low', signalIntegrity:'Selective', tension:62, colorHex:'#AFA9EC',
+    desc:'Carrier has entered peak isolation — withdrawing from regular communication cycles while maintaining high execution quality on assigned loads. This is a mastery phase: the carrier operates with precision under pressure but on their own terms. Individuation is occurring — they are developing a specialized operational identity, preferring specific lanes, load types, or customers. Check-call responsiveness declines not from disengagement but from deep route focus.',
+    logistics:'Assign solo long-haul runs, dedicated lanes, or owner-operator specialty loads. Minimal dispatch touchpoints required — this carrier performs best with autonomy. Do not over-manage. Watch for fragmentation if pushed outside their preferred operational zone.' },
+  { n:8, geo:'∞', label:'Eye of the Storm — Do Not Dispatch', math:'72', assetDensity:'High', signalIntegrity:'Compromised', tension:92, colorHex:'#F09595',
+    desc:'The highest-risk stage in the framework. Surface metrics are clean. HOS shows available hours, paperwork is current, the carrier answers calls promptly. This is the illusion of permanence — peak rigidity has set in. The carrier has stopped adapting to route stress, fatigue signals, and operational demands. The Blind Spot Metric is at maximum. A service failure, breakdown, or sudden authority surrender is imminent.',
+    logistics:'DO NOT ASSIGN. This carrier will appear fully bookable on every load board. That is the trap. Entropy has maxed below the surface. A Stage 9 failure event — breakdown, missed delivery, or carrier dropout — is incoming within 24–72 hours. Source a replacement carrier now.' },
+  { n:9, geo:'◎', label:'Exit / Dissolution', math:'81', assetDensity:'Collapsed', signalIntegrity:'Transparent', tension:14, colorHex:'#3fd9a8',
+    desc:'Carrier is exiting operations, restructuring, or in authority surrender. All operational pressure has released. In rare cases this signals a breakthrough reset — a carrier who has fully acknowledged their limits and is rebuilding with complete transparency.',
+    logistics:'Begin replacement sourcing immediately. Do not assign new loads. Rare exception: if this is a reset carrier returning from a voluntary pause, treat as Stage 1 and run a pilot load with full vetting before returning to standard dispatch.' },
 ];
 
 const CARRIERS = [
@@ -1187,161 +544,101 @@ const GHOST_DATA = [
 const LANES = [
   { name:'ATL → CHI', vol:8, cap:3, trend:'rising',   s:8 },
   { name:'LAX → DFW', vol:4, cap:7, trend:'stable',   s:4 },
-  { name:'NYC → MIA', vol:6, cap:5, trend:'falling',  s:5 },
+  { name:'NYC → MIA', vol:6, cap:5, trend:'softening', s:5 },
   { name:'CHI → HOU', vol:9, cap:2, trend:'critical', s:9 },
   { name:'SEA → PHX', vol:3, cap:8, trend:'stable',   s:3 },
-  { name:'DFW → ATL', vol:5, cap:6, trend:'rising',   s:6 },
+  { name:'DFW → ATL', vol:5, cap:6, trend:'tightening', s:6 },
 ];
 
-function calcYield(hos, vol, comm, rest) {
-  const pStable = (hos / 11) * 100;
-  const entropy = (vol / 10) * 100;
-  const cStable = (comm / 10) * 100;
-  const debt    = (rest / 14) * 100;
-  return Math.round((pStable * 0.30) + (cStable * 0.25) + ((100 - entropy) * 0.25) + ((100 - debt) * 0.20));
+function calcYield(hos,vol,comm,rest){
+  const p=(hos/11)*100, e=(vol/10)*100, c=(comm/10)*100, d=(rest/14)*100;
+  return Math.round((p*0.30)+(c*0.25)+((100-e)*0.25)+((100-d)*0.20));
+}
+function stageFromYield(y){
+  if(y>=85)return 6; if(y>=72)return 4; if(y>=58)return 2;
+  if(y>=45)return 7; if(y>=30)return 5; if(y>=15)return 8; return 9;
+}
+function yieldColor(y){ return y>=70?'#3fd9a8':y>=50?'#EF9F27':'#f07a79'; }
+function fractalScore(g){
+  return Math.round((Math.min(g.age*20,100)*0.30)+(Math.min(g.growth*2,100)*0.40)+((10-g.contact)*10*0.30));
+}
+function riskFor(s){
+  const m={4:{label:'Low — Prime',cls:'r-low'},6:{label:'Low — Peak Window',cls:'r-low'},2:{label:'Low — Standard',cls:'r-low'},
+    1:{label:'Monitor — New',cls:'r-watch'},3:{label:'Monitor — Scaling',cls:'r-watch'},
+    5:{label:'Critical — Threshold',cls:'r-high'},7:{label:'Caution — Isolated',cls:'r-med'},
+    8:{label:'Do Not Dispatch',cls:'r-trap'},9:{label:'Exit State',cls:'r-med'}};
+  return m[s]||{label:'Unknown',cls:'r-watch'};
+}
+function dispatchFor(s){
+  const m={
+    4:'Assign highest-value / tightest-window loads. Prime dispatch window.',
+    5:'Recovery run only — short haul, home time. Last off-ramp before degradation.',
+    6:'Assign most complex load NOW. Peak window closing.',
+    7:'Solo long-haul, minimal check-calls. Autonomy required.',
+    8:'DO NOT ASSIGN. Eye of storm. Failure imminent within 24–72 hrs.',
+    9:'Source replacement immediately. Do not assign new loads.',
+    2:'Standard volume lanes. Avoid expedited or high-liability freight.',
+    3:'Verify asset count before dispatch. Watch for over-booking.',
+    1:'Pilot load only. Short-haul, high-touch dispatch.',
+    0:'No assignment possible. Unverifiable MC.'};
+  return m[s]||'Monitor';
 }
 
-function stageFromYield(y) {
-  if (y >= 85) return 6;
-  if (y >= 72) return 4;
-  if (y >= 58) return 2;
-  if (y >= 45) return 7;
-  if (y >= 30) return 5;
-  if (y >= 15) return 8;
-  return 9;
-}
-
-function yieldColor(y) {
-  if (y >= 70) return '#3fd9a8';
-  if (y >= 50) return '#EF9F27';
-  return '#f07a79';
-}
-
-function fractalScore(g) {
-  const ageE  = Math.min(g.age * 20, 100);
-  const growE = Math.min(g.growth * 2, 100);
-  const contE = (10 - g.contact) * 10;
-  return Math.round((ageE * 0.30) + (growE * 0.40) + (contE * 0.30));
-}
-
-function riskFor(s) {
-  const map = {
-    4: { label:'Low',       cls:'r-low'  },
-    6: { label:'Low',       cls:'r-low'  },
-    2: { label:'Low',       cls:'r-low'  },
-    1: { label:'Monitor',   cls:'r-watch'},
-    3: { label:'Monitor',   cls:'r-watch'},
-    5: { label:'High — Threshold', cls:'r-high' },
-    7: { label:'Med — Isolation',  cls:'r-med'  },
-    8: { label:'Trap Risk', cls:'r-trap' },
-    9: { label:'Dissolution', cls:'r-med'},
-  };
-  return map[s] || { label:'Unknown', cls:'r-watch' };
-}
-
-function dispatchFor(s) {
-  const map = {
-    4:'Assign high-value / tight-window loads. Optimal foundation.',
-    5:'Threshold state. Assign restoration load (easy miles, home time). No hard deadlines.',
-    6:'Peak window — brief. Assign most complex load now. Will not last.',
-    7:'Isolated. Assign solo, low-communication-demand runs. Monitor closely.',
-    8:'DO NOT assign. False stability. Stage 9 failure imminent.',
-    9:'Exiting state. Seek replacement. Plan contingency.',
-    2:'Building carrier. Reliable for standard volume.',
-    3:'Scaling fast. Watch for over-extension.',
-    1:'New entrant. Pilot load only.',
-    0:'No assignment possible. Ghost or non-entity.',
-  };
-  return map[s] || 'Monitor';
-}
-
-function nav(id, el) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
+function nav(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
   el.classList.add('active');
 }
 
-function renderDashboard() {
-  const tbody = document.getElementById('carrier-tbody');
-  tbody.innerHTML = CARRIERS.map(c => {
-    const score = calcYield(c.hos, c.vol, c.comm, c.rest);
-    const sData = STAGES[c.s] || STAGES[0];
-    const risk  = riskFor(c.s);
-    const yc    = yieldColor(score);
-    return `<tr>
-      <td>
-        <div style="font-weight:500;">${c.name}</div>
-        <div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div>
-      </td>
-      <td><span class="stage-pill s-${c.s}">${sData.geo} Stage ${c.s} · ${sData.label}</span></td>
-      <td>
-        <div class="yield-wrap">
-          <div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div>
-          <span class="yield-num" style="color:${yc};">${score}</span>
-        </div>
-      </td>
-      <td>
-        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Comm:${c.comm} · Rest:${c.rest}d</div>
-      </td>
+function renderDashboard(){
+  document.getElementById('carrier-tbody').innerHTML=CARRIERS.map(c=>{
+    const score=calcYield(c.hos,c.vol,c.comm,c.rest);
+    const sData=STAGES[c.s]||STAGES[0], risk=riskFor(c.s), yc=yieldColor(score);
+    return`<tr>
+      <td><div style="font-weight:500;">${c.name}</div><div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div></td>
+      <td><span class="stage-pill s-${c.s}">${sData.geo} S${c.s} · ${sData.label}</span></td>
+      <td><div class="yield-wrap"><div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div><span class="yield-num" style="color:${yc};">${score}</span></div></td>
+      <td><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Sig:${c.comm} · Rec:${c.rest}d</div></td>
       <td><span class="risk-badge ${risk.cls}">${risk.label}</span></td>
       <td style="font-size:12px;color:var(--text-2);max-width:180px;line-height:1.4;">${dispatchFor(c.s)}</td>
     </tr>`;
   }).join('');
 }
 
-function updateCalc() {
-  const hos  = +document.getElementById('sl-hos').value;
-  const vol  = +document.getElementById('sl-vol').value;
-  const comm = +document.getElementById('sl-comm').value;
-  const rest = +document.getElementById('sl-rest').value;
-
-  document.getElementById('hos-v').textContent  = hos + ' hrs';
-  document.getElementById('vol-v').textContent  = vol + ' / 10';
-  document.getElementById('comm-v').textContent = comm + ' / 10';
-  document.getElementById('rest-v').textContent = rest + ' days';
-
-  const score  = calcYield(hos, vol, comm, rest);
-  const sn     = stageFromYield(score);
-  const sData  = STAGES[sn];
-  const yc     = yieldColor(score);
-
-  const pStable = Math.round((hos / 11) * 100);
-  const entropy = Math.round((vol / 10) * 100);
-  const cStable = Math.round((comm / 10) * 100);
-  const debt    = Math.round((rest / 14) * 100);
-
-  document.getElementById('calc-score-num').textContent = score;
-  document.getElementById('calc-score-num').style.color = yc;
-  document.getElementById('calc-stage-label').textContent = `Stage ${sn} — ${sData.label} · P.${sData.p} / C.${sData.c}`;
-
-  document.getElementById('calc-analysis').innerHTML = `${sData.logistics}`;
-
-  document.getElementById('calc-breakdown').innerHTML = `
-    <div class="math-row">P.Stable index (HOS weight 0.30) = ${pStable}  →  contributes ${Math.round(pStable * 0.30)} pts</div>
-    <div class="math-row">C.Stable proxy (comm weight 0.25) = ${cStable}  →  contributes ${Math.round(cStable * 0.25)} pts</div>
-    <div class="math-row">Anti-entropy (vol weight 0.25) = ${100 - entropy}  →  contributes ${Math.round((100 - entropy) * 0.25)} pts</div>
-    <div class="math-row">Recovery (rest weight 0.20) = ${100 - debt}  →  contributes ${Math.round((100 - debt) * 0.20)} pts</div>
-    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Total Axiom Yield Score = ${score}  →  maps to Stage ${sn}</div>
-  `;
+function updateCalc(){
+  const hos=+document.getElementById('sl-hos').value, vol=+document.getElementById('sl-vol').value,
+        comm=+document.getElementById('sl-comm').value, rest=+document.getElementById('sl-rest').value;
+  document.getElementById('hos-v').textContent=hos+' hrs';
+  document.getElementById('vol-v').textContent=vol+' / 10';
+  document.getElementById('comm-v').textContent=comm+' / 10';
+  document.getElementById('rest-v').textContent=rest+' days';
+  const score=calcYield(hos,vol,comm,rest), sn=stageFromYield(score), sData=STAGES[sn], yc=yieldColor(score);
+  const pS=Math.round((hos/11)*100), ent=Math.round((vol/10)*100), cS=Math.round((comm/10)*100), debt=Math.round((rest/14)*100);
+  document.getElementById('calc-score-num').textContent=score;
+  document.getElementById('calc-score-num').style.color=yc;
+  document.getElementById('calc-stage-label').textContent=`Stage ${sn} — ${sData.label}`;
+  document.getElementById('calc-analysis').innerHTML=sData.logistics;
+  document.getElementById('calc-breakdown').innerHTML=`
+    <div class="math-row">Asset Density (HOS × 0.30) = ${pS} → contributes ${Math.round(pS*0.30)} pts</div>
+    <div class="math-row">Signal Integrity (comm × 0.25) = ${cS} → contributes ${Math.round(cS*0.25)} pts</div>
+    <div class="math-row">Anti-entropy (volatility × 0.25) = ${100-ent} → contributes ${Math.round((100-ent)*0.25)} pts</div>
+    <div class="math-row">Recovery index (rest × 0.20) = ${100-debt} → contributes ${Math.round((100-debt)*0.20)} pts</div>
+    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Axiom Yield Score = ${score} → Stage ${sn}: ${sData.label}</div>`;
 }
 
-function renderGhost() {
-  document.getElementById('ghost-list').innerHTML = GHOST_DATA.map(g => {
-    const fs = fractalScore(g);
-    const isBad   = g.verdict === 'ghost';
-    const isWatch = g.verdict === 'watch';
-    const cls  = isBad ? 'r-trap' : isWatch ? 'r-watch' : 'r-low';
-    const lbl  = isBad ? '◌ Stage 0 — Ghost' : isWatch ? '◔ Watch' : '● Fractal Real';
-    const fc   = isBad ? '#f07a79' : isWatch ? '#EF9F27' : '#3fd9a8';
-    const ageE = Math.round(Math.min(g.age * 20, 100));
-    const grwE = Math.round(Math.min(g.growth * 2, 100));
-    const ctE  = Math.round((10 - g.contact) * 10);
-    return `<div class="fractal-item">
+function renderGhost(){
+  document.getElementById('ghost-list').innerHTML=GHOST_DATA.map(g=>{
+    const fs=fractalScore(g), isBad=g.verdict==='ghost', isWatch=g.verdict==='watch';
+    const cls=isBad?'r-trap':isWatch?'r-watch':'r-low';
+    const lbl=isBad?'◌ Ghost — Do Not Use':isWatch?'◔ Watch List':'● Verified Pattern';
+    const fc=isBad?'#f07a79':isWatch?'#EF9F27':'#3fd9a8';
+    const ageE=Math.round(Math.min(g.age*20,100)), grwE=Math.round(Math.min(g.growth*2,100)), ctE=Math.round((10-g.contact)*10);
+    return`<div class="fractal-item">
       <div class="fractal-info">
         <div class="f-name">${g.name}</div>
-        <div class="f-meta">${g.mc} · Age: ${g.age}y · Growth variance: ${g.growth}% · Contact quality: ${g.contact}/10</div>
-        <div class="f-math">age_entropy=${ageE} · growth_variance=${grwE} · contact_inv=${ctE} → score=(${ageE}×0.30)+(${grwE}×0.40)+(${ctE}×0.30)=${fs}</div>
+        <div class="f-meta">${g.mc} · Authority age: ${g.age}y · Volume variance: ${g.growth}% · Contact anomaly score: ${g.contact}/10</div>
+        <div class="f-math">age=${ageE} · variance=${grwE} · contact_anomaly=${ctE} → ghost_score=(${ageE}×0.30)+(${grwE}×0.40)+(${ctE}×0.30)=${fs}</div>
       </div>
       <div class="fractal-score-wrap">
         <div class="fractal-score-num" style="color:${fc};">${fs}</div>
@@ -1351,131 +648,86 @@ function renderGhost() {
   }).join('');
 }
 
-function renderLanes() {
-  document.getElementById('lane-grid').innerHTML = LANES.map((l, i) => {
-    const sData = STAGES[l.s] || STAGES[0];
-    const dots = Array(10).fill(0).map((_, j) => {
-      const cls = j < l.vol ? (l.vol >= 7 ? 'hot' : 'on') : '';
-      return `<div class="e-dot ${cls}"></div>`;
-    }).join('');
-    const trendColor = l.trend === 'critical' ? 'var(--red)' : l.trend === 'rising' ? 'var(--amber)' : l.trend === 'stable' ? 'var(--teal)' : 'var(--text-3)';
-    return `<div class="lane-card" onclick="showLane(${i})" id="lane-card-${i}">
+function renderLanes(){
+  document.getElementById('lane-grid').innerHTML=LANES.map((l,i)=>{
+    const sData=STAGES[l.s]||STAGES[0];
+    const dots=Array(10).fill(0).map((_,j)=>`<div class="e-dot ${j<l.vol?(l.vol>=7?'hot':'on'):''}"></div>`).join('');
+    const tc=l.trend==='critical'?'var(--red)':l.trend==='rising'||l.trend==='tightening'?'var(--amber)':l.trend==='stable'?'var(--teal)':'var(--text-3)';
+    return`<div class="lane-card" onclick="showLane(${i})" id="lane-card-${i}">
       <div class="lane-name">${l.name}</div>
       <div class="lane-stage">Stage ${l.s} · ${sData.label}</div>
       <div class="entropy-dots">${dots}</div>
-      <div class="lane-trend" style="color:${trendColor};">${l.trend}</div>
+      <div class="lane-trend" style="color:${tc};">${l.trend}</div>
     </div>`;
   }).join('');
 }
 
-function showLane(i) {
-  document.querySelectorAll('.lane-card').forEach((c, idx) => c.classList.toggle('selected', idx === i));
-  const l = LANES[i];
-  const sData = STAGES[l.s];
-  const entropy = Math.round((l.vol / 10) * 100);
-  const capIdx  = Math.round((l.cap / 10) * 100);
-  const mult = (1 + (sData.tension / 100) * 0.25).toFixed(2);
-  const card = document.getElementById('lane-detail-card');
-  card.style.display = 'block';
-  document.getElementById('lane-detail-title').textContent = l.name + ' — Entropy analysis';
-  document.getElementById('lane-detail-content').innerHTML = `
+function showLane(i){
+  document.querySelectorAll('.lane-card').forEach((c,idx)=>c.classList.toggle('selected',idx===i));
+  const l=LANES[i], sData=STAGES[l.s];
+  const entropy=Math.round((l.vol/10)*100), capIdx=Math.round((l.cap/10)*100);
+  const mult=(1+(sData.tension/100)*0.25).toFixed(2);
+  const card=document.getElementById('lane-detail-card');
+  card.style.display='block';
+  document.getElementById('lane-detail-title').textContent=l.name+' — Pressure analysis';
+  document.getElementById('lane-detail-content').innerHTML=`
     <div class="grid-2">
-      <div class="inv-box ${l.s % 2 === 0 ? 'inv-stable' : 'inv-unstable'}">
-        <div class="inv-label">Physical: ${sData.p}</div>
-        <div class="inv-body">Capacity index: ${capIdx}% · ${l.cap < 5 ? 'Capacity scarce — P.Unstable conditions.' : 'Adequate supply — P.Stable conditions.'}</div>
+      <div class="inv-box ${l.s%2===0?'inv-stable':'inv-unstable'}">
+        <div class="inv-label">Capacity: ${l.s%2===0?'Available':'Constrained'}</div>
+        <div class="inv-body">Capacity index: ${capIdx}% · ${l.cap<5?'Scarce capacity — tightening market conditions.':'Adequate supply — stable booking conditions.'}</div>
       </div>
-      <div class="inv-box ${l.s % 2 !== 0 ? 'inv-stable' : 'inv-unstable'}">
-        <div class="inv-label">Conscious: ${sData.c}</div>
-        <div class="inv-body">Demand entropy: ${entropy}% · ${l.vol >= 7 ? 'High demand volatility — C.Unstable pressure.' : 'Moderate demand — C.Stable equilibrium.'}</div>
+      <div class="inv-box ${l.s%2!==0?'inv-stable':'inv-unstable'}">
+        <div class="inv-label">Demand Pressure: ${l.s%2!==0?'Manageable':'Elevated'}</div>
+        <div class="inv-body">Demand load: ${entropy}% · ${l.vol>=7?'High shipment density — rate pressure building.':'Moderate demand — rate environment stable.'}</div>
       </div>
     </div>
-    <div class="math-row">Stage ${l.s} (${sData.math}) · Inversion tension: ${sData.tension}% · Trend: ${l.trend}</div>
-    <div class="math-row">Pricing multiplier = 1 + (${sData.tension} / 100 × 0.25) = ${mult}x base rate</div>
-    <div class="alert ${l.vol >= 7 ? 'alert-danger' : l.vol >= 5 ? 'alert-warn' : 'alert-success'}" style="margin-top:10px;">
-      <strong>${l.vol >= 7 ? 'Capacity collapse incoming.' : l.vol >= 5 ? 'Tension building.' : 'Lane in equilibrium.'}</strong> ${sData.logistics} Recommended rate multiplier: <strong>${mult}x</strong>.
-    </div>
-  `;
+    <div class="math-row">Stage ${l.s} · Pressure index: ${sData.tension}% · Trend: ${l.trend}</div>
+    <div class="math-row">Rate multiplier = 1 + (${sData.tension}/100 × 0.25) = ${mult}x base rate</div>
+    <div class="alert ${l.vol>=7?'alert-danger':l.vol>=5?'alert-warn':'alert-success'}" style="margin-top:10px;">
+      <strong>${l.vol>=7?'Capacity collapse incoming — quote now.':l.vol>=5?'Pressure building — begin multiplier pricing.':'Lane in equilibrium — standard rate applies.'}</strong> ${sData.logistics} Recommended multiplier: <strong>${mult}x</strong>.
+    </div>`;
 }
 
-function renderSAPFlow() {
-  const flow = document.getElementById('sap-flow');
-  flow.innerHTML = STAGES.map((s, i) => {
-    return `
-      ${i > 0 ? '<div class="sap-arrow">→</div>' : ''}
-      <div class="sap-node" onclick="showStageDetail(${i})">
-        <div class="sap-circle" id="sap-circle-${i}" style="background:${s.colorHex}22;border-color:${s.colorHex}44;">
-          <span style="font-size:17px;">${s.geo}</span>
-        </div>
-        <div class="sap-node-label">${i === 0 ? 'Void' : 'S' + s.n}</div>
+function renderSAPFlow(){
+  document.getElementById('sap-flow').innerHTML=STAGES.map((s,i)=>`
+    ${i>0?'<div class="sap-arrow">→</div>':''}
+    <div class="sap-node" onclick="showStageDetail(${i})">
+      <div class="sap-circle" id="sap-circle-${i}" style="background:${s.colorHex}22;border-color:${s.colorHex}44;">
+        <span style="font-size:17px;">${s.geo}</span>
       </div>
-    `;
-  }).join('');
+      <div class="sap-node-label">${i===0?'Ghost':'S'+s.n}</div>
+    </div>`).join('');
 }
 
-function showStageDetail(i) {
-  document.querySelectorAll('.sap-circle').forEach((c, idx) => {
-    c.classList.toggle('active-node', idx === i);
-  });
-  const s = STAGES[i];
-  const pCls = s.p === 'Stable' ? 'inv-stable' : s.p === 'beyond' ? 'inv-both' : 'inv-unstable';
-  const cCls = s.c === 'Stable' ? 'inv-stable' : s.c === 'beyond' ? 'inv-both' : 'inv-unstable';
-  const tensionColor = s.tension > 70 ? '#f07a79' : s.tension > 40 ? '#EF9F27' : '#3fd9a8';
-  document.getElementById('sap-stage-detail').innerHTML = `
+function showStageDetail(i){
+  document.querySelectorAll('.sap-circle').forEach((c,idx)=>c.classList.toggle('active-node',idx===i));
+  const s=STAGES[i];
+  const adCls=s.assetDensity==='High'?'inv-stable':s.assetDensity==='None'?'inv-both':'inv-unstable';
+  const siCls=s.signalIntegrity==='High'?'inv-stable':s.signalIntegrity==='None'?'inv-both':'inv-unstable';
+  const tc=s.tension>70?'#f07a79':s.tension>40?'#EF9F27':'#3fd9a8';
+  document.getElementById('sap-stage-detail').innerHTML=`
     <div class="stage-detail">
       <div class="stage-detail-header">
-        <span class="stage-detail-name">${s.geo} ${i === 0 ? 'Void / Plenara' : 'Stage ' + s.n + ' — ' + s.label}</span>
-        <span class="stage-pill s-${s.n}" style="background:${s.colorHex}22;color:${s.colorHex};">${s.math}</span>
+        <span class="stage-detail-name">${s.geo} ${i===0?'Stage 0 — Ghost / No Authority':'Stage '+s.n+' — '+s.label}</span>
+        <span class="stage-pill s-${s.n}" style="background:${s.colorHex}22;color:${s.colorHex};">SAP-${s.math}</span>
       </div>
       <div class="grid-2">
-        <div class="inv-box ${pCls}">
-          <div class="inv-label">Physical: ${s.p}</div>
-          <div class="inv-body">${s.p === 'Stable' ? 'Material form dominant. Foundation present. Physical comfort creates spiritual seeking.' : s.p === 'beyond' ? 'Beyond physical/conscious duality. Contains all, distincts nothing.' : 'Form unstable. Flux, emergence, or dissolution. Physical discomfort → conscious clarity.'}</div>
+        <div class="inv-box ${adCls}">
+          <div class="inv-label">Asset Density: ${s.assetDensity}</div>
+          <div class="inv-body">${s.assetDensity==='High'?'Fleet capacity is present and bookable. HOS banked. Equipment available. Surface metrics look strong.':s.assetDensity==='None'?'No verifiable asset base. Cannot confirm truck, trailer, or operational infrastructure.':'Capacity is limited, in flux, or actively declining. Verify equipment and authority status before dispatch.'}</div>
         </div>
-        <div class="inv-box ${cCls}">
-          <div class="inv-label">Conscious: ${s.c}</div>
-          <div class="inv-body">${s.c === 'Stable' ? 'Spiritual clarity present. Certainty in purpose. Knowing direction.' : s.c === 'beyond' ? 'Beyond conscious separation. No subject/object division.' : 'Seeking, questioning, spiritual restlessness despite material stability.'}</div>
+        <div class="inv-box ${siCls}">
+          <div class="inv-label">Signal Integrity: ${s.signalIntegrity}</div>
+          <div class="inv-body">${s.signalIntegrity==='High'?'Check calls are accurate. ETAs are realistic. Problems disclosed proactively. High-trust communication channel.':s.signalIntegrity==='None'?'No authentic communication baseline. Contact behavior is synthetic or scripted.':s.signalIntegrity==='Compromised'?'Surface responsiveness intact but accuracy is degrading. Dispatcher may be managing optics, not reality. Blind Spot Metric is maxed.':'Communication is selective — carrier engages on their own terms and preferred load types. Reliable within defined operational zone.'}</div>
         </div>
       </div>
       <div class="tension-wrap">
-        <div class="tension-top"><span>Inversion tension</span><span style="color:${tensionColor};font-family:'DM Mono',monospace;">${s.tension}%</span></div>
-        <div class="tension-track"><div class="tension-fill" style="width:${s.tension}%;background:${tensionColor};"></div></div>
+        <div class="tension-top"><span>Blind Spot Pressure</span><span style="color:${tc};font-family:'DM Mono',monospace;">${s.tension}%</span></div>
+        <div class="tension-track"><div class="tension-fill" style="width:${s.tension}%;background:${tc};"></div></div>
       </div>
       <div style="margin-top:14px;font-size:12px;color:var(--text-2);line-height:1.7;">${s.desc}</div>
-      <div class="alert alert-gold" style="margin-top:12px;"><strong>Logistics translation:</strong> ${s.logistics}</div>
-    </div>
-  `;
-}
-
-function renderMathTable() {
-  const el = document.getElementById('inversion-table');
-  if (!el) return;
-  el.innerHTML = `<table style="width:100%;font-size:12px;border-collapse:collapse;">
-    <thead>
-      <tr>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Stage</th>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Value</th>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Physical</th>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Conscious</th>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Tension</th>
-        <th style="text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;border-bottom:1px solid var(--border);background:var(--bg-3);">Label</th>
-      </tr>
-    </thead>
-    <tbody>
-      ${STAGES.map(s => {
-        const tc = s.tension > 70 ? '#f07a79' : s.tension > 40 ? '#EF9F27' : '#3fd9a8';
-        const pc = s.p === 'Stable' ? '#6fcd80' : s.p === 'beyond' ? '#888780' : '#f07a79';
-        const cc = s.c === 'Stable' ? '#6fcd80' : s.c === 'beyond' ? '#888780' : '#f07a79';
-        return `<tr>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);"><span style="font-size:16px;">${s.geo}</span></td>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;color:var(--gold-light);">${s.math.split('=')[0] || s.math}</td>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-weight:500;color:${pc};">${s.p}</td>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-weight:500;color:${cc};">${s.c}</td>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);font-family:'DM Mono',monospace;color:${tc};">${s.tension}%</td>
-          <td style="padding:10px 10px;border-bottom:1px solid var(--border);color:var(--text-2);font-size:11px;">${s.label}</td>
-        </tr>`;
-      }).join('')}
-    </tbody>
-  </table>`;
+      <div class="alert alert-gold" style="margin-top:12px;"><strong>Dispatch action:</strong> ${s.logistics}</div>
+    </div>`;
 }
 
 renderDashboard();
@@ -1483,7 +735,6 @@ updateCalc();
 renderGhost();
 renderLanes();
 renderSAPFlow();
-renderMathTable();
 </script>
 </body>
 </html>
