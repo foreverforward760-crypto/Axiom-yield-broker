@@ -8,63 +8,63 @@
 
 ## What This Is
 
-Luminark Logistics Overwatch is a carrier risk scoring platform built on the Stanfield Axiom of Perpetuity (SAP) — a proprietary 10-stage operational risk framework applied to freight logistics. Standard load board tools give you historical compliance data. LLO gives you where the carrier is *going* — by scoring current operating conditions against a predictive failure model.
+Luminark Logistics Overwatch is a predictive carrier risk platform for freight brokers, 3PLs, and dispatch operations. Standard load boards show you historical compliance data. Overwatch shows you where a carrier is *going* — scoring current operating conditions against a 10-stage failure model before the load is tendered.
 
-The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is tendered.
-
----
-
-## Risk Stage Quick Reference
-
-| Stage | Industry Label | Dispatch Action |
-|-------|---------------|----------------|
-| 0 | Ghost / No Authority | Do not assign. Full vetting required. |
-| 1 | New Entrant | Pilot loads only. Monitor first 3. |
-| 2 | Scaling Carrier | Standard dry van volume. |
-| 3 | Hyper-Growth Risk | Verify asset count. Watch over-booking. |
-| **4** | **Tier 1 Reliable** | **Assign highest-value freight.** |
-| 5 | Last Off-Ramp | Recovery run only. Last chance before Stage 8. |
-| 6 | Peak Window | Assign complex load NOW. 24–72 hr window. |
-| 7 | Solo Specialist | Solo long-haul. Full autonomy. Hands-off. |
-| **8** | **Eye of the Storm** | **DO NOT DISPATCH. Collapse imminent.** |
-| 9 | Dissolution / Exit | Source replacement immediately. |
+Built on the **Stanfield Axiom of Perpetuity (SAP) v3.0** — proprietary operational risk framework developed by Meridian Axiom Alignment Technologies.
 
 ---
 
 ## Core Features
 
-- **Axiom Yield Score (AYS)** — 0–100 predictive risk score. Below 40 = do not dispatch.
-- **Stage 8 Detection** — Identifies carriers who look perfect but are 24–72 hrs from failure. The Blind Spot Metric catches what load boards cannot see.
-- **Ghost Carrier Filter** — MC number screening. Fraudulent operators show no authentic operational variance — the filter scores that absence as the primary fraud signal.
-- **Lane Pressure Map** — Capacity forecasting 24–48 hrs ahead of load board visibility. Stage 8 lanes: 1.15x–1.25x rate multiplier.
-- **Risk Legend** — One-click quick reference. Make a dispatch decision in 3 seconds.
-- **SAP → Logistics Glossary** — Full translation table from framework language to industry standard terminology.
+| Feature | Description |
+|---------|-------------|
+| **Axiom Yield Score** | 0–100 predictive reliability score. Below 40 = do not dispatch. |
+| **Stage 8 Detection** | Identifies Eye-of-Storm carriers 24–72 hrs before service failure. |
+| **Ghost Carrier Filter** | MC screening against synthetic carrier fraud patterns. |
+| **Lane Pressure Map** | Capacity forecasting 24–48 hrs ahead of board visibility + rate multipliers. |
+| **Risk Legend** | One-click dispatch reference — make a $5,000 decision in three seconds. |
+| **SAP Glossary** | Full SAP → logistics translation table for onboarding and training. |
 
 ---
 
-## SAP → Logistics Glossary (Key Terms)
+## Risk Stage Quick Reference
 
-| SAP Term | Industry Translation |
-|----------|---------------------|
-| Asset Density (P.Stable) | Equipment / Driver Availability |
-| Signal Integrity (C.Stable) | Dispatch Responsiveness / Communication Quality |
-| Blind Spot Metric (Inversion Principle) | Good Metrics Masking Bad Operations |
-| Recovery Debt | Driver Fatigue Accumulation |
-| Entropy Load | Failure Probability Trending Up |
-| Ghost Score | Fraud Detection Score |
-| Lane Pressure Index | Market Tightness Index |
+| Stage | Industry Term | Action |
+|-------|--------------|--------|
+| S0 | Ghost / No MC History | Full vetting required |
+| S1 | New Entrant / Unproven | Pilot loads only |
+| S2 | Scaling Carrier | Standard volume lanes |
+| S3 | Hyper-Growth Risk | Verify assets before dispatch |
+| **S4** | **Tier 1 Reliable** | **Assign highest-value loads** |
+| S5 | Last Chance Recovery | Recovery miles — last off-ramp |
+| S6 | Hot Hand / Peak Window | Assign complex load NOW |
+| S7 | Isolated Specialist | Solo long-haul, full autonomy |
+| **S8** | **Eye of the Storm** | **DO NOT DISPATCH** |
+| S9 | Exit / Dissolution | Source replacement immediately |
+
+---
+
+## SAP → Logistics Translation
+
+| SAP Term | Logistics Term | Industry Language |
+|----------|---------------|-------------------|
+| P.Stable | Asset Density | Equipment & Driver Availability |
+| C.Stable | Signal Integrity | Dispatch Responsiveness |
+| Inversion Principle | Blind Spot Metric | Good Metrics Masking Bad Operations |
+| Entropy Accumulation | Risk Score Increase | Failure Probability Trending Up |
+| Axiom Yield | Carrier Reliability Score | Predictive Load Acceptance Rating |
 
 ---
 
 ## Status
 
-- ✅ Axiom Yield Calculator (client-side)
-- ✅ SAP Risk Stage Index — all 10 stages with dispatch guidance
+- ✅ Axiom Yield Score calculator
+- ✅ 10-stage Risk Stage Index with dispatch guidance
 - ✅ Ghost Carrier MC screening
 - ✅ Lane Pressure Map with rate multipliers
-- ✅ Risk Legend quick-reference modal
-- ✅ Full SAP → Logistics glossary and translation table
-- ⏳ Backend API integration (Phase 2)
+- ✅ Risk Legend modal (one-click reference)
+- ✅ Full SAP → Logistics glossary
+- ⏳ Backend API (Phase 2 — see `/backend`)
 - ⏳ Live carrier data feeds (Phase 2)
 
 **Join Beta Waitlist — Launching April 15, 2026**
@@ -73,15 +73,14 @@ The platform identifies Stage 8 carriers — those who appear fully compliant bu
 
 ## Tech Stack
 
-- **Frontend:** Single-file HTML/CSS/JS — GitHub Pages
+- **Frontend:** Single-file HTML/CSS/JS — GitHub Pages deployable
 - **Backend (Phase 2):** Flask/Python REST API — `/backend` folder
-- **Deploy config:** `render.yaml`
+- **Deploy:** Render.com via `render.yaml`
 
 ---
 
-**Author:** Richard Leroy Stanfield Jr.
-**Organization:** Meridian Axiom Alignment Technologies (MAAT)
+**Author:** Richard Leroy Stanfield Jr.  
+**Organization:** Meridian Axiom Alignment Technologies (MAAT)  
 **Contact:** LuminarkMeridian@gmail.com
-**Framework:** Stanfield Axiom of Perpetuity (SAP) v3.0
 
 Copyright © 2026 Richard Leroy Stanfield Jr. All rights reserved.
