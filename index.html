@@ -251,6 +251,77 @@
   .trans-table td:first-child{color:var(--gold-light);font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap}
   .trans-table td:nth-child(2){color:var(--text);font-weight:500}
 
+  /* CHECK-IN EXCHANGE */
+  .checkin-live-bar{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+  .checkin-live-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);animation:pulse 1.5s ease-in-out infinite;flex-shrink:0}
+  .checkin-live-label{font-size:11px;color:var(--teal);font-weight:500;text-transform:uppercase;letter-spacing:0.08em}
+  .checkin-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+  .filter-pill{font-size:11px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-3);color:var(--text-2);cursor:pointer;transition:all 0.15s;touch-action:manipulation;white-space:nowrap}
+  .filter-pill:hover{border-color:var(--border-2);color:var(--text)}
+  .filter-pill.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold-light)}
+  .checkin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:20px}
+  .checkin-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;position:relative;transition:border-color 0.15s}
+  .checkin-card:hover{border-color:var(--border-2)}
+  .checkin-card.s4-card{border-left:3px solid #97C459}
+  .checkin-card.s6-card{border-left:3px solid #5DCAA5}
+  .checkin-card.s7-card{border-left:3px solid #AFA9EC}
+  .checkin-card.s8-card{border-left:3px solid #F09595;opacity:0.7}
+  .checkin-card.s2-card{border-left:3px solid #B5D4F4}
+  .checkin-card.s3-card{border-left:3px solid #FAC775}
+  .checkin-card.s1-card{border-left:3px solid #85B7EB}
+  .checkin-card.s5-card{border-left:3px solid #EF9F27}
+  .checkin-card-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px;gap:8px}
+  .checkin-driver-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px}
+  .checkin-mc{font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace}
+  .checkin-age{font-size:10px;color:var(--text-3);margin-top:2px}
+  .checkin-score-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+  .checkin-score{font-size:28px;font-weight:700;font-family:'DM Mono',monospace;letter-spacing:-1px;line-height:1}
+  .checkin-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:12px;color:var(--text-2)}
+  .checkin-icon{width:16px;text-align:center;flex-shrink:0;font-size:13px}
+  .checkin-tag{font-size:10px;font-weight:600;padding:3px 8px;border-radius:4px;background:var(--bg-3);border:1px solid var(--border);color:var(--text-2);margin-right:4px;display:inline-block;margin-bottom:3px}
+  .checkin-match-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;margin-top:10px}
+  .match-stabilizer{background:rgba(175,169,236,0.2);color:#b0aaff;border:1px solid rgba(175,169,236,0.3)}
+  .match-volume{background:rgba(55,138,221,0.15);color:#7ab8f0;border:1px solid rgba(55,138,221,0.25)}
+  .match-prime{background:rgba(59,158,74,0.15);color:#6fcd80;border:1px solid rgba(59,158,74,0.25)}
+  .match-peak{background:rgba(29,158,117,0.15);color:#3fd9a8;border:1px solid rgba(29,158,117,0.25)}
+  .match-blocked{background:rgba(226,75,74,0.1);color:#f07a79;border:1px solid rgba(226,75,74,0.2)}
+  .match-recovery{background:rgba(239,159,39,0.15);color:var(--amber);border:1px solid rgba(239,159,39,0.25)}
+  .checkin-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+  .checkin-btn{font-size:11px;font-weight:600;padding:7px 14px;border-radius:var(--radius-sm);border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.15s;touch-action:manipulation;flex:1;min-width:80px;text-align:center}
+  .checkin-btn-primary{background:var(--gold);color:#000}
+  .checkin-btn-primary:hover{background:var(--gold-light)}
+  .checkin-btn-secondary{background:var(--bg-3);color:var(--text-2);border:1px solid var(--border)}
+  .checkin-btn-secondary:hover{background:var(--bg-4);color:var(--text)}
+  .checkin-btn-blocked{background:var(--red-dim);color:#f07a79;cursor:not-allowed;border:1px solid rgba(226,75,74,0.2)}
+  .hos-bar-wrap{margin:8px 0 4px}
+  .hos-bar-track{height:4px;background:var(--bg-4);border-radius:2px;overflow:hidden}
+  .hos-bar-fill{height:100%;border-radius:2px}
+  .checkin-portal-wrap{background:var(--bg-2);border:1px solid var(--gold);border-radius:var(--radius-lg);padding:24px 28px;margin-bottom:20px}
+  .checkin-portal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.3px}
+  .checkin-portal-sub{font-size:12px;color:var(--text-3);margin-bottom:20px}
+  .tap-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+  .tap-step{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+  .tap-num{font-size:24px;font-weight:700;font-family:'DM Mono',monospace;color:var(--gold);margin-bottom:6px}
+  .tap-label{font-size:12px;font-weight:500;color:var(--text);margin-bottom:4px}
+  .tap-sub{font-size:11px;color:var(--text-3);line-height:1.4}
+  .portal-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .form-field{display:flex;flex-direction:column;gap:5px}
+  .form-label{font-size:11px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em}
+  .form-input{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.15s;width:100%}
+  .form-input:focus{border-color:var(--gold)}
+  .form-select{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none;width:100%;cursor:pointer}
+  .form-select:focus{border-color:var(--gold)}
+  .equip-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .equip-tag{font-size:11px;font-weight:500;padding:6px 12px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--bg-3);color:var(--text-2);cursor:pointer;transition:all 0.15s;touch-action:manipulation}
+  .equip-tag:hover{border-color:var(--border-2);color:var(--text)}
+  .equip-tag.selected{background:var(--gold-dim);border-color:var(--gold);color:var(--gold-light);font-weight:600}
+  .checkin-submit-result{display:none;background:var(--teal-dim);border:1px solid rgba(29,158,117,0.3);border-radius:var(--radius);padding:16px 18px;margin-top:16px;text-align:center}
+  .submit-score-big{font-size:48px;font-weight:700;font-family:'DM Mono',monospace;margin-bottom:4px}
+  .velocity-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+  .vel-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;text-align:center}
+  .vel-label{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
+  .vel-value{font-size:18px;font-weight:600;font-family:'DM Mono',monospace}
+
   /* SCROLLBAR */
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:var(--bg)}
@@ -400,6 +471,7 @@
     <button class="nav-item" onclick="nav('calculator',this)"><span class="nav-icon">⊛</span> Yield Calculator</button>
     <button class="nav-item" onclick="nav('ghost',this)"><span class="nav-icon">◎</span> Ghost Filter <span class="nav-badge">2</span></button>
     <button class="nav-item" onclick="nav('lanes',this)"><span class="nav-icon">⊞</span> Lane Pressure</button>
+    <button class="nav-item" onclick="nav('checkin',this)"><span class="nav-icon">⬡</span> Check-In Exchange <span class="nav-badge" id="checkin-badge">6</span></button>
     <div class="sidebar-section-label">Intelligence</div>
     <button class="nav-item" onclick="nav('sap',this)"><span class="nav-icon">∞</span> Risk Stage Index</button>
     <button class="nav-item" onclick="nav('glossary',this)"><span class="nav-icon">▦</span> Glossary</button>
@@ -721,6 +793,185 @@
       </div>
       <div style="text-align:center;margin-top:24px;">
         <a href="mailto:LuminarkMeridian@gmail.com?subject=Luminark%20Overwatch%20Demo%20Request" style="display:inline-block;padding:13px 28px;background:var(--gold);color:#000;text-decoration:none;border-radius:var(--radius);font-weight:600;font-size:14px;">Request Live API Integration</a>
+      </div>
+    </div>
+
+    <!-- ── ACTIVE RESPONSE CHECK-IN EXCHANGE ── -->
+    <div id="page-checkin" class="page">
+      <div class="page-header">
+        <div class="page-title">Active Response Check-In Exchange</div>
+        <div class="page-sub">Dynamic Capacity Exchange — vetted carriers self-reporting availability with live SAP scoring and Operational Velocity matching</div>
+      </div>
+
+      <!-- CARRIER PORTAL -->
+      <div class="checkin-portal-wrap">
+        <div class="checkin-portal-title">📍 Carrier Check-In Portal — 3-Tap Check-In</div>
+        <div class="checkin-portal-sub">Carriers: submit your current status in under 60 seconds. Your Axiom Yield Score is calculated live and broadcast to brokers.</div>
+        <div class="tap-steps">
+          <div class="tap-step">
+            <div class="tap-num">1</div>
+            <div class="tap-label">Confirm Location</div>
+            <div class="tap-sub">City + state. Verified against GPS on mobile. Confirms Asset Density in real time.</div>
+          </div>
+          <div class="tap-step">
+            <div class="tap-num">2</div>
+            <div class="tap-label">Availability Window</div>
+            <div class="tap-sub">Available now or at a specific time. Sets your booking window for broker matching.</div>
+          </div>
+          <div class="tap-step">
+            <div class="tap-num">3</div>
+            <div class="tap-label">Intended Direction</div>
+            <div class="tap-sub">Select heading city/region. Enables backhaul matching and Lane Pressure routing.</div>
+          </div>
+        </div>
+
+        <div class="portal-form-grid">
+          <div class="form-field">
+            <label class="form-label">Driver / Company Name</label>
+            <input class="form-input" id="ci-name" placeholder="e.g. Carlos M. — Desert Run Carriers" type="text">
+          </div>
+          <div class="form-field">
+            <label class="form-label">MC Number</label>
+            <input class="form-input" id="ci-mc" placeholder="e.g. MC-7391024" type="text">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Current Location (City, State)</label>
+            <input class="form-input" id="ci-location" placeholder="e.g. Tampa, FL" type="text">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Intended Direction / Heading City</label>
+            <input class="form-input" id="ci-destination" placeholder="e.g. Atlanta, GA" type="text">
+          </div>
+          <div class="form-field">
+            <label class="form-label">HOS Remaining</label>
+            <select class="form-select" id="ci-hos">
+              <option value="11">11 hrs — Full bank</option>
+              <option value="9">9–10 hrs — Strong</option>
+              <option value="7" selected>7–8 hrs — Good</option>
+              <option value="5">5–6 hrs — Limited</option>
+              <option value="3">3–4 hrs — Short run only</option>
+              <option value="1">1–2 hrs — Recovery needed</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Availability</label>
+            <select class="form-select" id="ci-avail">
+              <option value="now">Available Now</option>
+              <option value="1h">Available in 1 hour</option>
+              <option value="2h">Available in 2–4 hours</option>
+              <option value="tomorrow">Available Tomorrow AM</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Days Since Last Home Time</label>
+            <select class="form-select" id="ci-rest">
+              <option value="0">0–2 days — Just had home time</option>
+              <option value="3" selected>3–5 days</option>
+              <option value="7">6–9 days</option>
+              <option value="11">10–13 days — Fatigue building</option>
+              <option value="14">14+ days — Recovery critical</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Route Conditions</label>
+            <select class="form-select" id="ci-vol">
+              <option value="1">Clear — No issues</option>
+              <option value="3" selected>Light — Minor delays possible</option>
+              <option value="6">Moderate — Weather / traffic</option>
+              <option value="9">Heavy — Significant delays expected</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-field" style="margin-bottom:14px;">
+          <label class="form-label">Equipment Type (select all that apply)</label>
+          <div class="equip-tags" id="equip-tags">
+            <div class="equip-tag selected" onclick="toggleEquip(this)">Dry Van</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Reefer</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Flatbed</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Step Deck</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Box Truck</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Power Only</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Tanker</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Hotshot</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">HAZMAT</div>
+            <div class="equip-tag" onclick="toggleEquip(this)">Team Driver</div>
+          </div>
+        </div>
+
+        <button class="btn-sm gold" style="width:100%;padding:13px;font-size:13px;" onclick="submitCheckin()">
+          Submit Check-In → Calculate Operational Velocity
+        </button>
+
+        <div class="checkin-submit-result" id="checkin-submit-result">
+          <div style="font-size:11px;color:var(--teal);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:6px;">✓ Check-In Received — Broadcasting to Active Brokers</div>
+          <div class="submit-score-big" id="submit-score-display">—</div>
+          <div style="font-size:13px;color:var(--text-2);margin-bottom:4px;" id="submit-stage-label"></div>
+          <div style="font-size:12px;color:var(--text-3);" id="submit-match-type"></div>
+          <div class="velocity-grid">
+            <div class="vel-card">
+              <div class="vel-label">Asset Density</div>
+              <div class="vel-value" id="vel-asset" style="color:var(--teal);">—</div>
+            </div>
+            <div class="vel-card">
+              <div class="vel-label">Blind Spot Pressure</div>
+              <div class="vel-value" id="vel-bsp" style="color:var(--amber);">—</div>
+            </div>
+            <div class="vel-card">
+              <div class="vel-label">Broker Match</div>
+              <div class="vel-value" id="vel-match" style="color:var(--gold-light);font-size:13px;">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIVE FEED HEADER -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+        <div class="checkin-live-bar" style="margin-bottom:0;">
+          <div class="checkin-live-dot"></div>
+          <span class="checkin-live-label">Live Capacity Feed</span>
+          <span style="font-size:11px;color:var(--text-3);" id="feed-timestamp"></span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn-sm" onclick="sortFeed('score')">Sort: Yield Score</button>
+          <button class="btn-sm" onclick="sortFeed('stage')">Sort: Stage</button>
+        </div>
+      </div>
+
+      <!-- FILTERS -->
+      <div class="checkin-filter-row">
+        <div class="filter-pill active" onclick="filterFeed('all',this)">All Active</div>
+        <div class="filter-pill" onclick="filterFeed('prime',this)">🟢 Tier 1 Ready (S4)</div>
+        <div class="filter-pill" onclick="filterFeed('peak',this)">⚡ Peak Window (S6)</div>
+        <div class="filter-pill" onclick="filterFeed('specialist',this)">🔷 Recovery Specialist (S7)</div>
+        <div class="filter-pill" onclick="filterFeed('volume',this)">📈 Volume Carriers (S2/S3)</div>
+        <div class="filter-pill" onclick="filterFeed('reefer',this)">❄ Reefer</div>
+        <div class="filter-pill" onclick="filterFeed('flatbed',this)">🔩 Flatbed</div>
+      </div>
+
+      <!-- LIVE FEED GRID -->
+      <div class="checkin-grid" id="checkin-grid"></div>
+
+      <!-- PREDICTIVE MATCHING PANEL -->
+      <div class="card">
+        <div class="card-title">Operational Velocity Matching Engine</div>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:14px;">
+          Every check-in is scored against three broker match types based on current load conditions. The engine silently deprioritizes Stage 8 carriers from high-value tenders — they remain visible but cannot be fast-matched.
+        </p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">
+          <div style="background:var(--bg-3);border:1px solid rgba(175,169,236,0.3);border-radius:var(--radius);padding:14px;">
+            <div style="font-size:11px;font-weight:600;color:#b0aaff;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">🔷 Stabilizer Match</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Broker has a late, abandoned, or confiscated load. System surfaces <strong style="color:#b0aaff;">Stage 7 Isolated Specialists</strong> — mastery under pressure, no drama, high execution in crisis conditions.</div>
+          </div>
+          <div style="background:var(--bg-3);border:1px solid rgba(55,138,221,0.3);border-radius:var(--radius);padding:14px;">
+            <div style="font-size:11px;font-weight:600;color:#7ab8f0;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">📈 Volume Match</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Broker has 5+ loads on one lane. System surfaces <strong style="color:#7ab8f0;">Stage 2/3 Scaling Carriers</strong> — hungry for volume, capable of backhaul, looking for growth relationships.</div>
+          </div>
+          <div style="background:var(--bg-3);border:1px solid rgba(226,75,74,0.2);border-radius:var(--radius);padding:14px;">
+            <div style="font-size:11px;font-weight:600;color:#f07a79;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">🚫 Red Flag Block</div>
+            <div style="font-size:12px;color:var(--text-2);line-height:1.6;">Stage 8 carriers check in with clean metrics. The engine <strong style="color:#f07a79;">silently deprioritizes</strong> them from high-value tenders. Brokers see them last — after all viable options are presented.</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1195,6 +1446,211 @@ function showStageDetail(i){
 /* ══════════════════════════════════════════════
    INIT
 ══════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════
+   CHECK-IN EXCHANGE DATA & ENGINE
+══════════════════════════════════════════════ */
+const CHECKIN_SEED=[
+  {id:1, name:'Carlos M.',       company:'Desert Run Carriers',   mc:'MC-7391024', location:'Tampa, FL',       dest:'Atlanta, GA',    hos:8, vol:2, comm:8, rest:3,  avail:'now',     equip:['Dry Van','Reefer'],         priority:false},
+  {id:2, name:'Diane K.',        company:'BlueSky Logistics',     mc:'MC-4920183', location:'Orlando, FL',     dest:'Charlotte, NC',  hos:10,vol:1, comm:9, rest:1,  avail:'now',     equip:['Reefer','Temperature Ctrl'],priority:true},
+  {id:3, name:'Marcus T.',       company:'Ironclad Trucking',     mc:'MC-9012847', location:'Jacksonville, FL',dest:'Houston, TX',    hos:7, vol:3, comm:7, rest:4,  avail:'now',     equip:['Dry Van','Flatbed'],        priority:false},
+  {id:4, name:'Apex Dispatch',   company:'Apex Haulers Inc',      mc:'MC-3847291', location:'Miami, FL',       dest:'Chicago, IL',    hos:8, vol:3, comm:3, rest:12, avail:'now',     equip:['Dry Van'],                  priority:false},
+  {id:5, name:'Rosa V.',         company:'Meridian Freight LLC',  mc:'MC-1042398', location:'St. Pete, FL',    dest:'Dallas, TX',     hos:9, vol:2, comm:9, rest:1,  avail:'now',     equip:['Dry Van','Power Only'],     priority:true},
+  {id:6, name:'Troy B.',         company:'SunCoast Transport',    mc:'MC-2847103', location:'Sarasota, FL',    dest:'Nashville, TN',  hos:6, vol:4, comm:6, rest:6,  avail:'1h',      equip:['Flatbed','Step Deck'],      priority:false},
+  {id:7, name:'Cascade Dispatch',company:'Cascade Transport',     mc:'MC-2198473', location:'Fort Myers, FL',  dest:'Memphis, TN',    hos:3, vol:7, comm:5, rest:8,  avail:'2h',      equip:['Dry Van'],                  priority:false},
+  {id:8, name:'Kim L.',          company:'Gulf Coast Haul',       mc:'MC-5510293', location:'Pensacola, FL',   dest:'Atlanta, GA',    hos:9, vol:2, comm:8, rest:2,  avail:'now',     equip:['Reefer'],                   priority:false},
+  {id:9, name:'Dante R.',        company:'Palmetto Express',      mc:'MC-6638471', location:'Lakeland, FL',    dest:'Birmingham, AL', hos:11,vol:1, comm:9, rest:0,  avail:'now',     equip:['Hotshot','Power Only'],     priority:true},
+];
+
+let CHECKIN_FEED=[...CHECKIN_SEED];
+let currentFilter='all';
+let currentSort='score';
+
+function getCheckinScore(c){return calcYield(c.hos,c.vol,c.comm,c.rest);}
+function getCheckinStage(c){return stageFromYield(getCheckinScore(c));}
+
+function getMatchType(c){
+  const s=getCheckinStage(c);
+  if(s===8)return{label:'⚠ Deprioritized — Stage 8',cls:'match-blocked',type:'blocked'};
+  if(s===7)return{label:'🔷 Stabilizer Match — Recovery Specialist',cls:'match-stabilizer',type:'stabilizer'};
+  if(s===4)return{label:'🟢 Prime Match — Tier 1 Ready',cls:'match-prime',type:'prime'};
+  if(s===6)return{label:'⚡ Peak Window Match',cls:'match-peak',type:'peak'};
+  if(s===2||s===3)return{label:'📈 Volume Match — Scaling Carrier',cls:'match-volume',type:'volume'};
+  if(s===5)return{label:'⚠ Recovery Run Required',cls:'match-recovery',type:'recovery'};
+  return{label:'Monitor',cls:'match-volume',type:'other'};
+}
+
+function availLabel(a){
+  return{now:'Available Now',  '1h':'Available in 1 hr', '2h':'Available in 2–4 hrs', tomorrow:'Available Tomorrow AM'}[a]||a;
+}
+
+function renderCheckinCard(c){
+  const score=getCheckinScore(c);
+  const stage=getCheckinStage(c);
+  const sData=STAGES[stage];
+  const yc=yieldColor(score);
+  const match=getMatchType(c);
+  const isBlocked=match.type==='blocked';
+  const rigidity=isRigidityRisk(c.hos,c.rest);
+  const hosBarColor=c.hos>=7?'#3fd9a8':c.hos>=4?'#EF9F27':'#f07a79';
+  const hosBarPct=Math.round((c.hos/11)*100);
+
+  return`<div class="checkin-card s${stage}-card" data-stage="${stage}" data-equip="${c.equip.join(',')}" data-score="${score}">
+    <div class="checkin-card-header">
+      <div>
+        <div class="checkin-driver-name">${c.name}</div>
+        <div class="checkin-mc">${c.company} · ${c.mc}</div>
+        <div class="checkin-age">${availLabel(c.avail)}</div>
+      </div>
+      <div class="checkin-score-wrap">
+        <div class="checkin-score" style="color:${yc};">${score}</div>
+        <span class="stage-pill s-${stage}" style="font-size:10px;padding:3px 8px;">S${stage}</span>
+        ${c.priority?'<span style="font-size:9px;color:var(--gold-light);text-transform:uppercase;letter-spacing:0.06em;">★ Priority</span>':''}
+      </div>
+    </div>
+
+    <div class="checkin-row"><span class="checkin-icon">📍</span><span>${c.location} → ${c.dest}</span></div>
+
+    <div class="hos-bar-wrap">
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-3);margin-bottom:4px;">
+        <span>HOS Remaining</span><span style="color:${hosBarColor};font-family:'DM Mono',monospace;">${c.hos} hrs</span>
+      </div>
+      <div class="hos-bar-track"><div class="hos-bar-fill" style="width:${hosBarPct}%;background:${hosBarColor};"></div></div>
+    </div>
+
+    <div class="checkin-row" style="margin-top:8px;flex-wrap:wrap;gap:4px;">
+      ${c.equip.map(e=>`<span class="checkin-tag">${e}</span>`).join('')}
+    </div>
+
+    ${rigidity?'<div style="font-size:10px;color:#f07a79;margin-top:6px;font-weight:500;">⚠ Rigidity Flag — 14+ days no home time</div>':''}
+
+    <span class="checkin-match-badge ${match.cls}">${match.label}</span>
+
+    <div class="checkin-actions">
+      ${isBlocked
+        ?`<button class="checkin-btn checkin-btn-blocked" style="flex:2;" disabled>⚠ Stage 8 — Do Not Dispatch</button>`
+        :`<button class="checkin-btn checkin-btn-primary" onclick="contactCarrier('${c.name}','${c.mc}',${score},${stage})">Contact Carrier</button>
+          <button class="checkin-btn checkin-btn-secondary" onclick="loadCheckinToCalc(${c.id})">→ Calculator</button>`
+      }
+    </div>
+  </div>`;
+}
+
+function renderCheckinFeed(){
+  let feed=[...CHECKIN_FEED];
+
+  // Filter
+  if(currentFilter==='prime') feed=feed.filter(c=>getCheckinStage(c)===4);
+  else if(currentFilter==='peak') feed=feed.filter(c=>getCheckinStage(c)===6);
+  else if(currentFilter==='specialist') feed=feed.filter(c=>getCheckinStage(c)===7);
+  else if(currentFilter==='volume') feed=feed.filter(c=>[2,3].includes(getCheckinStage(c)));
+  else if(currentFilter==='reefer') feed=feed.filter(c=>c.equip.some(e=>e.toLowerCase().includes('reefer')));
+  else if(currentFilter==='flatbed') feed=feed.filter(c=>c.equip.some(e=>e.toLowerCase().includes('flatbed')));
+
+  // Sort — Stage 8 always last regardless of sort
+  feed.sort((a,b)=>{
+    const sa=getCheckinStage(a), sb=getCheckinStage(b);
+    if(sa===8&&sb!==8)return 1;
+    if(sb===8&&sa!==8)return -1;
+    if(currentSort==='score') return getCheckinScore(b)-getCheckinScore(a);
+    if(currentSort==='stage'){
+      // Stage 4 first, then 6, then others, then 8 last
+      const priority={4:0,6:1,7:2,2:3,3:4,1:5,5:6,9:7,0:8,8:9};
+      return (priority[sa]??5)-(priority[sb]??5);
+    }
+    return 0;
+  });
+
+  document.getElementById('checkin-grid').innerHTML=feed.map(renderCheckinCard).join('');
+
+  // Timestamp
+  document.getElementById('feed-timestamp').textContent='Updated '+new Date().toLocaleTimeString();
+}
+
+function filterFeed(type,el){
+  currentFilter=type;
+  document.querySelectorAll('.filter-pill').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');
+  renderCheckinFeed();
+}
+
+function sortFeed(type){
+  currentSort=type;
+  renderCheckinFeed();
+}
+
+function contactCarrier(name,mc,score,stage){
+  const sData=STAGES[stage];
+  alert(`📞 Contact Request Logged\n\nCarrier: ${name} · ${mc}\nYield Score: ${score} · Stage ${stage} — ${sData.label}\n\nDispatch Guidance:\n${sData.logistics}\n\n(Phase 2: This will trigger an in-app notification to the carrier and log the contact in your CRM.)`);
+}
+
+function loadCheckinToCalc(id){
+  const c=CHECKIN_FEED.find(x=>x.id===id);
+  if(!c)return;
+  document.getElementById('calc-carrier-name').value=c.company;
+  document.getElementById('calc-mc-number').value=c.mc;
+  document.getElementById('sl-hos').value=c.hos;
+  document.getElementById('sl-vol').value=c.vol;
+  document.getElementById('sl-comm').value=c.comm;
+  document.getElementById('sl-rest').value=c.rest;
+  updateCalc();
+  nav('calculator',document.querySelectorAll('.nav-item')[1]);
+  window.scrollTo(0,0);
+}
+
+function toggleEquip(el){el.classList.toggle('selected');}
+
+function submitCheckin(){
+  const name=document.getElementById('ci-name').value||'Anonymous Driver';
+  const mc=document.getElementById('ci-mc').value||'MC-PENDING';
+  const location=document.getElementById('ci-location').value||'Location not provided';
+  const dest=document.getElementById('ci-destination').value||'Flexible';
+  const hos=+document.getElementById('ci-hos').value;
+  const avail=document.getElementById('ci-avail').value;
+  const rest=+document.getElementById('ci-rest').value;
+  const vol=+document.getElementById('ci-vol').value;
+  const comm=8; // default high for self-submitting carriers (they're actively communicating)
+  const equip=[...document.querySelectorAll('.equip-tag.selected')].map(e=>e.textContent);
+
+  if(!location||location==='Location not provided'){
+    document.getElementById('ci-location').focus();
+    document.getElementById('ci-location').style.borderColor='var(--red)';
+    setTimeout(()=>document.getElementById('ci-location').style.borderColor='',2000);
+    return;
+  }
+
+  const score=calcYield(hos,vol,comm,rest);
+  const stage=stageFromYield(score);
+  const sData=STAGES[stage];
+  const match=getMatchType({hos,vol,comm,rest,equip});
+  const yc=yieldColor(score);
+
+  // Add to live feed
+  const newEntry={
+    id:Date.now(),name,company:name,mc,location,dest,hos,vol,comm,rest,avail,equip,priority:stage===4||stage===6
+  };
+  CHECKIN_FEED.unshift(newEntry);
+  document.getElementById('checkin-badge').textContent=CHECKIN_FEED.length;
+
+  // Show result
+  const res=document.getElementById('checkin-submit-result');
+  res.style.display='block';
+  document.getElementById('submit-score-display').textContent=score;
+  document.getElementById('submit-score-display').style.color=yc;
+  document.getElementById('submit-stage-label').textContent=`Stage ${stage} — ${sData.label} · ${sData.industryTerm}`;
+  document.getElementById('submit-match-type').textContent=match.label;
+  document.getElementById('vel-asset').textContent=Math.round((hos/11)*100)+'%';
+  document.getElementById('vel-bsp').textContent=sData.tension+'%';
+  document.getElementById('vel-match').textContent=match.type==='blocked'?'Deprioritized':match.type==='prime'?'Priority Queue':match.type==='stabilizer'?'Recovery Pool':match.type==='peak'?'Express Queue':'Volume Pool';
+
+  // Re-render feed with new entry
+  renderCheckinFeed();
+  res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
+renderCheckinFeed();
 renderDashboard();
 renderGhost();
 renderLanes();
