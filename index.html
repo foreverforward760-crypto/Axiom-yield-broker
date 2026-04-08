@@ -7,92 +7,122 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg:#0f0e0c; --bg-2:#1a1916; --bg-3:#222120; --bg-4:#2c2b28;
-    --border:rgba(255,255,255,0.08); --border-2:rgba(255,255,255,0.14);
-    --text:#f0ede8; --text-2:#a09c94; --text-3:#6b6760;
-    --gold:#c8841a; --gold-light:#f0aa40; --gold-dim:rgba(200,132,26,0.15);
-    --teal:#1d9e75; --teal-dim:rgba(29,158,117,0.15);
-    --red:#e24b4a; --red-dim:rgba(226,75,74,0.15);
-    --blue:#378add; --blue-dim:rgba(55,138,221,0.15);
-    --purple:#7f77dd; --purple-dim:rgba(127,119,221,0.15);
-    --green:#3b9e4a; --green-dim:rgba(59,158,74,0.15);
-    --amber:#ef9f27; --amber-dim:rgba(239,159,39,0.15);
-    --coral:#d85a30; --coral-dim:rgba(216,90,48,0.15);
-    --radius:10px; --radius-sm:6px; --radius-lg:16px;
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#0f0e0c;--bg-2:#1a1916;--bg-3:#222120;--bg-4:#2c2b28;
+    --border:rgba(255,255,255,0.08);--border-2:rgba(255,255,255,0.14);
+    --text:#f0ede8;--text-2:#a09c94;--text-3:#6b6760;
+    --gold:#c8841a;--gold-light:#f0aa40;--gold-dim:rgba(200,132,26,0.15);
+    --teal:#1d9e75;--teal-dim:rgba(29,158,117,0.15);
+    --red:#e24b4a;--red-dim:rgba(226,75,74,0.15);
+    --blue:#378add;--blue-dim:rgba(55,138,221,0.15);
+    --purple:#7f77dd;--purple-dim:rgba(127,119,221,0.15);
+    --green:#3b9e4a;--green-dim:rgba(59,158,74,0.15);
+    --amber:#ef9f27;--amber-dim:rgba(239,159,39,0.15);
+    --coral:#d85a30;--coral-dim:rgba(216,90,48,0.15);
+    --radius:10px;--radius-sm:6px;--radius-lg:16px;
   }
-  body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; font-size:14px; line-height:1.6; }
-  .app-shell { display:grid; grid-template-columns:224px 1fr; grid-template-rows:58px 1fr; min-height:100vh; }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
+  .app-shell{display:grid;grid-template-columns:224px 1fr;grid-template-rows:58px 1fr;min-height:100vh}
 
   /* TOPBAR */
-  .topbar { grid-column:1/-1; background:var(--bg-2); border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; padding:0 24px; }
-  .brand { display:flex; align-items:center; gap:12px; }
-  .brand-icon { width:32px; height:32px; border-radius:8px; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#000; letter-spacing:-0.5px; }
-  .brand-name { font-size:15px; font-weight:600; color:var(--text); letter-spacing:-0.3px; }
-  .brand-tag { font-size:11px; color:var(--text-3); font-weight:300; }
-  .topbar-right { display:flex; align-items:center; gap:10px; }
-  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--teal); box-shadow:0 0 6px var(--teal); animation:pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  .status-label { font-size:11px; color:var(--text-3); }
-  .version-badge { font-size:10px; padding:3px 8px; border-radius:20px; background:var(--gold-dim); color:var(--gold-light); border:1px solid rgba(200,132,26,0.3); font-family:'DM Mono',monospace; }
+  .topbar{grid-column:1/-1;background:var(--bg-2);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand-icon{width:32px;height:32px;border-radius:8px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;letter-spacing:-0.5px}
+  .brand-name{font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.3px}
+  .brand-tag{font-size:11px;color:var(--text-3);font-weight:300}
+  .topbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .status-dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 6px var(--teal);animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  .status-label{font-size:11px;color:var(--text-3)}
+  .version-badge{font-size:10px;padding:3px 8px;border-radius:20px;background:var(--gold-dim);color:var(--gold-light);border:1px solid rgba(200,132,26,0.3);font-family:'DM Mono',monospace}
 
-  /* RISK LEGEND BUTTON + MODAL */
-  .legend-btn { font-size:12px; font-weight:500; padding:7px 14px; border-radius:var(--radius-sm); border:1px solid var(--border-2); background:transparent; color:var(--text-2); cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.15s,color 0.15s; }
-  .legend-btn:hover { background:var(--bg-4); color:var(--text); }
-  .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:2000; align-items:center; justify-content:center; }
-  .modal-overlay.open { display:flex; }
-  .modal { background:var(--bg-2); border:1px solid var(--border-2); border-radius:var(--radius-lg); padding:28px 32px; width:520px; max-width:94vw; position:relative; }
-  .modal-title { font-size:16px; font-weight:600; color:var(--text); margin-bottom:4px; letter-spacing:-0.3px; }
-  .modal-sub { font-size:12px; color:var(--text-3); margin-bottom:20px; }
-  .modal-close { position:absolute; top:16px; right:18px; background:none; border:none; color:var(--text-3); font-size:18px; cursor:pointer; line-height:1; }
-  .modal-close:hover { color:var(--text); }
-  .legend-table { width:100%; border-collapse:collapse; }
-  .legend-table th { text-align:left; font-size:10px; font-weight:500; color:var(--text-3); text-transform:uppercase; letter-spacing:0.06em; padding:7px 10px; background:var(--bg-3); border-bottom:1px solid var(--border); }
-  .legend-table td { padding:11px 10px; font-size:12px; border-bottom:1px solid var(--border); vertical-align:top; }
-  .legend-table tr:last-child td { border-bottom:none; }
-  .legend-table td:first-child { font-weight:600; white-space:nowrap; }
-  .legend-table td:last-child { color:var(--text-2); }
+  /* MODALS */
+  .legend-btn,.export-btn,.comm-btn{font-size:12px;font-weight:500;padding:7px 14px;border-radius:var(--radius-sm);border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s,color 0.15s;white-space:nowrap}
+  .legend-btn:hover,.export-btn:hover,.comm-btn:hover{background:var(--bg-4);color:var(--text)}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:2000;align-items:center;justify-content:center;padding:16px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--bg-2);border:1px solid var(--border-2);border-radius:var(--radius-lg);padding:24px 28px;width:560px;max-width:100%;max-height:90vh;overflow-y:auto;position:relative}
+  .modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px;letter-spacing:-0.3px;padding-right:32px}
+  .modal-sub{font-size:12px;color:var(--text-3);margin-bottom:18px}
+  .modal-close{position:absolute;top:16px;right:18px;background:none;border:none;color:var(--text-3);font-size:20px;cursor:pointer;line-height:1;padding:4px 8px;border-radius:4px;touch-action:manipulation}
+  .modal-close:hover{color:var(--text);background:var(--bg-4)}
+  .legend-table{width:100%;border-collapse:collapse}
+  .legend-table th{text-align:left;padding:8px 10px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;background:var(--bg-3);border-bottom:1px solid var(--border)}
+  .legend-table td{padding:12px 10px;font-size:12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+  .legend-table tr:last-child td{border-bottom:none}
+  .legend-table td:first-child{white-space:nowrap}
+
+  /* COMM CHECK FORM */
+  .comm-check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+  .comm-check-item:last-child{border-bottom:none}
+  .comm-label{font-size:12px;color:var(--text-2);flex:1;line-height:1.5}
+  .comm-radio-group{display:flex;gap:8px;flex-shrink:0}
+  .comm-radio-group label{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-3);cursor:pointer;padding:4px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);transition:all 0.15s;white-space:nowrap;touch-action:manipulation}
+  .comm-radio-group input[type=radio]{display:none}
+  .comm-radio-group input[type=radio]:checked+span{color:var(--text)}
+  .comm-radio-group label:has(input:checked){border-color:var(--gold);background:var(--gold-dim);color:var(--gold-light)}
+  .comm-result-box{margin-top:16px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;text-align:center;display:none}
+  .comm-score-num{font-size:42px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-2px;margin-bottom:4px}
+  .comm-score-label{font-size:12px;color:var(--text-2)}
+
+  /* PDF EXPORT */
+  @media print{
+    body{background:#fff;color:#000}
+    .app-shell{display:block}
+    .sidebar,.topbar,.modal-overlay,#fixed-cta{display:none!important}
+    .main{padding:0}
+    .page{display:none!important}
+    #print-report{display:block!important}
+    .print-header{border-bottom:2px solid #c8841a;padding-bottom:16px;margin-bottom:20px}
+    .print-score{font-size:64px;font-weight:700;color:#c8841a}
+    .print-field{margin-bottom:8px;font-size:13px}
+    .print-field strong{display:inline-block;width:160px;color:#555}
+    .print-stage-box{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:16px;margin:16px 0;font-size:13px;line-height:1.7}
+    .print-footer{margin-top:32px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:12px}
+  }
+  #print-report{display:none}
 
   /* SIDEBAR */
-  .sidebar { background:var(--bg-2); border-right:1px solid var(--border); padding:20px 12px; display:flex; flex-direction:column; gap:4px; }
-  .sidebar-section-label { font-size:10px; font-weight:500; color:var(--text-3); letter-spacing:0.08em; text-transform:uppercase; padding:12px 8px 6px; }
-  .nav-item { display:flex; align-items:center; gap:10px; padding:9px 10px; border-radius:var(--radius-sm); cursor:pointer; font-size:13px; color:var(--text-2); transition:background 0.15s,color 0.15s; border:none; background:none; width:100%; text-align:left; }
-  .nav-item:hover { background:var(--bg-3); color:var(--text); }
-  .nav-item.active { background:var(--gold-dim); color:var(--gold-light); }
-  .nav-icon { width:18px; height:18px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
-  .nav-badge { margin-left:auto; font-size:10px; padding:1px 6px; border-radius:20px; background:var(--red-dim); color:var(--red); }
+  .sidebar{background:var(--bg-2);border-right:1px solid var(--border);padding:20px 12px;display:flex;flex-direction:column;gap:4px;overflow-y:auto}
+  .sidebar-section-label{font-size:10px;font-weight:500;color:var(--text-3);letter-spacing:0.08em;text-transform:uppercase;padding:12px 8px 6px}
+  .nav-item{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:var(--radius-sm);cursor:pointer;font-size:13px;color:var(--text-2);transition:background 0.15s,color 0.15s;border:none;background:none;width:100%;text-align:left;touch-action:manipulation;min-height:40px}
+  .nav-item:hover{background:var(--bg-3);color:var(--text)}
+  .nav-item.active{background:var(--gold-dim);color:var(--gold-light)}
+  .nav-icon{width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .nav-badge{margin-left:auto;font-size:10px;padding:2px 7px;border-radius:20px;background:var(--red-dim);color:var(--red)}
 
   /* MAIN */
-  .main { overflow-y:auto; padding:28px 32px; background:var(--bg); }
-  .page { display:none; }
-  .page.active { display:block; animation:fadeIn 0.2s ease; }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:none} }
-  .page-header { margin-bottom:24px; }
-  .page-title { font-size:22px; font-weight:600; color:var(--text); letter-spacing:-0.5px; margin-bottom:4px; }
-  .page-sub { font-size:13px; color:var(--text-3); }
+  .main{overflow-y:auto;padding:24px 28px;background:var(--bg)}
+  .page{display:none}
+  .page.active{display:block;animation:fadeIn 0.2s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+  .page-header{margin-bottom:22px}
+  .page-title{font-size:22px;font-weight:600;color:var(--text);letter-spacing:-0.5px;margin-bottom:4px}
+  .page-sub{font-size:13px;color:var(--text-3)}
 
-  /* METRIC CARDS */
-  .metrics-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
-  .metric-card { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
-  .metric-label { font-size:11px; color:var(--text-3); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:8px; }
-  .metric-value { font-size:28px; font-weight:600; letter-spacing:-1px; line-height:1; margin-bottom:6px; }
-  .metric-sub { font-size:11px; color:var(--text-3); display:flex; align-items:center; gap:5px; }
-  .up{color:var(--teal)} .down{color:var(--red)} .warn{color:var(--amber)} .gold{color:var(--gold-light)}
+  /* METRICS */
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+  .metric-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+  .metric-label{font-size:11px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px}
+  .metric-value{font-size:28px;font-weight:600;letter-spacing:-1px;line-height:1;margin-bottom:6px}
+  .metric-sub{font-size:11px;color:var(--text-3);display:flex;align-items:center;gap:5px}
+  .up{color:var(--teal)}.down{color:var(--red)}.warn{color:var(--amber)}.gold{color:var(--gold-light)}
 
   /* TABLE */
-  .table-wrap { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:24px; }
-  .table-head { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--border); }
-  .table-head-title { font-size:13px; font-weight:500; color:var(--text); }
-  .table-head-sub { font-size:11px; color:var(--text-3); }
-  table { width:100%; border-collapse:collapse; }
-  thead th { text-align:left; font-size:10px; font-weight:500; color:var(--text-3); text-transform:uppercase; letter-spacing:0.06em; padding:10px 18px; background:var(--bg-3); border-bottom:1px solid var(--border); }
-  tbody td { padding:13px 18px; font-size:13px; color:var(--text); border-bottom:1px solid var(--border); vertical-align:middle; }
-  tbody tr:last-child td { border-bottom:none; }
-  tbody tr:hover td { background:rgba(255,255,255,0.02); }
+  .table-wrap{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:20px}
+  .table-head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:8px}
+  .table-head-title{font-size:13px;font-weight:500;color:var(--text)}
+  .table-head-sub{font-size:11px;color:var(--text-3)}
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;min-width:600px}
+  thead th{text-align:left;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;padding:10px 16px;background:var(--bg-3);border-bottom:1px solid var(--border);white-space:nowrap}
+  tbody td{padding:12px 16px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(255,255,255,0.02)}
 
-  /* PILLS & BADGES */
-  .stage-pill { display:inline-flex; align-items:center; gap:5px; font-size:11px; font-weight:500; padding:4px 9px; border-radius:20px; }
+  /* PILLS */
+  .stage-pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:4px 9px;border-radius:20px;white-space:nowrap}
   .s-0{background:rgba(136,135,128,0.15);color:#888780}
   .s-1{background:var(--blue-dim);color:#7ab8f0}
   .s-2{background:var(--blue-dim);color:#7ab8f0}
@@ -103,7 +133,7 @@
   .s-7{background:var(--purple-dim);color:#b0aaff}
   .s-8{background:var(--red-dim);color:#f07a79}
   .s-9{background:var(--teal-dim);color:#3fd9a8}
-  .risk-badge { font-size:10px; font-weight:500; padding:3px 8px; border-radius:20px; }
+  .risk-badge{font-size:10px;font-weight:500;padding:4px 9px;border-radius:20px;white-space:nowrap}
   .r-low{background:var(--green-dim);color:#6fcd80}
   .r-med{background:var(--amber-dim);color:var(--amber)}
   .r-high{background:var(--red-dim);color:#f07a79}
@@ -111,100 +141,109 @@
   .r-watch{background:var(--gold-dim);color:var(--gold-light)}
 
   /* YIELD BAR */
-  .yield-wrap { display:flex; align-items:center; gap:8px; }
-  .yield-track { width:72px; height:5px; background:var(--bg-4); border-radius:3px; overflow:hidden; }
-  .yield-fill { height:100%; border-radius:3px; transition:width 0.4s ease; }
-  .yield-num { font-size:12px; font-weight:500; font-family:'DM Mono',monospace; min-width:28px; }
+  .yield-wrap{display:flex;align-items:center;gap:8px}
+  .yield-track{width:60px;height:5px;background:var(--bg-4);border-radius:3px;overflow:hidden;flex-shrink:0}
+  .yield-fill{height:100%;border-radius:3px;transition:width 0.4s ease}
+  .yield-num{font-size:12px;font-weight:500;font-family:'DM Mono',monospace;min-width:26px}
 
   /* CARDS */
-  .card { background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius); padding:18px 20px; margin-bottom:18px; }
-  .card-title { font-size:13px; font-weight:500; color:var(--text); margin-bottom:14px; }
-  .math-row { font-family:'DM Mono',monospace; font-size:11px; color:var(--text-3); background:var(--bg-3); border:1px solid var(--border); border-radius:var(--radius-sm); padding:7px 11px; margin:8px 0; }
-  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
-  .inv-box { border-radius:var(--radius-sm); padding:12px 14px; font-size:12px; line-height:1.5; }
+  .card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;margin-bottom:16px}
+  .card-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:14px}
+  .math-row{font-family:'DM Mono',monospace;font-size:11px;color:var(--text-3);background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 11px;margin:8px 0;overflow-x:auto}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+  .inv-box{border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;line-height:1.5}
   .inv-stable{background:var(--green-dim);border:1px solid rgba(59,158,74,0.2)}
   .inv-unstable{background:var(--red-dim);border:1px solid rgba(226,75,74,0.2)}
   .inv-both{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.3)}
-  .inv-label { font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px; }
-  .inv-stable .inv-label{color:#6fcd80} .inv-unstable .inv-label{color:#f07a79} .inv-both .inv-label{color:#3fd9a8}
+  .inv-label{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px}
+  .inv-stable .inv-label{color:#6fcd80}.inv-unstable .inv-label{color:#f07a79}.inv-both .inv-label{color:#3fd9a8}
   .inv-body{color:var(--text-2)}
 
   /* TENSION BAR */
   .tension-wrap{margin-top:12px}
   .tension-top{display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);margin-bottom:5px}
-  .tension-track{height:4px;background:var(--bg-4);border-radius:2px;overflow:hidden}
+  .tension-track{height:5px;background:var(--bg-4);border-radius:2px;overflow:hidden}
   .tension-fill{height:100%;border-radius:2px;transition:width 0.4s}
 
-  /* CALC SLIDERS */
-  .input-group{margin-bottom:18px}
-  .input-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text-2);margin-bottom:6px}
-  .input-val{font-family:'DM Mono',monospace;color:var(--gold-light);font-size:12px}
-  input[type="range"]{-webkit-appearance:none;width:100%;height:4px;background:var(--bg-4);border-radius:2px;outline:none;cursor:pointer}
-  input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);cursor:pointer;transition:transform 0.15s}
-  input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.2)}
-  .score-result{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center;margin-top:18px}
+  /* CALC */
+  .input-group{margin-bottom:16px}
+  .input-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text-2);margin-bottom:6px;gap:8px;flex-wrap:wrap}
+  .input-hint{font-size:10px;color:var(--text-3);margin-top:4px;line-height:1.4}
+  .input-val{font-family:'DM Mono',monospace;color:var(--gold-light);font-size:12px;flex-shrink:0}
+  input[type="range"]{-webkit-appearance:none;width:100%;height:6px;background:var(--bg-4);border-radius:3px;outline:none;cursor:pointer;touch-action:manipulation}
+  input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--gold);border:2px solid var(--bg);cursor:pointer;transition:transform 0.15s}
+  input[type="range"]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+  .score-result{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center;margin-top:16px}
   .score-num{font-size:64px;font-weight:600;letter-spacing:-3px;line-height:1;font-family:'DM Mono',monospace;margin-bottom:6px}
-  .score-stage{font-size:13px;color:var(--text-2);margin-bottom:16px}
+  .score-stage{font-size:13px;color:var(--text-2);margin-bottom:12px}
   .score-analysis-box{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;font-size:12px;color:var(--text-2);line-height:1.7;text-align:left}
+  .score-rigidity-flag{background:var(--red-dim);border:1px solid rgba(226,75,74,0.3);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:#f07a79;margin-top:10px;font-weight:500;display:none}
+
+  /* SAVED CARRIERS */
+  .saved-bar{display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:8px}
+  .saved-bar-label{font-size:11px;color:var(--text-3)}
+  .btn-sm{font-size:11px;font-weight:500;padding:6px 12px;border-radius:var(--radius-sm);border:1px solid var(--border-2);background:transparent;color:var(--text-2);cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s,color 0.15s;touch-action:manipulation}
+  .btn-sm:hover{background:var(--bg-4);color:var(--text)}
+  .btn-sm.gold{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+  .btn-sm.gold:hover{background:var(--gold-light);border-color:var(--gold-light)}
+  .saved-list{margin-top:10px}
+  .saved-item{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);margin-bottom:6px;gap:8px;flex-wrap:wrap}
+  .saved-item-name{font-size:12px;font-weight:500;color:var(--text)}
+  .saved-item-meta{font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace}
+  .saved-item-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
 
   /* GHOST */
-  .fractal-item{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+  .fractal-item{display:flex;align-items:flex-start;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);gap:12px}
   .fractal-item:last-child{border-bottom:none}
   .fractal-info .f-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
   .fractal-info .f-meta{font-size:11px;color:var(--text-3)}
-  .fractal-info .f-math{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);margin-top:5px}
-  .fractal-score-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:5px}
+  .fractal-info .f-math{font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);margin-top:5px;overflow-x:auto}
+  .fractal-score-wrap{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0}
   .fractal-score-num{font-size:22px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-1px}
 
   /* LANES */
-  .lane-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-  .lane-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color 0.15s,background 0.15s}
+  .lane-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+  .lane-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;cursor:pointer;transition:border-color 0.15s,background 0.15s;touch-action:manipulation}
   .lane-card:hover{border-color:var(--border-2);background:var(--bg-3)}
   .lane-card.selected{border-color:var(--gold);background:var(--gold-dim)}
   .lane-name{font-size:13px;font-weight:600;margin-bottom:3px;color:var(--text)}
   .lane-stage{font-size:11px;color:var(--text-3);margin-bottom:8px}
   .entropy-dots{display:flex;gap:3px;margin-bottom:8px}
-  .e-dot{width:8px;height:8px;border-radius:50%;background:var(--bg-4)}
-  .e-dot.on{background:var(--gold)} .e-dot.hot{background:var(--coral);box-shadow:0 0 4px var(--coral)}
+  .e-dot{width:9px;height:9px;border-radius:50%;background:var(--bg-4)}
+  .e-dot.on{background:var(--gold)}.e-dot.hot{background:var(--coral);box-shadow:0 0 4px var(--coral)}
   .lane-trend{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em}
 
   /* SAP FLOW */
-  .sap-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:18px 0;margin-bottom:16px}
-  .sap-node{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
-  .sap-circle{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;border:2px solid transparent;transition:transform 0.15s,border-color 0.15s}
-  .sap-circle:hover{transform:scale(1.12)}
+  .sap-flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:16px 0;margin-bottom:14px}
+  .sap-node{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;touch-action:manipulation}
+  .sap-circle{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;border:2px solid transparent;transition:transform 0.15s,border-color 0.15s}
+  .sap-circle:hover{transform:scale(1.1)}
   .sap-circle.active-node{border-color:var(--gold);box-shadow:0 0 10px var(--gold-dim)}
   .sap-node-label{font-size:9px;color:var(--text-3);text-align:center;max-width:44px;line-height:1.2}
   .sap-arrow{font-size:12px;color:var(--text-3);margin-bottom:20px;flex-shrink:0}
   .stage-detail{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;animation:fadeIn 0.2s ease}
-  .stage-detail-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .stage-detail-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;gap:12px;flex-wrap:wrap}
   .stage-detail-name{font-size:16px;font-weight:600;letter-spacing:-0.3px;color:var(--text)}
 
   /* ALERTS */
   .alert{border-radius:var(--radius-sm);padding:12px 14px;font-size:12px;line-height:1.6;margin-top:12px}
   .alert strong{font-weight:500}
-  .alert-warn{background:var(--amber-dim);border:1px solid rgba(239,159,39,0.25);color:var(--text-2)}
-  .alert-warn strong{color:var(--amber)}
-  .alert-danger{background:var(--red-dim);border:1px solid rgba(226,75,74,0.25);color:var(--text-2)}
-  .alert-danger strong{color:#f07a79}
-  .alert-success{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.25);color:var(--text-2)}
-  .alert-success strong{color:#3fd9a8}
-  .alert-gold{background:var(--gold-dim);border:1px solid rgba(200,132,26,0.25);color:var(--text-2)}
-  .alert-gold strong{color:var(--gold-light)}
+  .alert-warn{background:var(--amber-dim);border:1px solid rgba(239,159,39,0.25);color:var(--text-2)}.alert-warn strong{color:var(--amber)}
+  .alert-danger{background:var(--red-dim);border:1px solid rgba(226,75,74,0.25);color:var(--text-2)}.alert-danger strong{color:#f07a79}
+  .alert-success{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.25);color:var(--text-2)}.alert-success strong{color:#3fd9a8}
+  .alert-gold{background:var(--gold-dim);border:1px solid rgba(200,132,26,0.25);color:var(--text-2)}.alert-gold strong{color:var(--gold-light)}
 
   /* SECTION DIVIDER */
-  .section-divider{display:flex;align-items:center;gap:12px;margin:24px 0 18px}
+  .section-divider{display:flex;align-items:center;gap:12px;margin:22px 0 16px}
   .section-divider-label{font-size:11px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap}
   .section-divider-line{flex:1;height:1px;background:var(--border)}
 
   /* GLOSSARY */
   .glossary-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .gloss-item{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px}
-  .gloss-term{font-size:12px;font-weight:600;color:var(--gold-light);margin-bottom:4px;font-family:'DM Mono',monospace}
+  .gloss-term{font-size:12px;font-weight:600;color:var(--gold-light);margin-bottom:3px;font-family:'DM Mono',monospace}
   .gloss-alias{font-size:10px;color:var(--text-3);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.05em}
   .gloss-def{font-size:12px;color:var(--text-2);line-height:1.6}
-
-  /* TRANSLATION TABLE */
   .trans-table{width:100%;border-collapse:collapse;font-size:12px}
   .trans-table th{text-align:left;padding:8px 12px;font-size:10px;font-weight:500;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;background:var(--bg-3);border-bottom:1px solid var(--border)}
   .trans-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
@@ -212,38 +251,129 @@
   .trans-table td:first-child{color:var(--gold-light);font-family:'DM Mono',monospace;font-size:11px;white-space:nowrap}
   .trans-table td:nth-child(2){color:var(--text);font-weight:500}
 
-  ::-webkit-scrollbar{width:6px} ::-webkit-scrollbar-track{background:var(--bg)} ::-webkit-scrollbar-thumb{background:var(--bg-4);border-radius:3px}
+  /* SCROLLBAR */
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:var(--bg)}
+  ::-webkit-scrollbar-thumb{background:var(--bg-4);border-radius:3px}
+
+  /* RESPONSIVE */
   @media(max-width:900px){
     .app-shell{grid-template-columns:1fr;grid-template-rows:58px auto 1fr}
     .sidebar{grid-row:2;flex-direction:row;flex-wrap:wrap;padding:8px;border-right:none;border-bottom:1px solid var(--border);gap:2px}
-    .sidebar-section-label{display:none} .nav-item{width:auto}
-    .metrics-grid{grid-template-columns:repeat(2,1fr)} .lane-grid{grid-template-columns:repeat(2,1fr)}
-    .main{padding:18px} .glossary-grid{grid-template-columns:1fr}
+    .sidebar-section-label{display:none}
+    .nav-item{width:auto;padding:8px 10px;font-size:12px}
+    .metrics-grid{grid-template-columns:repeat(2,1fr)}
+    .lane-grid{grid-template-columns:repeat(2,1fr)}
+    .grid-2{grid-template-columns:1fr}
+    .glossary-grid{grid-template-columns:1fr}
+    .main{padding:16px}
+    .brand-tag{display:none}
+  }
+  @media(max-width:480px){
+    .metrics-grid{grid-template-columns:1fr 1fr}
+    .lane-grid{grid-template-columns:1fr 1fr}
+    .topbar{padding:0 14px}
+    .brand-name{font-size:13px}
+    .legend-btn{padding:6px 10px;font-size:11px}
   }
 </style>
 </head>
 <body>
 
-<!-- RISK LEGEND MODAL -->
-<div class="modal-overlay" id="legend-modal" onclick="if(event.target===this)closeLegend()">
+<!-- ── RISK LEGEND MODAL ── -->
+<div class="modal-overlay" id="legend-modal" onclick="if(event.target===this)closeModal('legend-modal')">
   <div class="modal">
-    <button class="modal-close" onclick="closeLegend()">✕</button>
+    <button class="modal-close" onclick="closeModal('legend-modal')">✕</button>
     <div class="modal-title">Risk Stage Legend</div>
-    <div class="modal-sub">Quick reference — make a dispatch decision in three seconds</div>
+    <div class="modal-sub">Make a dispatch decision in three seconds — mid-call reference</div>
     <table class="legend-table">
       <thead><tr><th>Status</th><th>Industry Term</th><th>Meaning</th><th>Action</th></tr></thead>
       <tbody>
-        <tr><td><span class="risk-badge r-trap">S8 — Eye of Storm</span></td><td style="color:var(--text);">Rigidity Risk</td><td>Peak stability masking imminent collapse. Entropy maxed.</td><td style="color:#f07a79;font-weight:600;">Do Not Dispatch</td></tr>
-        <tr><td><span class="risk-badge r-high">S5 — Threshold</span></td><td style="color:var(--text);">Last Off-Ramp</td><td>Burnout threshold. Last window to recover before breakdown.</td><td style="color:var(--amber);font-weight:600;">Recovery Miles Only</td></tr>
-        <tr><td><span class="risk-badge r-low">S4 — Tier 1</span></td><td style="color:var(--text);">Prime Carrier</td><td>Optimal operating zone. Maximum reliability window.</td><td style="color:#6fcd80;font-weight:600;">Assign High-Value Loads</td></tr>
-        <tr><td><span class="risk-badge r-low">S6 — Peak Window</span></td><td style="color:var(--text);">Hot Hand</td><td>Brief peak. 24–72 hrs before fatigue hits.</td><td style="color:#3fd9a8;font-weight:600;">Assign Complex Load NOW</td></tr>
-        <tr><td><span class="risk-badge r-med">S7 — Isolated</span></td><td style="color:var(--text);">Solo Specialist</td><td>High competence, low comms. Autonomy required.</td><td style="color:#b0aaff;font-weight:600;">Solo Long-Haul Only</td></tr>
-        <tr><td><span class="risk-badge r-watch">S9 — Exit</span></td><td style="color:var(--text);">Dissolution</td><td>Carrier exiting or restructuring. Unpredictable.</td><td style="color:var(--gold-light);font-weight:600;">Source Replacement</td></tr>
-        <tr><td><span class="risk-badge r-watch">S3 — Scaling</span></td><td style="color:var(--text);">Hyper-Growth Risk</td><td>Expanding faster than management can handle.</td><td style="color:var(--amber);font-weight:600;">Verify Assets First</td></tr>
-        <tr><td><span class="risk-badge r-watch">S0 — Ghost</span></td><td style="color:var(--text);">No MC History</td><td>No verifiable load history. Fraud risk elevated.</td><td style="color:#f07a79;font-weight:600;">Full Vetting Required</td></tr>
+        <tr><td><span class="risk-badge r-trap">S8 Eye of Storm</span></td><td style="color:var(--text);font-weight:500;">Rigidity Risk</td><td style="color:var(--text-2);">Perfect scorecard masking imminent collapse. Entropy maxed.</td><td style="color:#f07a79;font-weight:600;">Do Not Dispatch</td></tr>
+        <tr><td><span class="risk-badge r-high">S5 Threshold</span></td><td style="color:var(--text);font-weight:500;">Last Off-Ramp</td><td style="color:var(--text-2);">Burnout threshold. One recovery run saves them. Miss it and they're done.</td><td style="color:var(--amber);font-weight:600;">Recovery Miles Only</td></tr>
+        <tr><td><span class="risk-badge r-low">S4 Tier 1</span></td><td style="color:var(--text);font-weight:500;">Prime Carrier</td><td style="color:var(--text-2);">Optimal operating zone. Max reliability. Best window.</td><td style="color:#6fcd80;font-weight:600;">Assign High-Value Loads</td></tr>
+        <tr><td><span class="risk-badge r-low">S6 Peak Window</span></td><td style="color:var(--text);font-weight:500;">Hot Hand</td><td style="color:var(--text-2);">Brief peak — 24–72 hrs before fatigue closes the window.</td><td style="color:#3fd9a8;font-weight:600;">Assign Complex Load NOW</td></tr>
+        <tr><td><span class="risk-badge r-med">S7 Isolated</span></td><td style="color:var(--text);font-weight:500;">Solo Specialist</td><td style="color:var(--text-2);">High competence, low comms. Needs autonomy to perform.</td><td style="color:#b0aaff;font-weight:600;">Solo Long-Haul Only</td></tr>
+        <tr><td><span class="risk-badge r-watch">S9 Exit</span></td><td style="color:var(--text);font-weight:500;">Dissolution</td><td style="color:var(--text-2);">Carrier exiting or restructuring. Capacity unpredictable.</td><td style="color:var(--gold-light);font-weight:600;">Source Replacement</td></tr>
+        <tr><td><span class="risk-badge r-watch">S3 Scaling</span></td><td style="color:var(--text);font-weight:500;">Hyper-Growth Risk</td><td style="color:var(--text-2);">Expanding faster than management can handle.</td><td style="color:var(--amber);font-weight:600;">Verify Assets First</td></tr>
+        <tr><td><span class="risk-badge r-trap">S0 Ghost</span></td><td style="color:var(--text);font-weight:500;">No MC History</td><td style="color:var(--text-2);">No verifiable load history. Fraud risk elevated.</td><td style="color:#f07a79;font-weight:600;">Full Vetting Required</td></tr>
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- ── COMM CHECK MODAL ── -->
+<div class="modal-overlay" id="comm-modal" onclick="if(event.target===this)closeModal('comm-modal')">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('comm-modal')">✕</button>
+    <div class="modal-title">Signal Integrity Check</div>
+    <div class="modal-sub">Score carrier communication quality during the vetting call — feeds directly into Yield Score</div>
+    <div id="comm-questions">
+      <div class="comm-check-item">
+        <div class="comm-label">1. Did the carrier answer within 2 rings?</div>
+        <div class="comm-radio-group">
+          <label><input type="radio" name="cq1" value="10"><span>Yes</span></label>
+          <label><input type="radio" name="cq1" value="5"><span>Voicemail CB</span></label>
+          <label><input type="radio" name="cq1" value="0"><span>No Answer</span></label>
+        </div>
+      </div>
+      <div class="comm-check-item">
+        <div class="comm-label">2. Did they provide a tractor/trailer number immediately without being asked?</div>
+        <div class="comm-radio-group">
+          <label><input type="radio" name="cq2" value="10"><span>Yes</span></label>
+          <label><input type="radio" name="cq2" value="5"><span>After prompting</span></label>
+          <label><input type="radio" name="cq2" value="0"><span>No / Evasive</span></label>
+        </div>
+      </div>
+      <div class="comm-check-item">
+        <div class="comm-label">3. Did they confirm exact current location with a city/state?</div>
+        <div class="comm-radio-group">
+          <label><input type="radio" name="cq3" value="10"><span>Yes</span></label>
+          <label><input type="radio" name="cq4" value="5"><span>General region</span></label>
+          <label><input type="radio" name="cq3" value="0"><span>Vague / Unknown</span></label>
+        </div>
+      </div>
+      <div class="comm-check-item">
+        <div class="comm-label">4. Were they available on every lane you mentioned — no capacity hesitation?</div>
+        <div class="comm-radio-group">
+          <label><input type="radio" name="cq4" value="0"><span>Yes — all lanes</span></label>
+          <label><input type="radio" name="cq4" value="5"><span>Some limits stated</span></label>
+          <label><input type="radio" name="cq4" value="10"><span>Defined capacity</span></label>
+        </div>
+      </div>
+      <div class="comm-check-item">
+        <div class="comm-label">5. Did they proactively mention any current issue — weather, traffic, mechanical?</div>
+        <div class="comm-radio-group">
+          <label><input type="radio" name="cq5" value="10"><span>Yes — disclosed</span></label>
+          <label><input type="radio" name="cq5" value="5"><span>When asked only</span></label>
+          <label><input type="radio" name="cq5" value="0"><span>No disclosure</span></label>
+        </div>
+      </div>
+    </div>
+    <button class="btn-sm gold" style="margin-top:16px;width:100%;padding:10px;" onclick="scoreCommCheck()">Calculate Signal Integrity Score</button>
+    <div class="comm-result-box" id="comm-result">
+      <div class="comm-score-num" id="comm-score-display">—</div>
+      <div class="comm-score-label" id="comm-score-label">Signal Integrity Score / 10</div>
+      <div style="margin-top:10px;font-size:12px;color:var(--text-2);" id="comm-score-advice"></div>
+      <button class="btn-sm gold" style="margin-top:12px;" onclick="applyCommScore()">Apply to Yield Calculator →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── PRINT REPORT (hidden except print) ── -->
+<div id="print-report">
+  <div class="print-header">
+    <div style="font-size:11px;color:#888;margin-bottom:4px;">LUMINARK LOGISTICS OVERWATCH · MERIDIAN AXIOM ALIGNMENT TECHNOLOGIES</div>
+    <div style="font-size:20px;font-weight:700;color:#c8841a;">Carrier Risk Report</div>
+    <div style="font-size:11px;color:#888;margin-top:4px;" id="print-timestamp"></div>
+  </div>
+  <div id="print-carrier-name" style="font-size:16px;font-weight:600;margin-bottom:16px;"></div>
+  <div class="print-score" id="print-score-num"></div>
+  <div style="font-size:14px;font-weight:600;margin-bottom:16px;" id="print-stage-label"></div>
+  <div id="print-fields"></div>
+  <div class="print-stage-box" id="print-dispatch-box"></div>
+  <div id="print-rigidity-note" style="display:none;background:#fff0f0;border:1px solid #f09595;border-radius:6px;padding:12px;margin-top:12px;font-size:12px;color:#c0392b;font-weight:600;"></div>
+  <div class="print-footer">Generated by Luminark Logistics Overwatch · SAP v3.0 · Meridian Axiom Alignment Technologies · LuminarkMeridian@gmail.com · © 2026 Richard Leroy Stanfield Jr.</div>
 </div>
 
 <div class="app-shell">
@@ -256,7 +386,8 @@
       </div>
     </div>
     <div class="topbar-right">
-      <button class="legend-btn" onclick="openLegend()">▦ Risk Legend</button>
+      <button class="legend-btn" onclick="openModal('legend-modal')">▦ Risk Legend</button>
+      <button class="comm-btn" onclick="openModal('comm-modal')">📞 Signal Check</button>
       <div class="status-dot"></div>
       <span class="status-label">Live</span>
       <span class="version-badge">SAP v3.0</span>
@@ -313,13 +444,15 @@
             <div class="table-head-sub">SAP stage · Yield Score · Dispatch recommendation</div>
           </div>
         </div>
-        <table>
-          <thead><tr><th>Carrier / MC#</th><th>Risk Stage</th><th>Yield Score</th><th>Operating Metrics</th><th>Risk Flag</th><th>Dispatch Action</th></tr></thead>
-          <tbody id="carrier-tbody"></tbody>
-        </table>
+        <div class="table-scroll">
+          <table>
+            <thead><tr><th>Carrier / MC#</th><th>Risk Stage</th><th>Yield Score</th><th>Operating Metrics</th><th>Risk Flag</th><th>Dispatch Action</th></tr></thead>
+            <tbody id="carrier-tbody"></tbody>
+          </table>
+        </div>
       </div>
       <div class="alert alert-gold">
-        <strong>Blind Spot Alert — Stage 8 Carriers:</strong> Stage 8 carriers score clean on every surface metric — HOS is fine, delivery record is good, they answer calls. That is the trap. Peak rigidity has set in. The carrier has stopped adapting. A breakdown, no-show, or sudden authority surrender is coming within 48–72 hours. Do not assign time-sensitive or high-value loads to any Stage 8 carrier regardless of their load board rating.
+        <strong>Blind Spot Alert — Stage 8 Carriers:</strong> Stage 8 carriers score clean on every surface metric — HOS is fine, delivery record looks good, they answer calls. That is the trap. Peak rigidity has set in. The carrier has stopped adapting. A breakdown, no-show, or sudden authority surrender is coming within 48–72 hours. Do not assign any load to a Stage 8 carrier regardless of their load board rating.
       </div>
     </div>
 
@@ -327,41 +460,66 @@
     <div id="page-calculator" class="page">
       <div class="page-header">
         <div class="page-title">Axiom Yield Calculator</div>
-        <div class="page-sub">Enter four operating metrics — get SAP risk stage + Axiom Yield Score in real time</div>
+        <div class="page-sub">Enter four operating metrics → SAP risk stage + Axiom Yield Score + PDF risk report</div>
       </div>
       <div class="grid-2">
         <div class="card">
           <div class="card-title">Carrier Operating Inputs</div>
+
+          <div class="input-group">
+            <div class="input-top"><span>Carrier name (optional — for report)</span></div>
+            <input type="text" id="calc-carrier-name" placeholder="e.g. Meridian Freight LLC" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;">
+          </div>
+          <div class="input-group">
+            <div class="input-top"><span>MC number (optional)</span></div>
+            <input type="text" id="calc-mc-number" placeholder="e.g. MC-1042398" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;">
+          </div>
+
           <div class="input-group">
             <div class="input-top"><span>Hours of Service remaining (HOS)</span><span class="input-val" id="hos-v">6 hrs</span></div>
             <input type="range" min="0" max="11" value="6" step="1" id="sl-hos" oninput="updateCalc()">
-            <div class="math-row">Asset Density index = HOS / 11 × 100</div>
+            <div class="input-hint">0 = hours exhausted / out of compliance · 11 = full HOS bank</div>
           </div>
           <div class="input-group">
             <div class="input-top"><span>Route volatility — weather + traffic severity</span><span class="input-val" id="vol-v">4 / 10</span></div>
             <input type="range" min="0" max="10" value="4" step="1" id="sl-vol" oninput="updateCalc()">
-            <div class="math-row">Entropy load = volatility / 10 × 100</div>
+            <div class="input-hint">0 = clear conditions / easy route · 10 = severe weather / heavy urban congestion</div>
           </div>
           <div class="input-group">
-            <div class="input-top"><span>Signal Integrity — dispatcher communication quality</span><span class="input-val" id="comm-v">7 / 10</span></div>
+            <div class="input-top">
+              <span>Signal Integrity — dispatcher communication quality</span>
+              <span class="input-val" id="comm-v">7 / 10</span>
+            </div>
             <input type="range" min="0" max="10" value="7" step="1" id="sl-comm" oninput="updateCalc()">
-            <div class="math-row">Signal Integrity index = comm / 10 × 100</div>
+            <div class="input-hint">0 = unresponsive / ghosting · 10 = proactive, accurate, immediate · Use 📞 Signal Check above for live vetting</div>
           </div>
           <div class="input-group">
             <div class="input-top"><span>Days since last recovery run / home time</span><span class="input-val" id="rest-v">3 days</span></div>
             <input type="range" min="0" max="14" value="3" step="1" id="sl-rest" oninput="updateCalc()">
-            <div class="math-row">Recovery debt = days / 14 × 100 → accelerates Stage 8 progression</div>
+            <div class="input-hint">0 = just had home time / recovery run · 14+ = no rest in two weeks — Stage 8 accelerator</div>
           </div>
+
+          <div class="saved-bar">
+            <span class="saved-bar-label" id="saved-count-label">Recent checks: 0 saved</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <button class="btn-sm" onclick="saveCurrentCalc()">💾 Save Check</button>
+              <button class="btn-sm" onclick="clearSaved()">Clear</button>
+            </div>
+          </div>
+          <div class="saved-list" id="saved-list"></div>
         </div>
+
         <div>
           <div class="score-result">
             <div class="score-num" id="calc-score-num">71</div>
             <div class="score-stage" id="calc-stage-label">Stage 4 — Tier 1 Reliable</div>
-            <div class="score-analysis-box" id="calc-analysis">Analysis appears here...</div>
+            <div class="score-analysis-box" id="calc-analysis"></div>
+            <div class="score-rigidity-flag" id="rigidity-flag">⚠ System Rigidity Detected — 14+ days without a recovery run + high Asset Density. Maintenance or driver burnout imminent regardless of current HOS.</div>
           </div>
           <div class="card" style="margin-top:14px;">
             <div class="card-title">Score breakdown</div>
             <div id="calc-breakdown"></div>
+            <button class="btn-sm gold" style="margin-top:14px;width:100%;padding:10px;" onclick="exportPDF()">⬇ Download Risk Report (PDF)</button>
           </div>
         </div>
       </div>
@@ -376,18 +534,18 @@
       <div class="card">
         <div class="card-title">How the detection algorithm works</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px;">
-          Legitimate carriers build operational history through natural growth cycles — periods of high volume followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load volume variance, and suspiciously high contact responsiveness across every lane. The Ghost Filter scores the <em>absence of authentic operational variance</em> as the primary fraud signal.
+          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The Ghost Filter scores the <em>absence of authentic operational variance</em> as the primary fraud signal.
         </p>
         <div class="math-row">Ghost Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
         <div class="math-row">authority_age = min(carrier_age_yrs × 20, 100) · volume_variance = normalized load history variance</div>
         <div class="math-row">contact_anomaly = (10 − contact_quality) × 10 · Flag threshold: score &lt; 35 → Ghost pattern confirmed</div>
         <div class="alert alert-warn" style="margin-top:10px;">
-          <strong>Primary signal:</strong> A carrier available on every lane, answering every call on the first ring, with no capacity constraints — is a red flag, not a green one. Unlimited availability = synthetic operation. Legitimate owner-operators have defined capacity windows.
+          <strong>Primary signal:</strong> A carrier available on every lane, answering on the first ring, with zero capacity constraints is a red flag — not a green one. Unlimited availability = synthetic operation. Legitimate owner-operators have defined capacity windows.
         </div>
       </div>
       <div class="table-wrap">
         <div class="table-head"><div class="table-head-title">MC Number Screening Results</div></div>
-        <div id="ghost-list" style="padding:0 4px 4px;"></div>
+        <div id="ghost-list" style="padding:0 14px 4px;"></div>
       </div>
     </div>
 
@@ -395,12 +553,12 @@
     <div id="page-lanes" class="page">
       <div class="page-header">
         <div class="page-title">Lane Pressure Map</div>
-        <div class="page-sub">Market Tightness Index by freight corridor — rate multipliers and capacity forecasting 24–48 hrs ahead of the market</div>
+        <div class="page-sub">Market Tightness Index by corridor — rate multipliers and capacity forecasting 24–48 hrs ahead of the board</div>
       </div>
       <div class="card">
         <div class="card-title">Reading lane pressure stages</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          Every freight corridor cycles through predictable capacity stages. A lane entering <strong style="color:var(--text);font-weight:500;">Stage 8 (Eye of the Storm)</strong> shows strong load board availability and flat spot rates — right before a capacity collapse. The Overwatch engine identifies this inflection 24–48 hours before it shows on the board. Quote the multiplier now. When everyone else sees the shortage, you already locked the rate.
+          Every freight corridor cycles through predictable capacity stages. A lane entering <strong style="color:var(--text);font-weight:500;">Stage 8 (Eye of the Storm)</strong> shows strong load board availability and flat spot rates — right before a capacity collapse. The Overwatch engine identifies this inflection 24–48 hours before it appears on the board. Quote the multiplier now. When the market sees the shortage, you already locked the rate.
         </p>
         <div class="math-row">Lane pressure index = (demand_vol / 10 × 60) + (inverse_capacity / 10 × 40)</div>
         <div class="math-row">Rate multiplier = 1 + (pressure_score / 100 × 0.25) · Stage 8 lanes → 1.15x–1.25x base rate</div>
@@ -423,16 +581,16 @@
         <div class="grid-2">
           <div class="inv-box inv-stable">
             <div class="inv-label">High Asset Density — Even stages (2, 4, 6, 8)</div>
-            <div class="inv-body">Fleet capacity is present and bookable. HOS banked. Equipment available. Surface metrics look strong. <strong style="color:#6fcd80;">Stage 4 is optimal.</strong> Stage 8 is the trap — identical surface profile, opposite failure risk.</div>
+            <div class="inv-body">Fleet capacity present and bookable. HOS banked. Equipment available. Surface metrics look strong. <strong style="color:#6fcd80;">Stage 4 is the sweet spot.</strong> Stage 8 has the identical surface profile — with maximum failure risk underneath. Asset Density alone is never sufficient for dispatch decisions.</div>
           </div>
           <div class="inv-box inv-unstable">
             <div class="inv-label">Constrained Capacity — Odd stages (1, 3, 5, 7)</div>
-            <div class="inv-body">Physical capacity is limited, scaling, or in flux. Signal Integrity is stronger — drivers and dispatchers are more transparent about real conditions. Stage 5 is the last recovery window before irreversible degradation.</div>
+            <div class="inv-body">Physical capacity is limited, scaling, or in flux. Signal Integrity is typically stronger — drivers and dispatchers are more transparent about real conditions. Stage 5 is the last recovery window before irreversible degradation.</div>
           </div>
         </div>
         <div class="inv-box inv-both" style="margin-top:0;">
-          <div class="inv-label">Stage 9 — Exit / Reset: Pressure neutralized. Both conditions acknowledged. Plan replacement now.</div>
-          <div class="inv-body">The only stage where Asset Density and Signal Integrity limits are both fully acknowledged. No hidden tension. Carrier is transparent about exit or restructure. Rare exception: signals a breakthrough reset carrier rebuilding with full operational clarity.</div>
+          <div class="inv-label">Stage 9 — Exit / Reset: Pressure neutralized. Both limits acknowledged. Plan replacement immediately.</div>
+          <div class="inv-body">The only stage where Asset Density and Signal Integrity limits are both fully transparent. No hidden tension. Carrier is honest about exit or restructure. Rare exception: signals a breakthrough reset carrier rebuilding with full operational clarity.</div>
         </div>
       </div>
       <div class="section-divider"><span class="section-divider-label">Select a risk stage</span><div class="section-divider-line"></div></div>
@@ -446,80 +604,80 @@
         <div class="page-title">SAP Glossary — Freight &amp; Logistics Edition</div>
         <div class="page-sub">Industry translation of every term used in Luminark Logistics Overwatch</div>
       </div>
-
       <div class="card">
         <div class="card-title">Core metric definitions</div>
         <div class="glossary-grid">
           <div class="gloss-item">
             <div class="gloss-term">Axiom Yield Score (AYS)</div>
             <div class="gloss-alias">Predictive Load Acceptance Rating</div>
-            <div class="gloss-def">A composite 0–100 carrier reliability score calculated from four operating inputs: HOS availability, route volatility, Signal Integrity, and recovery debt. Higher scores indicate safer dispatch windows. Scores below 40 trigger Stage 8 or Stage 9 flags — do not dispatch under any conditions.</div>
+            <div class="gloss-def">A composite 0–100 carrier reliability score from four operating inputs: HOS availability, route volatility, Signal Integrity, and recovery debt. Any score below 40 is a do-not-dispatch signal regardless of load board history.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Asset Density</div>
-            <div class="gloss-alias">SAP: P.Stable · Industry: Equipment / Driver Availability</div>
-            <div class="gloss-def">The physical capacity of a carrier at the current moment — trucks available, HOS banked, active authority, equipment on the road. High Asset Density means the carrier has the physical infrastructure to execute the load. Critically: Stage 8 carriers have high Asset Density while concealing maximum failure risk. Asset Density alone is never sufficient for dispatch decisions.</div>
+            <div class="gloss-alias">SAP: P.Stable · Equipment / Driver Availability</div>
+            <div class="gloss-def">The physical capacity of a carrier at the current moment — trucks available, HOS banked, active authority, equipment on the road. Critically: Stage 8 carriers have maximum Asset Density while concealing maximum failure risk underneath. Asset Density alone never justifies a dispatch decision.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Signal Integrity</div>
-            <div class="gloss-alias">SAP: C.Stable · Industry: Dispatch Responsiveness</div>
-            <div class="gloss-def">The honesty, accuracy, and reliability of communication from the driver or dispatcher. High Signal Integrity means check calls are accurate, ETAs are realistic, and problems are disclosed proactively. Low Signal Integrity — dispatchers going quiet, ETAs inflating, load status unclear — is the primary failure predictor regardless of surface capacity metrics. Signal Integrity degrading while Asset Density stays high is the Stage 8 early warning signature.</div>
+            <div class="gloss-alias">SAP: C.Stable · Dispatch Responsiveness</div>
+            <div class="gloss-def">The honesty, accuracy, and reliability of communication from driver or dispatcher. High Signal Integrity: check calls accurate, ETAs realistic, problems disclosed proactively. Signal Integrity degrading while Asset Density stays high is the Stage 8 early warning signature. Use the 📞 Signal Check tool to score this during every vetting call.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Blind Spot Metric</div>
-            <div class="gloss-alias">SAP: Inversion Principle · Industry: Hidden Risk Indicator</div>
-            <div class="gloss-def">The core detection mechanism behind Stage 8 identification. When Asset Density is at its highest, Signal Integrity pressure accumulates invisibly underneath. A carrier's surface compliance score is inversely correlated with their true failure risk at Stage 8. This is what load boards cannot see — and the reason Luminark Logistics Overwatch exists. Good metrics masking bad operations.</div>
+            <div class="gloss-alias">SAP: Inversion Principle · Hidden Risk Indicator</div>
+            <div class="gloss-def">The core Stage 8 detection mechanism. When Asset Density is highest, Signal Integrity pressure accumulates invisibly underneath. A carrier's surface compliance score is inversely correlated with true failure risk at Stage 8. Good metrics masking bad operations — what load boards cannot see.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Recovery Debt</div>
             <div class="gloss-alias">Failure Probability Trending Up</div>
-            <div class="gloss-def">Accumulated operational fatigue measured in days since the carrier's last recovery run — a short-haul load with guaranteed home time or extended rest. High recovery debt is the primary driver of Stage 8 failure events: breakdowns, missed deliveries, and sudden carrier dropout. A carrier running 12+ days without a recovery window is approaching Stage 8 regardless of their current HOS number.</div>
+            <div class="gloss-def">Accumulated operational fatigue measured in days since the carrier's last recovery run — short haul with guaranteed home time or extended rest. A carrier running 12+ days without recovery is approaching Stage 8 regardless of current HOS number. High recovery debt is the primary driver of Stage 8 failure events.</div>
           </div>
           <div class="gloss-item">
-            <div class="gloss-term">Entropy Load</div>
-            <div class="gloss-alias">Risk Score Increase / Failure Probability Trending Up</div>
-            <div class="gloss-def">The aggregate operational pressure from route difficulty: weather severity, traffic density, dock delays, and congestion. High entropy load accelerates stage progression — pushing carriers toward Stage 8 faster than recovery debt alone. A carrier in Stage 4 assigned three consecutive high-entropy routes without a recovery run can reach Stage 8 within a single dispatch week.</div>
+            <div class="gloss-term">System Rigidity Flag</div>
+            <div class="gloss-alias">Eye of the Storm Trigger</div>
+            <div class="gloss-def">Triggered when a carrier shows high Asset Density (strong HOS, clean metrics) combined with 14+ days without a recovery run. The calculator surfaces this automatically. A truck running perfectly for two weeks with no rest window is a ticking time bomb — the rigidity flag fires before Stage 8 is formally reached.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Ghost Score</div>
-            <div class="gloss-alias">Operating Pattern Analysis / Fraud Detection Algorithm</div>
-            <div class="gloss-def">Composite fraud detection score derived from MC authority age, load volume variance, and contact anomaly index. Scores below 35 confirm a synthetic carrier operation — no authentic growth history, unlimited lane availability, and a recently issued authority number with no verifiable freight activity. Primary indicator: absence of legitimate operational variance.</div>
+            <div class="gloss-alias">Operating Pattern Analysis / Fraud Detection</div>
+            <div class="gloss-def">Composite fraud score from MC authority age, load volume variance, and contact anomaly index. Scores below 35 confirm a synthetic carrier — no authentic growth history, unlimited availability, recently issued authority with no verifiable freight activity. Primary signal: absence of legitimate operational variance.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Lane Pressure Index</div>
             <div class="gloss-alias">Market Tightness Index / Corridor Capacity Tension</div>
-            <div class="gloss-def">Corridor-level capacity risk score tracking demand volume against available carrier supply on a given freight lane. Used to set rate multipliers 24–48 hours before market-visible capacity shortages. Stage 8 lanes warrant 1.15x–1.25x base rate — booked before the board reflects the shortage.</div>
+            <div class="gloss-def">Corridor-level capacity risk score tracking demand volume against available carrier supply. Used to set rate multipliers 24–48 hours before market-visible shortages. Stage 8 lanes warrant 1.15x–1.25x base rate — booked before the board reflects the shortage.</div>
           </div>
         </div>
       </div>
-
       <div class="card">
         <div class="card-title">SAP → Logistics translation table</div>
-        <table class="trans-table">
-          <thead><tr><th>SAP Concept</th><th>Logistics Translation</th><th>Industry Term</th></tr></thead>
-          <tbody>
-            <tr><td>Stage 0 (Void)</td><td>No Operating History</td><td>Ghost Carrier / New MC</td></tr>
-            <tr><td>Stage 1 (Navigation)</td><td>Startup Phase</td><td>New Entrant / Unproven</td></tr>
-            <tr><td>Stage 2 (Polarity)</td><td>Growth Mode</td><td>Scaling Carrier</td></tr>
-            <tr><td>Stage 3 (Expression)</td><td>Rapid Expansion</td><td>Hyper-Growth Risk</td></tr>
-            <tr><td>Stage 4 (Foundation)</td><td>Optimal Operating Zone</td><td>Tier 1 Reliable</td></tr>
-            <tr><td>Stage 5 (Threshold)</td><td>Critical Decision Point</td><td>Burnout Threshold / Last Chance Recovery</td></tr>
-            <tr><td>Stage 6 (Integration)</td><td>Peak Performance Window</td><td>Hot Hand / Unsustainable Peak</td></tr>
-            <tr><td>Stage 7 (Analysis)</td><td>Mastery Under Pressure</td><td>Isolated Specialist / Owner-Operator Mindset</td></tr>
-            <tr><td>Stage 8 (Unity/Trap)</td><td>Hidden Failure Risk</td><td>Eye of the Storm / Rigidity Risk / Imminent Collapse</td></tr>
-            <tr><td>Stage 9 (Release)</td><td>Exit / Restructure State</td><td>Dissolution / Bankruptcy / Pivot</td></tr>
-            <tr><td>P.Stable</td><td>Asset Density</td><td>Equipment &amp; Driver Availability</td></tr>
-            <tr><td>P.Unstable</td><td>Capacity Strain</td><td>Overbooked / Driver Shortage</td></tr>
-            <tr><td>C.Stable</td><td>Signal Integrity</td><td>Dispatch Responsiveness</td></tr>
-            <tr><td>C.Unstable</td><td>Signal Breakdown</td><td>Unresponsive / Ghosting Risk</td></tr>
-            <tr><td>Entropy Accumulation</td><td>Risk Score Increase</td><td>Failure Probability Trending Up</td></tr>
-            <tr><td>Inversion Principle</td><td>Blind Spot Metric</td><td>Good Metrics Masking Bad Operations</td></tr>
-            <tr><td>Axiom Yield</td><td>Carrier Reliability Score</td><td>Predictive Load Acceptance Rating</td></tr>
-            <tr><td>Fractal Fingerprint</td><td>Operating Pattern Analysis</td><td>Fraud Detection Algorithm</td></tr>
-            <tr><td>Lane Entropy</td><td>Corridor Capacity Tension</td><td>Market Tightness Index</td></tr>
-            <tr><td>Tension Score</td><td>Operational Stress Level</td><td>Breakdown Probability</td></tr>
-          </tbody>
-        </table>
+        <div style="overflow-x:auto;">
+          <table class="trans-table">
+            <thead><tr><th>SAP Concept</th><th>Logistics Translation</th><th>Industry Term</th></tr></thead>
+            <tbody>
+              <tr><td>Stage 0 (Void)</td><td>No Operating History</td><td>Ghost Carrier / New MC</td></tr>
+              <tr><td>Stage 1 (Navigation)</td><td>Startup Phase</td><td>New Entrant / Unproven</td></tr>
+              <tr><td>Stage 2 (Polarity)</td><td>Growth Mode</td><td>Scaling Carrier</td></tr>
+              <tr><td>Stage 3 (Expression)</td><td>Rapid Expansion</td><td>Hyper-Growth Risk</td></tr>
+              <tr><td>Stage 4 (Foundation)</td><td>Optimal Operating Zone</td><td>Tier 1 Reliable</td></tr>
+              <tr><td>Stage 5 (Threshold)</td><td>Critical Decision Point</td><td>Burnout Threshold / Last Chance Recovery</td></tr>
+              <tr><td>Stage 6 (Integration)</td><td>Peak Performance Window</td><td>Hot Hand / Unsustainable Peak</td></tr>
+              <tr><td>Stage 7 (Analysis)</td><td>Mastery Under Pressure</td><td>Isolated Specialist / Owner-Operator Mindset</td></tr>
+              <tr><td>Stage 8 (Unity/Trap)</td><td>Hidden Failure Risk</td><td>Eye of the Storm / Rigidity Risk / Imminent Collapse</td></tr>
+              <tr><td>Stage 9 (Release)</td><td>Exit / Restructure State</td><td>Dissolution / Bankruptcy / Pivot</td></tr>
+              <tr><td>P.Stable</td><td>Asset Density</td><td>Equipment &amp; Driver Availability</td></tr>
+              <tr><td>P.Unstable</td><td>Capacity Strain</td><td>Overbooked / Driver Shortage</td></tr>
+              <tr><td>C.Stable</td><td>Signal Integrity</td><td>Dispatch Responsiveness</td></tr>
+              <tr><td>C.Unstable</td><td>Signal Breakdown</td><td>Unresponsive / Ghosting Risk</td></tr>
+              <tr><td>Entropy Accumulation</td><td>Risk Score Increase</td><td>Failure Probability Trending Up</td></tr>
+              <tr><td>Inversion Principle</td><td>Blind Spot Metric</td><td>Good Metrics Masking Bad Operations</td></tr>
+              <tr><td>Axiom Yield</td><td>Carrier Reliability Score</td><td>Predictive Load Acceptance Rating</td></tr>
+              <tr><td>Fractal Fingerprint</td><td>Operating Pattern Analysis</td><td>Fraud Detection Algorithm</td></tr>
+              <tr><td>Lane Entropy</td><td>Corridor Capacity Tension</td><td>Market Tightness Index</td></tr>
+              <tr><td>Tension Score</td><td>Operational Stress Level</td><td>Breakdown Probability</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
@@ -527,139 +685,146 @@
     <div id="page-about" class="page">
       <div class="page-header">
         <div class="page-title">About Luminark Logistics Overwatch</div>
-        <div class="page-sub">Predictive carrier risk intelligence for freight brokers, 3PLs, and dispatch operations</div>
+        <div class="page-sub">Predictive carrier risk intelligence for freight brokers, 3PLs, and dispatch operations — backed by MAAT</div>
       </div>
       <div class="card">
         <div class="card-title">What this is</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:12px;">
-          Luminark Logistics Overwatch is a predictive carrier risk platform built on the <strong style="color:var(--text);font-weight:500;">Stanfield Axiom of Perpetuity (SAP)</strong> — a proprietary 10-stage operational risk framework developed by Meridian Axiom Alignment Technologies. Standard load board tools show you historical compliance data. Overwatch shows you where a carrier is <em>going</em> — scoring current operating conditions against a predictive failure model.
+          Luminark Logistics Overwatch is a predictive carrier risk platform built on the <strong style="color:var(--text);font-weight:500;">Stanfield Axiom of Perpetuity (SAP)</strong> — a proprietary 10-stage operational risk framework developed by <strong style="color:var(--text);font-weight:500;">Meridian Axiom Alignment Technologies (MAAT)</strong>. Standard load board tools show historical compliance data. Overwatch shows where a carrier is <em>going</em> — scoring current operating conditions against a predictive failure model before the load is tendered.
         </p>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;">
-          The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is tendered. It also screens for ghost carrier MC patterns, tracks lane-level capacity pressure ahead of market visibility, and delivers dispatch-ready guidance for every risk stage.
+          The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is booked. It also screens for ghost carrier MC patterns, tracks lane capacity pressure ahead of market visibility, and delivers dispatch-ready guidance for every risk stage.
         </p>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊛ Axiom Yield Score</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">0–100 predictive reliability score from four dispatch metrics. Replaces gut-feel carrier selection with a repeatable, data-driven protocol. Any score below 40 is a do-not-dispatch signal regardless of load board history.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">0–100 predictive reliability score from four dispatch metrics. Replaces gut-feel carrier selection with a repeatable, data-driven protocol. Any score below 40 is a do-not-dispatch signal.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">◎ Ghost Carrier Filter</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier patterns. The filter scores the absence of authentic operational variance as the primary fraud signal — unlimited availability with no capacity constraints is the tell.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier fraud patterns. The filter scores the absence of authentic operational variance as the primary fraud signal. Unlimited availability with no capacity constraints is the tell.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊞ Lane Pressure Intelligence</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Corridor-level capacity forecasting 24–48 hours ahead of board visibility. Stage 8 lanes get a 1.15x–1.25x rate multiplier recommendation before the shortage is visible. Quote now. Negotiate later.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Corridor-level capacity forecasting 24–48 hrs ahead of board visibility. Stage 8 lanes get a 1.15x–1.25x rate multiplier recommendation before the shortage is visible. Quote now. Negotiate later.</p>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Platform author</div>
+        <div class="card-title">Intelligence parent — Meridian Axiom Alignment Technologies</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          <strong style="color:var(--text);font-weight:500;">Richard Leroy Stanfield Jr.</strong> — Founder, Meridian Axiom Alignment Technologies (MAAT)<br>
-          Luminark Logistics Overwatch · SAP v3.0 · April 2026<br>
-          <span style="color:var(--text-3);font-size:12px;">LUMINARK ecosystem · NSDT five-dimensional analysis engine · LuminarkMeridian@gmail.com</span>
+          Luminark Logistics Overwatch is one component of the LUMINARK ecosystem — a suite of interconnected intelligence platforms developed by MAAT applying the SAP framework to systemic risk analysis across logistics, financial infrastructure, and operational health monitoring. The underlying SAP v3.0 framework and NSDT five-dimensional analysis engine are proprietary to MAAT.
+        </p>
+        <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-top:10px;">
+          <strong style="color:var(--text);font-weight:500;">Richard Leroy Stanfield Jr.</strong> — Founder, MAAT · LuminarkMeridian@gmail.com
         </p>
       </div>
       <div style="text-align:center;margin-top:24px;">
-        <a href="mailto:LuminarkMeridian@gmail.com?subject=Luminark%20Overwatch%20Demo%20Request"
-           style="display:inline-block;padding:12px 28px;background:var(--gold);color:#000;text-decoration:none;border-radius:var(--radius);font-weight:600;font-size:14px;">
-          Request Demo — $299/month
-        </a>
+        <a href="mailto:LuminarkMeridian@gmail.com?subject=Luminark%20Overwatch%20Demo%20Request" style="display:inline-block;padding:13px 28px;background:var(--gold);color:#000;text-decoration:none;border-radius:var(--radius);font-weight:600;font-size:14px;">Request Live API Integration</a>
       </div>
     </div>
 
   </main>
 </div>
 
-<!-- WAITLIST CTA -->
-<div style="position:fixed;bottom:20px;right:20px;z-index:1000;">
-  <a href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank"
-     style="display:inline-block;padding:14px 28px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#000;text-decoration:none;border-radius:8px;font-weight:700;font-size:0.9rem;box-shadow:0 4px 20px rgba(200,132,26,0.4);text-transform:uppercase;letter-spacing:1.5px;">
-    Join Beta Waitlist
+<!-- INTEL FEED CTA -->
+<div id="fixed-cta" style="position:fixed;bottom:20px;right:20px;z-index:999;">
+  <a href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank" style="display:inline-block;padding:13px 24px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#000;text-decoration:none;border-radius:8px;font-weight:700;font-size:0.85rem;box-shadow:0 4px 20px rgba(200,132,26,0.4);text-transform:uppercase;letter-spacing:1.5px;">
+    Request Intel Access
   </a>
 </div>
 
 <script>
-/* ── STAGE DATA ── */
-const STAGES = [
-  { n:0, geo:'●', label:'Ghost / No Authority', industryTerm:'Ghost Carrier / New MC',
-    assetDensity:'None', signalIntegrity:'None', tension:0, colorHex:'#888780',
-    desc:'No verifiable load history. Either brand-new authority with zero freight activity or a fraudulent shell operation. High double-broker and cargo theft risk.',
-    logistics:'Do not assign. Require Carrier 411 + FMCSA bond verification. Pilot load only after full vetting including reference calls to prior brokers.' },
-  { n:1, geo:'·', label:'New Entrant', industryTerm:'Startup Phase / Unproven',
-    assetDensity:'Low', signalIntegrity:'High', tension:28, colorHex:'#85B7EB',
-    desc:'Recently issued operating authority. Clear intent, limited track record. High responsiveness, low verification baseline. Single-truck or micro-fleet entering the market.',
-    logistics:'Pilot loads only. Short-haul, forgiving delivery windows, high-touch dispatch required. Monitor first three loads before any standard assignment. Avoid time-sensitive, HAZMAT, or temperature-controlled freight.' },
-  { n:2, geo:'—', label:'Growth Mode', industryTerm:'Scaling Carrier',
-    assetDensity:'Moderate', signalIntegrity:'Variable', tension:42, colorHex:'#B5D4F4',
-    desc:'Established authority with growing load history. Adding capacity and seeking higher volume. Reliable but not yet predictable under pressure.',
-    logistics:'Good for standard lanes. Monitor load volume vs confirmed asset count. Watch for over-extension across multiple brokers simultaneously. Avoid complex multi-stop or high-liability freight.' },
-  { n:3, geo:'△', label:'Rapid Expansion', industryTerm:'Hyper-Growth Risk',
-    assetDensity:'Growing', signalIntegrity:'Strong', tension:55, colorHex:'#FAC775',
-    desc:'Scaling faster than management infrastructure can support. Adding trucks and drivers at pace that outstrips dispatcher capacity. Operational energy is high but commitment reliability is declining.',
-    logistics:'Verify current equipment count before dispatch — do not rely on stated fleet size. Monitor breakdown patterns. Avoid complex multi-stop loads. Check dispatcher-to-driver ratio before high-value tender.' },
-  { n:4, geo:'□', label:'Tier 1 Reliable', industryTerm:'Optimal Operating Zone',
-    assetDensity:'High', signalIntegrity:'High', tension:22, colorHex:'#97C459',
-    desc:'Peak operational efficiency. Strong HOS, high Signal Integrity, low recovery debt, sustainable dispatch rhythms. This is the window every broker is looking for.',
-    logistics:'Prime carrier zone. Assign highest-value, tightest-window, most complex freight. Time-sensitive LTL, temperature-controlled, high-liability FTL. Maximum confidence. This is the dispatch sweet spot.' },
-  { n:5, geo:'⬠', label:'Burnout Threshold', industryTerm:'Last Chance Recovery / Point of No Return',
-    assetDensity:'Declining', signalIntegrity:'Elevated', tension:88, colorHex:'#EF9F27',
-    desc:'The operational breakpoint. Hidden duality — carrier may appear capable on the surface while running on empty underneath. This is the last window to stabilize before breakdown. Two paths from here: recovery run pulls them back to Stage 4, or continued hard freight pushes them into Stage 6 collapse and rapid Stage 7–8 progression. The decision made at Stage 5 is irreversible.',
-    logistics:'This is the last off-ramp. Assign recovery run immediately — short haul, flexible delivery window, guaranteed home time. Do NOT assign hard-deadline, multi-stop, or time-sensitive freight. Failure to intervene here results in a Stage 8 eye-of-storm event within one to two dispatch cycles.' },
-  { n:6, geo:'⬡', label:'Peak Performance Window', industryTerm:'Hot Hand / Unsustainable Peak',
-    assetDensity:'High', signalIntegrity:'Variable', tension:38, colorHex:'#5DCAA5',
-    desc:'Brief window of maximum output following a recovery cycle. Carrier is executing at peak capacity — everything clicking, high responsiveness, strong delivery performance. This state is unsustainable. Hours to days before fatigue reasserts.',
-    logistics:'Assign your most complex or highest-value load immediately. Do not wait for next cycle. Rotate the next carrier into the queue now — this window closes before the next dispatch day. Do not attempt to extend this stage through continued hard assignments.' },
-  { n:7, geo:'⬢', label:'Isolated Specialist', industryTerm:'Mastery Under Pressure / Owner-Operator Mindset',
-    assetDensity:'Low', signalIntegrity:'Selective', tension:62, colorHex:'#AFA9EC',
-    desc:'Peak isolation phase. The carrier has reached mastery under pressure — executing with high competence on their preferred load types and lanes while withdrawing from broader communication cycles. Individuation is occurring: this carrier is developing a specialized operational identity. Check-call responsiveness drops not from disengagement but from deep operational focus. Risk of decision paralysis if pushed outside their defined zone.',
-    logistics:'Assign solo long-haul runs, dedicated lanes, or owner-operator specialty loads. This carrier performs best with full autonomy and minimal dispatch touchpoints. Do not over-manage — micromanagement at Stage 7 accelerates Stage 8 progression. Avoid team freight or high-coordination multi-stop loads.' },
-  { n:8, geo:'∞', label:'Eye of the Storm', industryTerm:'Rigidity Risk / Illusion of Permanence / Imminent Collapse',
-    assetDensity:'High', signalIntegrity:'Compromised', tension:92, colorHex:'#F09595',
-    desc:'HIGHEST TRAP RISK IN THE FRAMEWORK. Surface metrics are clean across every dimension — HOS is fine, delivery record shows on-time performance, carrier passes inspection, they answer calls promptly. This is the illusion of permanence. Peak rigidity has set in: the carrier has stopped adapting to route stress, driver fatigue signals, and operational demands. The Blind Spot Metric is at maximum. Signal Integrity is compromised beneath a functional surface. A service failure, breakdown, no-show, or sudden authority surrender is incoming.',
-    logistics:'DO NOT ASSIGN. This carrier will appear fully bookable on every load board — that is the trap. Source a replacement carrier now. A Stage 9 failure event is coming within 24–72 hours. Do not tender any new loads regardless of their scorecard, DAT history, or how the call goes.' },
-  { n:9, geo:'◎', label:'Exit / Dissolution', industryTerm:'Dissolution / Bankruptcy / Pivot',
-    assetDensity:'Collapsed', signalIntegrity:'Transparent', tension:14, colorHex:'#3fd9a8',
-    desc:'Carrier is exiting operations, restructuring, or in authority surrender. All operational pressure has released — the carrier is fully transparent about their limits. Unpredictable in terms of near-term capacity. Rare exception: Stage 9 can signal a breakthrough reset — a carrier who has acknowledged every operational limit and is rebuilding with complete clarity.',
-    logistics:'Begin replacement sourcing immediately. Do not tender new loads. Rare exception: if this is a voluntary reset carrier returning from a self-initiated pause, treat as Stage 1 and run a pilot load with full vetting before standard dispatch.' },
+/* ══════════════════════════════════════════════
+   STAGE DATA
+══════════════════════════════════════════════ */
+const STAGES=[
+  {n:0,geo:'●',label:'Ghost / No Authority',industryTerm:'Ghost Carrier / New MC',
+   assetDensity:'None',signalIntegrity:'None',tension:0,colorHex:'#888780',
+   desc:'No verifiable load history. Either brand-new authority with zero freight activity or a fraudulent shell operation. High double-broker and cargo theft risk.',
+   logistics:'Do not assign. Require Carrier 411 + FMCSA bond verification. Pilot load only after full vetting including reference calls to prior brokers.'},
+  {n:1,geo:'·',label:'New Entrant',industryTerm:'Startup Phase / Unproven',
+   assetDensity:'Low',signalIntegrity:'High',tension:28,colorHex:'#85B7EB',
+   desc:'Recently issued operating authority. Clear intent, limited track record. High responsiveness, low verification baseline. Single-truck or micro-fleet entering the market.',
+   logistics:'Pilot loads only. Short-haul, forgiving windows, high-touch dispatch. Monitor first three loads before standard assignment. Avoid time-sensitive, HAZMAT, or temperature-controlled freight.'},
+  {n:2,geo:'—',label:'Growth Mode',industryTerm:'Scaling Carrier',
+   assetDensity:'Moderate',signalIntegrity:'Variable',tension:42,colorHex:'#B5D4F4',
+   desc:'Established authority with growing load history. Adding capacity and seeking volume. Reliable but not yet predictable under pressure.',
+   logistics:'Standard volume lanes. Monitor load volume vs confirmed asset count. Watch for over-extension across multiple brokers. Avoid complex multi-stop or high-liability freight.'},
+  {n:3,geo:'△',label:'Rapid Expansion',industryTerm:'Hyper-Growth Risk',
+   assetDensity:'Growing',signalIntegrity:'Strong',tension:55,colorHex:'#FAC775',
+   desc:'Scaling faster than management infrastructure can support. Adding trucks and drivers at pace that outstrips dispatcher capacity. Energy is high but commitment reliability is declining.',
+   logistics:'Verify current equipment count before dispatch — do not rely on stated fleet size. Monitor breakdown patterns. Avoid complex multi-stop loads. Check dispatcher-to-driver ratio before high-value tender.'},
+  {n:4,geo:'□',label:'Tier 1 Reliable',industryTerm:'Optimal Operating Zone',
+   assetDensity:'High',signalIntegrity:'High',tension:22,colorHex:'#97C459',
+   desc:'Peak operational efficiency. Strong HOS, high Signal Integrity, low recovery debt, sustainable dispatch rhythms. Maximum confidence window.',
+   logistics:'Prime carrier zone. Assign highest-value, tightest-window, most complex freight. Time-sensitive LTL, temperature-controlled, high-liability FTL. This is the dispatch sweet spot.'},
+  {n:5,geo:'⬠',label:'Burnout Threshold',industryTerm:'Last Chance Recovery / Point of No Return',
+   assetDensity:'Declining',signalIntegrity:'Elevated',tension:88,colorHex:'#EF9F27',
+   desc:'The operational breakpoint. Hidden duality — carrier may appear capable on the surface while running on empty underneath. Last window to stabilize before breakdown. Two paths: recovery run pulls them back to Stage 4, or continued hard freight pushes them into Stage 6 collapse and rapid Stage 7–8 progression. The decision made at Stage 5 is irreversible.',
+   logistics:'Last off-ramp. Assign recovery run immediately — short haul, flexible window, guaranteed home time. Do NOT assign hard-deadline, multi-stop, or time-sensitive freight. Failure to intervene here results in a Stage 8 event within one to two dispatch cycles.'},
+  {n:6,geo:'⬡',label:'Peak Performance Window',industryTerm:'Hot Hand / Unsustainable Peak',
+   assetDensity:'High',signalIntegrity:'Variable',tension:38,colorHex:'#5DCAA5',
+   desc:'Brief window of maximum output following a recovery cycle. Everything clicking — high responsiveness, strong delivery performance. Unsustainable. Hours to days before fatigue reasserts.',
+   logistics:'Assign your most complex or highest-value load immediately. Do not wait for next cycle. Rotate the next carrier into queue now — this window closes before the next dispatch day.'},
+  {n:7,geo:'⬢',label:'Isolated Specialist',industryTerm:'Mastery Under Pressure / Owner-Operator Mindset',
+   assetDensity:'Low',signalIntegrity:'Selective',tension:62,colorHex:'#AFA9EC',
+   desc:'Peak isolation phase. Carrier has reached mastery under pressure — executing with high competence on preferred load types and lanes while withdrawing from broader communication cycles. Individuation is occurring: this carrier is developing a specialized operational identity. Check-call responsiveness drops not from disengagement but from deep operational focus. Risk of decision paralysis if pushed outside their defined zone.',
+   logistics:'Assign solo long-haul runs, dedicated lanes, or owner-operator specialty loads. Full autonomy, minimal dispatch touchpoints. Do not over-manage — micromanagement at Stage 7 accelerates Stage 8 progression. Avoid team freight or high-coordination multi-stop loads.'},
+  {n:8,geo:'∞',label:'Eye of the Storm',industryTerm:'Rigidity Risk / Illusion of Permanence / Imminent Collapse',
+   assetDensity:'High',signalIntegrity:'Compromised',tension:92,colorHex:'#F09595',
+   desc:'HIGHEST TRAP RISK. Surface metrics are clean across every dimension — HOS fine, delivery record on-time, carrier passes inspection, answers calls promptly. This is the illusion of permanence. Peak rigidity has set in: carrier has stopped adapting to route stress, driver fatigue, and operational demands. Signal Integrity is compromised beneath a functional surface. A service failure, breakdown, no-show, or authority surrender is incoming.',
+   logistics:'DO NOT ASSIGN. This carrier will appear fully bookable on every load board — that is the trap. Source a replacement now. Stage 9 failure event incoming within 24–72 hours. Do not tender any new loads regardless of scorecard or DAT history.'},
+  {n:9,geo:'◎',label:'Exit / Dissolution',industryTerm:'Dissolution / Bankruptcy / Pivot',
+   assetDensity:'Collapsed',signalIntegrity:'Transparent',tension:14,colorHex:'#3fd9a8',
+   desc:'Carrier exiting operations, restructuring, or in authority surrender. All operational pressure released — fully transparent about limits. Unpredictable in near-term capacity. Rare exception: Stage 9 signals a breakthrough reset carrier rebuilding with complete clarity.',
+   logistics:'Begin replacement sourcing immediately. Do not tender new loads. Rare exception: voluntary reset carrier returning from a self-initiated pause — treat as Stage 1, run pilot load with full vetting before standard dispatch.'},
 ];
 
-const CARRIERS = [
-  { name:'Meridian Freight LLC',  mc:'MC-1042398', s:4, hos:9,  vol:2, comm:9,  rest:1 },
-  { name:'Cascade Transport',     mc:'MC-2198473', s:5, hos:3,  vol:7, comm:5,  rest:8 },
-  { name:'Apex Haulers Inc',      mc:'MC-3847291', s:8, hos:8,  vol:3, comm:3,  rest:12 },
-  { name:'BlueSky Logistics',     mc:'MC-4920183', s:6, hos:10, vol:4, comm:8,  rest:2 },
-  { name:'Desert Run Carriers',   mc:'MC-7391024', s:7, hos:4,  vol:8, comm:6,  rest:7 },
-  { name:'Ironclad Trucking',     mc:'MC-9012847', s:2, hos:7,  vol:5, comm:7,  rest:3 },
+const CARRIERS=[
+  {name:'Meridian Freight LLC', mc:'MC-1042398',s:4,hos:9, vol:2,comm:9, rest:1},
+  {name:'Cascade Transport',    mc:'MC-2198473',s:5,hos:3, vol:7,comm:5, rest:8},
+  {name:'Apex Haulers Inc',     mc:'MC-3847291',s:8,hos:8, vol:3,comm:3, rest:12},
+  {name:'BlueSky Logistics',    mc:'MC-4920183',s:6,hos:10,vol:4,comm:8, rest:2},
+  {name:'Desert Run Carriers',  mc:'MC-7391024',s:7,hos:4, vol:8,comm:6, rest:7},
+  {name:'Ironclad Trucking',    mc:'MC-9012847',s:2,hos:7, vol:5,comm:7, rest:3},
 ];
 
-const GHOST_DATA = [
-  { name:'FastLoad Express',   mc:'MC-0024810', age:0.3, growth:2,  contact:9.5, verdict:'ghost' },
-  { name:'Premier Cargo LLC',  mc:'MC-8841027', age:3.2, growth:45, contact:4.0, verdict:'real'  },
-  { name:'Speedy Haul Co',     mc:'MC-0103948', age:0.8, growth:1,  contact:9.8, verdict:'ghost' },
-  { name:'Valley Transport',   mc:'MC-5584721', age:7.1, growth:32, contact:5.5, verdict:'real'  },
-  { name:'ZipFreight Inc',     mc:'MC-0049183', age:1.2, growth:8,  contact:7.0, verdict:'watch' },
+const GHOST_DATA=[
+  {name:'FastLoad Express',  mc:'MC-0024810',age:0.3,growth:2, contact:9.5,verdict:'ghost'},
+  {name:'Premier Cargo LLC', mc:'MC-8841027',age:3.2,growth:45,contact:4.0,verdict:'real'},
+  {name:'Speedy Haul Co',    mc:'MC-0103948',age:0.8,growth:1, contact:9.8,verdict:'ghost'},
+  {name:'Valley Transport',  mc:'MC-5584721',age:7.1,growth:32,contact:5.5,verdict:'real'},
+  {name:'ZipFreight Inc',    mc:'MC-0049183',age:1.2,growth:8, contact:7.0,verdict:'watch'},
 ];
 
-const LANES = [
-  { name:'ATL → CHI', vol:8, cap:3, trend:'tightening', s:8 },
-  { name:'LAX → DFW', vol:4, cap:7, trend:'stable',     s:4 },
-  { name:'NYC → MIA', vol:6, cap:5, trend:'softening',  s:5 },
-  { name:'CHI → HOU', vol:9, cap:2, trend:'critical',   s:9 },
-  { name:'SEA → PHX', vol:3, cap:8, trend:'stable',     s:3 },
-  { name:'DFW → ATL', vol:5, cap:6, trend:'rising',     s:6 },
+const LANES=[
+  {name:'ATL → CHI',vol:8,cap:3,trend:'tightening',s:8},
+  {name:'LAX → DFW',vol:4,cap:7,trend:'stable',    s:4},
+  {name:'NYC → MIA',vol:6,cap:5,trend:'softening',  s:5},
+  {name:'CHI → HOU',vol:9,cap:2,trend:'critical',   s:9},
+  {name:'SEA → PHX',vol:3,cap:8,trend:'stable',     s:3},
+  {name:'DFW → ATL',vol:5,cap:6,trend:'rising',     s:6},
 ];
 
-/* ── SCORING ── */
+/* ══════════════════════════════════════════════
+   SCORING
+══════════════════════════════════════════════ */
 function calcYield(hos,vol,comm,rest){
+  // Clamp all inputs
+  hos=Math.max(0,Math.min(11,+hos||0));
+  vol=Math.max(0,Math.min(10,+vol||0));
+  comm=Math.max(0,Math.min(10,+comm||0));
+  rest=Math.max(0,Math.min(14,+rest||0));
   const p=(hos/11)*100,e=(vol/10)*100,c=(comm/10)*100,d=(rest/14)*100;
-  return Math.round((p*0.30)+(c*0.25)+((100-e)*0.25)+((100-d)*0.20));
+  return Math.max(0,Math.min(100,Math.round((p*0.30)+(c*0.25)+((100-e)*0.25)+((100-d)*0.20))));
 }
 function stageFromYield(y){
   if(y>=85)return 6;if(y>=72)return 4;if(y>=58)return 2;
   if(y>=45)return 7;if(y>=30)return 5;if(y>=15)return 8;return 9;
 }
 function yieldColor(y){return y>=70?'#3fd9a8':y>=50?'#EF9F27':'#f07a79';}
+function isRigidityRisk(hos,rest){return hos>=7&&rest>=14;}
 function fractalScore(g){
   return Math.round((Math.min(g.age*20,100)*0.30)+(Math.min(g.growth*2,100)*0.40)+((10-g.contact)*10*0.30));
 }
@@ -679,7 +844,7 @@ function dispatchFor(s){
     5:'Recovery run only — short haul, home time guaranteed. Last off-ramp.',
     6:'Assign most complex load NOW. Peak window closing within 24–72 hrs.',
     7:'Solo long-haul only. Full autonomy. Minimal check-calls.',
-    8:'DO NOT ASSIGN. Eye of storm. Failure incoming within 24–72 hrs.',
+    8:'DO NOT ASSIGN. Eye of storm. Service failure incoming within 24–72 hrs.',
     9:'Source replacement now. Do not tender new loads.',
     2:'Standard volume lanes. Avoid expedited or high-liability freight.',
     3:'Verify current asset count. Watch for over-booking across brokers.',
@@ -689,56 +854,236 @@ function dispatchFor(s){
   return m[s]||'Monitor';
 }
 
-/* ── NAV ── */
+/* ══════════════════════════════════════════════
+   NAV & MODALS
+══════════════════════════════════════════════ */
 function nav(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   el.classList.add('active');
 }
-function openLegend(){document.getElementById('legend-modal').classList.add('open');}
-function closeLegend(){document.getElementById('legend-modal').classList.remove('open');}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLegend();});
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>m.classList.remove('open'));});
 
-/* ── RENDER DASHBOARD ── */
+/* ══════════════════════════════════════════════
+   DASHBOARD
+══════════════════════════════════════════════ */
 function renderDashboard(){
   document.getElementById('carrier-tbody').innerHTML=CARRIERS.map(c=>{
     const score=calcYield(c.hos,c.vol,c.comm,c.rest);
     const sData=STAGES[c.s]||STAGES[0],risk=riskFor(c.s),yc=yieldColor(score);
+    const rigidity=isRigidityRisk(c.hos,c.rest)?'<span style="font-size:10px;color:#f07a79;margin-left:6px;">⚠ Rigidity</span>':'';
     return`<tr>
       <td><div style="font-weight:500;">${c.name}</div><div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div></td>
       <td><span class="stage-pill s-${c.s}">${sData.geo} S${c.s} · ${sData.label}</span></td>
-      <td><div class="yield-wrap"><div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div><span class="yield-num" style="color:${yc};">${score}</span></div></td>
+      <td><div class="yield-wrap"><div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div><span class="yield-num" style="color:${yc};">${score}</span>${rigidity}</div></td>
       <td><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Sig:${c.comm} · Rec:${c.rest}d</div></td>
       <td><span class="risk-badge ${risk.cls}">${risk.label}</span></td>
-      <td style="font-size:12px;color:var(--text-2);max-width:180px;line-height:1.4;">${dispatchFor(c.s)}</td>
+      <td style="font-size:12px;color:var(--text-2);max-width:160px;line-height:1.4;">${dispatchFor(c.s)}</td>
     </tr>`;
   }).join('');
 }
 
-/* ── RENDER CALC ── */
+/* ══════════════════════════════════════════════
+   CALCULATOR
+══════════════════════════════════════════════ */
 function updateCalc(){
-  const hos=+document.getElementById('sl-hos').value,vol=+document.getElementById('sl-vol').value,
-        comm=+document.getElementById('sl-comm').value,rest=+document.getElementById('sl-rest').value;
+  const hos=+document.getElementById('sl-hos').value;
+  const vol=+document.getElementById('sl-vol').value;
+  const comm=+document.getElementById('sl-comm').value;
+  const rest=+document.getElementById('sl-rest').value;
   document.getElementById('hos-v').textContent=hos+' hrs';
   document.getElementById('vol-v').textContent=vol+' / 10';
   document.getElementById('comm-v').textContent=comm+' / 10';
   document.getElementById('rest-v').textContent=rest+' days';
-  const score=calcYield(hos,vol,comm,rest),sn=stageFromYield(score),sData=STAGES[sn],yc=yieldColor(score);
-  const pS=Math.round((hos/11)*100),ent=Math.round((vol/10)*100),cS=Math.round((comm/10)*100),debt=Math.round((rest/14)*100);
+
+  const score=calcYield(hos,vol,comm,rest);
+  const sn=stageFromYield(score);
+  const sData=STAGES[sn];
+  const yc=yieldColor(score);
+  const pS=Math.round((hos/11)*100);
+  const ent=Math.round((vol/10)*100);
+  const cS=Math.round((comm/10)*100);
+  const debt=Math.round((rest/14)*100);
+  const rigidity=isRigidityRisk(hos,rest);
+
   document.getElementById('calc-score-num').textContent=score;
   document.getElementById('calc-score-num').style.color=yc;
   document.getElementById('calc-stage-label').textContent=`Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
   document.getElementById('calc-analysis').innerHTML=sData.logistics;
+
+  const rflag=document.getElementById('rigidity-flag');
+  rflag.style.display=rigidity?'block':'none';
+
   document.getElementById('calc-breakdown').innerHTML=`
-    <div class="math-row">Asset Density (HOS × 0.30) = ${pS} → contributes ${Math.round(pS*0.30)} pts</div>
-    <div class="math-row">Signal Integrity (comm × 0.25) = ${cS} → contributes ${Math.round(cS*0.25)} pts</div>
-    <div class="math-row">Anti-entropy (volatility × 0.25) = ${100-ent} → contributes ${Math.round((100-ent)*0.25)} pts</div>
-    <div class="math-row">Recovery index (rest × 0.20) = ${100-debt} → contributes ${Math.round((100-debt)*0.20)} pts</div>
-    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Axiom Yield Score = ${score} → Stage ${sn}: ${sData.label}</div>`;
+    <div class="math-row">Asset Density  (HOS × 0.30)       = ${pS} → ${Math.round(pS*0.30)} pts</div>
+    <div class="math-row">Signal Integrity (comm × 0.25)    = ${cS} → ${Math.round(cS*0.25)} pts</div>
+    <div class="math-row">Anti-entropy   (vol × 0.25)       = ${100-ent} → ${Math.round((100-ent)*0.25)} pts</div>
+    <div class="math-row">Recovery index (rest × 0.20)      = ${100-debt} → ${Math.round((100-debt)*0.20)} pts</div>
+    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Axiom Yield Score = ${score} → Stage ${sn}: ${sData.label}${rigidity?' ⚠ RIGIDITY FLAG':''}</div>`;
+
+  // Auto-save to localStorage on every change
+  localStorage.setItem('lo_last_calc',JSON.stringify({hos,vol,comm,rest,
+    name:document.getElementById('calc-carrier-name').value,
+    mc:document.getElementById('calc-mc-number').value}));
 }
 
-/* ── RENDER GHOST ── */
+/* ══════════════════════════════════════════════
+   SAVED CHECKS (localStorage)
+══════════════════════════════════════════════ */
+function getSaved(){
+  try{return JSON.parse(localStorage.getItem('lo_saved_checks')||'[]');}catch{return[];}
+}
+function setSaved(arr){localStorage.setItem('lo_saved_checks',JSON.stringify(arr));}
+
+function saveCurrentCalc(){
+  const hos=+document.getElementById('sl-hos').value;
+  const vol=+document.getElementById('sl-vol').value;
+  const comm=+document.getElementById('sl-comm').value;
+  const rest=+document.getElementById('sl-rest').value;
+  const name=document.getElementById('calc-carrier-name').value||'Unnamed Carrier';
+  const mc=document.getElementById('calc-mc-number').value||'—';
+  const score=calcYield(hos,vol,comm,rest);
+  const sn=stageFromYield(score);
+  const arr=getSaved();
+  arr.unshift({name,mc,hos,vol,comm,rest,score,stage:sn,ts:new Date().toLocaleTimeString()});
+  if(arr.length>10)arr.pop();
+  setSaved(arr);
+  renderSavedList();
+}
+
+function loadSavedCalc(i){
+  const arr=getSaved();
+  const c=arr[i];
+  if(!c)return;
+  document.getElementById('calc-carrier-name').value=c.name==='Unnamed Carrier'?'':c.name;
+  document.getElementById('calc-mc-number').value=c.mc==='—'?'':c.mc;
+  document.getElementById('sl-hos').value=c.hos;
+  document.getElementById('sl-vol').value=c.vol;
+  document.getElementById('sl-comm').value=c.comm;
+  document.getElementById('sl-rest').value=c.rest;
+  updateCalc();
+}
+
+function removeSaved(i){
+  const arr=getSaved();arr.splice(i,1);setSaved(arr);renderSavedList();
+}
+function clearSaved(){setSaved([]);renderSavedList();}
+
+function renderSavedList(){
+  const arr=getSaved();
+  document.getElementById('saved-count-label').textContent=`Recent checks: ${arr.length} saved`;
+  const el=document.getElementById('saved-list');
+  if(!arr.length){el.innerHTML='';return;}
+  el.innerHTML=arr.map((c,i)=>{
+    const yc=yieldColor(c.score);
+    return`<div class="saved-item">
+      <div>
+        <div class="saved-item-name">${c.name}</div>
+        <div class="saved-item-meta">${c.mc} · ${c.ts}</div>
+      </div>
+      <div class="saved-item-right">
+        <span style="font-size:16px;font-weight:600;font-family:'DM Mono',monospace;color:${yc};">${c.score}</span>
+        <span class="stage-pill s-${c.stage}" style="font-size:10px;padding:3px 7px;">S${c.stage}</span>
+        <button class="btn-sm" style="padding:4px 8px;" onclick="loadSavedCalc(${i})">Load</button>
+        <button class="btn-sm" style="padding:4px 8px;color:var(--red);" onclick="removeSaved(${i})">✕</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function restoreLastCalc(){
+  try{
+    const last=JSON.parse(localStorage.getItem('lo_last_calc'));
+    if(!last)return;
+    if(last.name)document.getElementById('calc-carrier-name').value=last.name;
+    if(last.mc)document.getElementById('calc-mc-number').value=last.mc;
+    document.getElementById('sl-hos').value=last.hos||6;
+    document.getElementById('sl-vol').value=last.vol||4;
+    document.getElementById('sl-comm').value=last.comm||7;
+    document.getElementById('sl-rest').value=last.rest||3;
+    updateCalc();
+  }catch{}
+}
+
+/* ══════════════════════════════════════════════
+   COMM CHECK
+══════════════════════════════════════════════ */
+function scoreCommCheck(){
+  let total=0,answered=0;
+  ['cq1','cq2','cq3','cq4','cq5'].forEach(name=>{
+    const sel=document.querySelector(`input[name="${name}"]:checked`);
+    if(sel){total+=parseInt(sel.value);answered++;}
+  });
+  if(answered<3){
+    alert('Please answer at least 3 questions for an accurate Signal Integrity score.');return;
+  }
+  // Normalize to 0–10 scale
+  const maxPossible=answered*10;
+  const scaled=Math.round((total/maxPossible)*10);
+  const el=document.getElementById('comm-result');
+  el.style.display='block';
+  const scoreEl=document.getElementById('comm-score-display');
+  scoreEl.textContent=scaled+'/10';
+  const color=scaled>=7?'#3fd9a8':scaled>=4?'#EF9F27':'#f07a79';
+  scoreEl.style.color=color;
+  const advice=['0–3: High Ghost/Fraud risk. Do not proceed without full FMCSA vetting.',
+    '4–6: Moderate Signal Integrity. Use with caution on standard lanes.',
+    '7–9: Good Signal Integrity. Acceptable for standard dispatch.',
+    '10: Excellent Signal Integrity. Confidence to assign sensitive loads.'];
+  document.getElementById('comm-score-label').textContent='Signal Integrity Score / 10';
+  document.getElementById('comm-score-advice').textContent=advice[scaled<=3?0:scaled<=6?1:scaled<=9?2:3];
+  document.getElementById('comm-result').setAttribute('data-score',scaled);
+}
+
+function applyCommScore(){
+  const el=document.getElementById('comm-result');
+  const score=parseInt(el.getAttribute('data-score'));
+  if(isNaN(score))return;
+  document.getElementById('sl-comm').value=score;
+  updateCalc();
+  closeModal('comm-modal');
+  nav('calculator',document.querySelector('.nav-item:nth-child(2)'));
+}
+
+/* ══════════════════════════════════════════════
+   PDF EXPORT
+══════════════════════════════════════════════ */
+function exportPDF(){
+  const hos=+document.getElementById('sl-hos').value;
+  const vol=+document.getElementById('sl-vol').value;
+  const comm=+document.getElementById('sl-comm').value;
+  const rest=+document.getElementById('sl-rest').value;
+  const name=document.getElementById('calc-carrier-name').value||'Unknown Carrier';
+  const mc=document.getElementById('calc-mc-number').value||'—';
+  const score=calcYield(hos,vol,comm,rest);
+  const sn=stageFromYield(score);
+  const sData=STAGES[sn];
+  const rigidity=isRigidityRisk(hos,rest);
+
+  document.getElementById('print-timestamp').textContent=new Date().toLocaleString()+' · Luminark Logistics Overwatch';
+  document.getElementById('print-carrier-name').textContent=name+' · '+mc;
+  document.getElementById('print-score-num').textContent=score;
+  document.getElementById('print-score-num').style.color=yieldColor(score);
+  document.getElementById('print-stage-label').textContent=`Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
+  document.getElementById('print-fields').innerHTML=`
+    <div class="print-field"><strong>Hours of Service:</strong>${hos} hrs remaining</div>
+    <div class="print-field"><strong>Route Volatility:</strong>${vol} / 10</div>
+    <div class="print-field"><strong>Signal Integrity:</strong>${comm} / 10</div>
+    <div class="print-field"><strong>Recovery Debt:</strong>${rest} days since last recovery run</div>
+    <div class="print-field"><strong>Blind Spot Pressure:</strong>${sData.tension}%</div>`;
+  document.getElementById('print-dispatch-box').innerHTML=`<strong>Dispatch Action:</strong> ${sData.logistics}`;
+  const rNote=document.getElementById('print-rigidity-note');
+  rNote.style.display=rigidity?'block':'none';
+  if(rigidity)rNote.textContent='⚠ SYSTEM RIGIDITY DETECTED — High Asset Density + 14+ days without recovery run. Maintenance or driver burnout imminent. Do not assign new loads.';
+  window.print();
+}
+
+/* ══════════════════════════════════════════════
+   GHOST FILTER
+══════════════════════════════════════════════ */
 function renderGhost(){
   document.getElementById('ghost-list').innerHTML=GHOST_DATA.map(g=>{
     const fs=fractalScore(g),isBad=g.verdict==='ghost',isWatch=g.verdict==='watch';
@@ -750,7 +1095,7 @@ function renderGhost(){
       <div class="fractal-info">
         <div class="f-name">${g.name}</div>
         <div class="f-meta">${g.mc} · Authority age: ${g.age}y · Volume variance: ${g.growth}% · Contact anomaly: ${g.contact}/10</div>
-        <div class="f-math">age=${ageE} · variance=${grwE} · contact_anomaly=${ctE} → ghost_score=(${ageE}×0.30)+(${grwE}×0.40)+(${ctE}×0.30)=${fs}</div>
+        <div class="f-math">age=${ageE} · variance=${grwE} · contact_anomaly=${ctE} → ghost_score=${fs}</div>
       </div>
       <div class="fractal-score-wrap">
         <div class="fractal-score-num" style="color:${fc};">${fs}</div>
@@ -760,7 +1105,9 @@ function renderGhost(){
   }).join('');
 }
 
-/* ── RENDER LANES ── */
+/* ══════════════════════════════════════════════
+   LANES
+══════════════════════════════════════════════ */
 function renderLanes(){
   document.getElementById('lane-grid').innerHTML=LANES.map((l,i)=>{
     const sData=STAGES[l.s]||STAGES[0];
@@ -800,7 +1147,9 @@ function showLane(i){
     </div>`;
 }
 
-/* ── RENDER SAP FLOW ── */
+/* ══════════════════════════════════════════════
+   SAP FLOW
+══════════════════════════════════════════════ */
 function renderSAPFlow(){
   document.getElementById('sap-flow').innerHTML=STAGES.map((s,i)=>`
     ${i>0?'<div class="sap-arrow">→</div>':''}
@@ -827,11 +1176,11 @@ function showStageDetail(i){
       <div class="grid-2">
         <div class="inv-box ${adCls}">
           <div class="inv-label">Asset Density: ${s.assetDensity}</div>
-          <div class="inv-body">${s.assetDensity==='High'?'Fleet capacity present and bookable. HOS banked. Equipment available. Surface metrics look strong — verify Signal Integrity before dispatch.':s.assetDensity==='None'?'No verifiable asset base. Cannot confirm truck, trailer, or operating authority.':'Capacity limited, in flux, or declining. Verify equipment and authority status before any tender.'}</div>
+          <div class="inv-body">${s.assetDensity==='High'?'Fleet capacity present and bookable. HOS banked. Equipment available. Verify Signal Integrity before dispatch — Stage 8 has this same profile.':s.assetDensity==='None'?'No verifiable asset base. Cannot confirm truck, trailer, or authority.':'Capacity limited, in flux, or declining. Verify equipment and authority before any tender.'}</div>
         </div>
         <div class="inv-box ${siCls}">
           <div class="inv-label">Signal Integrity: ${s.signalIntegrity}</div>
-          <div class="inv-body">${s.signalIntegrity==='High'?'Check calls accurate. ETAs realistic. Problems disclosed proactively. High-trust communication.':s.signalIntegrity==='None'?'No authentic communication baseline. Contact behavior is scripted or synthetic.':s.signalIntegrity==='Compromised'?'Surface responsiveness intact — accuracy is degrading underneath. Dispatcher managing optics, not reality. Blind Spot Metric maxed.':'Communication is selective — reliable within preferred load types and lanes. Requires autonomy to maintain integrity.'}</div>
+          <div class="inv-body">${s.signalIntegrity==='High'?'Check calls accurate. ETAs realistic. Problems disclosed proactively. High-trust communication.':s.signalIntegrity==='None'?'No authentic communication baseline. Contact behavior scripted or synthetic.':s.signalIntegrity==='Compromised'?'Surface responsiveness intact — accuracy degrading underneath. Dispatcher managing optics, not reality. Blind Spot Metric maxed.':'Selective — reliable within preferred load types and lanes. Requires autonomy to maintain.'}</div>
         </div>
       </div>
       <div class="tension-wrap">
@@ -843,12 +1192,15 @@ function showStageDetail(i){
     </div>`;
 }
 
-/* ── INIT ── */
+/* ══════════════════════════════════════════════
+   INIT
+══════════════════════════════════════════════ */
 renderDashboard();
-updateCalc();
 renderGhost();
 renderLanes();
 renderSAPFlow();
+restoreLastCalc();
+renderSavedList();
 </script>
 </body>
 </html>

@@ -8,22 +8,30 @@
 
 ## What This Is
 
-Luminark Logistics Overwatch is a predictive carrier risk platform for freight brokers, 3PLs, and dispatch operations. Standard load boards show you historical compliance data. Overwatch shows you where a carrier is *going* — scoring current operating conditions against a 10-stage failure model before the load is tendered.
+Predictive carrier risk platform for freight brokers, 3PLs, and dispatch operations. Identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is tendered.
 
-Built on the **Stanfield Axiom of Perpetuity (SAP) v3.0** — proprietary operational risk framework developed by Meridian Axiom Alignment Technologies.
+Built on **Stanfield's Axiom of Perpetuity (SAP) v3.0** — proprietary framework by Meridian Axiom Alignment Technologies (MAAT).
 
 ---
 
-## Core Features
+## Features (Current Intel Feed)
 
-| Feature | Description |
-|---------|-------------|
-| **Axiom Yield Score** | 0–100 predictive reliability score. Below 40 = do not dispatch. |
-| **Stage 8 Detection** | Identifies Eye-of-Storm carriers 24–72 hrs before service failure. |
-| **Ghost Carrier Filter** | MC screening against synthetic carrier fraud patterns. |
-| **Lane Pressure Map** | Capacity forecasting 24–48 hrs ahead of board visibility + rate multipliers. |
-| **Risk Legend** | One-click dispatch reference — make a $5,000 decision in three seconds. |
-| **SAP Glossary** | Full SAP → logistics translation table for onboarding and training. |
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Axiom Yield Score | ✅ Live | 0–100 predictive reliability score from 4 dispatch metrics |
+| Stage 8 Detection | ✅ Live | Eye-of-Storm identification 24–72 hrs before failure |
+| System Rigidity Flag | ✅ Live | Auto-fires when HOS ≥ 7 + recovery debt ≥ 14 days |
+| Signal Check Modal | ✅ Live | 5-question comm vetting tool — applies score to calculator |
+| Risk Legend Modal | ✅ Live | One-click mid-call dispatch reference |
+| Ghost Carrier Filter | ✅ Live | MC fraud pattern screening |
+| Lane Pressure Map | ✅ Live | Corridor capacity forecasting + rate multipliers |
+| PDF Risk Report | ✅ Live | Download carrier risk report for TMS attachment |
+| Saved Checks | ✅ Live | localStorage — survives page refresh, last 10 carriers |
+| Input Validation | ✅ Live | All inputs clamped, edge cases handled |
+| Mobile Responsive | ✅ Live | Touch-optimized, finger-friendly targets |
+| SAP Glossary | ✅ Live | 20-row SAP → Logistics → Industry translation table |
+| Backend API | ⏳ Phase 2 | Flask/Python — see `/backend` folder |
+| Live Carrier Feeds | ⏳ Phase 2 | DAT / TruckerTools integration |
 
 ---
 
@@ -44,43 +52,13 @@ Built on the **Stanfield Axiom of Perpetuity (SAP) v3.0** — proprietary operat
 
 ---
 
-## SAP → Logistics Translation
-
-| SAP Term | Logistics Term | Industry Language |
-|----------|---------------|-------------------|
-| P.Stable | Asset Density | Equipment & Driver Availability |
-| C.Stable | Signal Integrity | Dispatch Responsiveness |
-| Inversion Principle | Blind Spot Metric | Good Metrics Masking Bad Operations |
-| Entropy Accumulation | Risk Score Increase | Failure Probability Trending Up |
-| Axiom Yield | Carrier Reliability Score | Predictive Load Acceptance Rating |
-
----
-
-## Status
-
-- ✅ Axiom Yield Score calculator
-- ✅ 10-stage Risk Stage Index with dispatch guidance
-- ✅ Ghost Carrier MC screening
-- ✅ Lane Pressure Map with rate multipliers
-- ✅ Risk Legend modal (one-click reference)
-- ✅ Full SAP → Logistics glossary
-- ⏳ Backend API (Phase 2 — see `/backend`)
-- ⏳ Live carrier data feeds (Phase 2)
-
-**Join Beta Waitlist — Launching April 15, 2026**
-
----
-
 ## Tech Stack
 
-- **Frontend:** Single-file HTML/CSS/JS — GitHub Pages deployable
-- **Backend (Phase 2):** Flask/Python REST API — `/backend` folder
-- **Deploy:** Render.com via `render.yaml`
+- **Frontend:** Single-file HTML/CSS/JS — GitHub Pages deployable, zero dependencies
+- **Backend (Phase 2):** Flask/Python REST API — `/backend` folder, Render-ready via `render.yaml`
 
 ---
 
-**Author:** Richard Leroy Stanfield Jr.  
-**Organization:** Meridian Axiom Alignment Technologies (MAAT)  
-**Contact:** LuminarkMeridian@gmail.com
-
+**Author:** Richard Leroy Stanfield Jr. — Founder, MAAT  
+**Contact:** LuminarkMeridian@gmail.com  
 Copyright © 2026 Richard Leroy Stanfield Jr. All rights reserved.
