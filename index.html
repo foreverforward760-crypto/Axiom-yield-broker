@@ -66,6 +66,50 @@
   .comm-score-num{font-size:42px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:-2px;margin-bottom:4px}
   .comm-score-label{font-size:12px;color:var(--text-2)}
 
+  /* TREND ARROWS & MOMENTUM */
+  .trend-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;padding:2px 6px;border-radius:4px;margin-left:5px;cursor:help}
+  .trend-up{background:rgba(29,158,117,0.15);color:#3fd9a8}
+  .trend-down{background:rgba(226,75,74,0.15);color:#f07a79}
+  .trend-stable{background:rgba(107,103,96,0.15);color:var(--text-3)}
+  .trend-new{background:rgba(55,138,221,0.12);color:#7ab8f0}
+
+  /* RESILIENCE SCORE */
+  .resilience-badge{display:inline-block;font-size:11px;font-weight:700;font-family:'DM Mono',monospace;padding:3px 8px;border-radius:4px;min-width:32px;text-align:center}
+  .res-high{background:rgba(59,158,74,0.15);color:#6fcd80;border:1px solid rgba(59,158,74,0.2)}
+  .res-mid{background:rgba(239,159,39,0.15);color:var(--amber);border:1px solid rgba(239,159,39,0.2)}
+  .res-low{background:rgba(226,75,74,0.15);color:#f07a79;border:1px solid rgba(226,75,74,0.2)}
+
+  /* EXIT WATCH & CLARITY AUDIT BADGES */
+  .exit-watch-badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:rgba(127,119,221,0.15);color:#b0aaff;border:1px solid rgba(127,119,221,0.25);margin-left:5px;cursor:help}
+  .container-violation-badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:20px;background:rgba(216,90,48,0.15);color:#f0906a;border:1px solid rgba(216,90,48,0.25);margin-left:5px}
+
+  /* CLARITY AUDIT TOAST */
+  .clarity-toast{position:fixed;top:70px;right:20px;z-index:3000;background:var(--bg-2);border:1px solid var(--amber);border-radius:var(--radius);padding:14px 18px;max-width:340px;box-shadow:0 4px 24px rgba(0,0,0,0.4);animation:fadeIn 0.3s ease;display:none}
+  .clarity-toast.open{display:block}
+  .clarity-toast-title{font-size:12px;font-weight:600;color:var(--amber);margin-bottom:4px}
+  .clarity-toast-body{font-size:11px;color:var(--text-2);line-height:1.5}
+  .clarity-toast-close{position:absolute;top:8px;right:10px;background:none;border:none;color:var(--text-3);cursor:pointer;font-size:14px;padding:2px 6px}
+
+  /* ADVISORY BOXES (screen + print) */
+  .advisory-box{border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;line-height:1.6;margin-top:8px}
+  .advisory-box.amber{background:rgba(239,159,39,0.12);border:1px solid rgba(239,159,39,0.3);color:var(--amber)}
+  .advisory-box.teal{background:var(--teal-dim);border:1px solid rgba(29,158,117,0.25);color:#3fd9a8}
+  .advisory-box.blue{background:var(--blue-dim);border:1px solid rgba(55,138,221,0.2);color:#7ab8f0}
+  .strength-box{background:rgba(59,158,74,0.1);border:1px solid rgba(59,158,74,0.2);border-radius:var(--radius-sm);padding:8px 12px;font-size:11px;color:#6fcd80;margin-bottom:8px}
+  .best-for-box{background:var(--blue-dim);border:1px solid rgba(55,138,221,0.2);border-radius:var(--radius-sm);padding:8px 12px;font-size:11px;color:#7ab8f0;margin-bottom:8px}
+
+  /* ROUTE LOCK TOGGLE */
+  .route-lock-wrap{display:flex;align-items:flex-start;gap:10px;background:rgba(239,159,39,0.08);border:1px solid rgba(239,159,39,0.25);border-radius:var(--radius-sm);padding:12px 14px;margin-top:14px;cursor:pointer}
+  .route-lock-wrap input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;accent-color:var(--amber)}
+  .route-lock-label{font-size:12px;color:var(--text-2);line-height:1.5}
+  .route-lock-label strong{color:var(--amber)}
+
+  /* BROKER TRUST OVERRIDE */
+  .trust-override-wrap{display:flex;align-items:flex-start;gap:10px;background:rgba(55,138,221,0.08);border:1px solid rgba(55,138,221,0.2);border-radius:var(--radius-sm);padding:12px 14px;margin-top:10px;cursor:pointer}
+  .trust-override-wrap input[type=checkbox]{width:16px;height:16px;flex-shrink:0;margin-top:2px;cursor:pointer;accent-color:var(--blue)}
+  .trust-override-label{font-size:12px;color:var(--text-2);line-height:1.5}
+  .trust-override-label strong{color:#7ab8f0}
+
   /* PDF EXPORT */
   @media print{
     body{background:#fff;color:#000}
@@ -80,6 +124,10 @@
     .print-field strong{display:inline-block;width:160px;color:#555}
     .print-stage-box{background:#f5f5f5;border:1px solid #ddd;border-radius:8px;padding:16px;margin:16px 0;font-size:13px;line-height:1.7}
     .print-footer{margin-top:32px;font-size:11px;color:#888;border-top:1px solid #ddd;padding-top:12px}
+    .advisory-box,.strength-box,.best-for-box{-webkit-print-color-adjust:exact;print-color-adjust:exact;background-color:#f8f9fa!important;border:1px solid #dee2e6!important;color:#333!important}
+    .advisory-box.amber{background-color:#fff3cd!important;border-color:#ffc107!important;color:#856404!important}
+    .strength-box{background-color:#d1e7dd!important;border-color:#badbcc!important;color:#0f5132!important}
+    .best-for-box{background-color:#cfe2ff!important;border-color:#b6d4fe!important;color:#084298!important}
   }
   #print-report{display:none}
 
@@ -322,6 +370,18 @@
   .vel-label{font-size:10px;color:var(--text-3);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px}
   .vel-value{font-size:18px;font-weight:600;font-family:'DM Mono',monospace}
 
+  /* FMCSA TOGGLE */
+  .fmcsa-toggle{width:38px;height:20px;background:var(--bg-4);border-radius:10px;position:relative;cursor:pointer;transition:background 0.2s;flex-shrink:0;border:1px solid var(--border)}
+  .fmcsa-toggle.on{background:var(--blue)}
+  .fmcsa-toggle-knob{width:14px;height:14px;background:#fff;border-radius:50%;position:absolute;top:2px;left:2px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
+  .fmcsa-toggle.on .fmcsa-toggle-knob{left:20px}
+
+  /* ADVISORY BOXES (screen + print) */
+  .strength-box{background:rgba(29,158,117,0.12);border:1px solid rgba(29,158,117,0.25);border-radius:var(--radius-sm);padding:10px 14px}
+  .best-for-box{background:rgba(55,138,221,0.12);border:1px solid rgba(55,138,221,0.25);border-radius:var(--radius-sm);padding:10px 14px}
+  .advisory-box{background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px}
+  .advisory-box.amber{background:rgba(239,159,39,0.12);border:1px solid rgba(239,159,39,0.3)}
+
   /* SCROLLBAR */
   ::-webkit-scrollbar{width:6px;height:6px}
   ::-webkit-scrollbar-track{background:var(--bg)}
@@ -360,7 +420,7 @@
     <table class="legend-table">
       <thead><tr><th>Status</th><th>Industry Term</th><th>Meaning</th><th>Action</th></tr></thead>
       <tbody>
-        <tr><td><span class="risk-badge r-trap">S8 Eye of Storm</span></td><td style="color:var(--text);font-weight:500;">Rigidity Risk</td><td style="color:var(--text-2);">Perfect scorecard masking imminent collapse. Entropy maxed.</td><td style="color:#f07a79;font-weight:600;">Do Not Dispatch</td></tr>
+        <tr><td><span class="risk-badge r-trap">S8 Precision Op.</span></td><td style="color:var(--text);font-weight:500;">Peak Rigidity</td><td style="color:var(--text-2);">Flawless record, zero flexibility buffer. 100% capacity — no room for deviation.</td><td style="color:var(--amber);font-weight:600;">Fixed-Route Only + Backup</td></tr>
         <tr><td><span class="risk-badge r-high">S5 Threshold</span></td><td style="color:var(--text);font-weight:500;">Last Off-Ramp</td><td style="color:var(--text-2);">Burnout threshold. One recovery run saves them. Miss it and they're done.</td><td style="color:var(--amber);font-weight:600;">Recovery Miles Only</td></tr>
         <tr><td><span class="risk-badge r-low">S4 Tier 1</span></td><td style="color:var(--text);font-weight:500;">Prime Carrier</td><td style="color:var(--text-2);">Optimal operating zone. Max reliability. Best window.</td><td style="color:#6fcd80;font-weight:600;">Assign High-Value Loads</td></tr>
         <tr><td><span class="risk-badge r-low">S6 Peak Window</span></td><td style="color:var(--text);font-weight:500;">Hot Hand</td><td style="color:var(--text-2);">Brief peak — 24–72 hrs before fatigue closes the window.</td><td style="color:#3fd9a8;font-weight:600;">Assign Complex Load NOW</td></tr>
@@ -432,19 +492,141 @@
 </div>
 
 <!-- ── PRINT REPORT (hidden except print) ── -->
+<!-- PDF GENERATION — Luminark Sentinel Clarity Report (hidden except @media print) -->
 <div id="print-report">
   <div class="print-header">
-    <div style="font-size:11px;color:#888;margin-bottom:4px;">LUMINARK LOGISTICS OVERWATCH · MERIDIAN AXIOM ALIGNMENT TECHNOLOGIES</div>
-    <div style="font-size:20px;font-weight:700;color:#c8841a;">Carrier Risk Report</div>
+    <div style="font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;">Meridian Axiom Alignment Technologies · MAAT · SAP v3.0</div>
+    <div style="font-size:22px;font-weight:800;color:#c8841a;letter-spacing:-0.5px;">Luminark Sentinel Clarity Report</div>
     <div style="font-size:11px;color:#888;margin-top:4px;" id="print-timestamp"></div>
   </div>
-  <div id="print-carrier-name" style="font-size:16px;font-weight:600;margin-bottom:16px;"></div>
-  <div class="print-score" id="print-score-num"></div>
-  <div style="font-size:14px;font-weight:600;margin-bottom:16px;" id="print-stage-label"></div>
-  <div id="print-fields"></div>
-  <div class="print-stage-box" id="print-dispatch-box"></div>
-  <div id="print-rigidity-note" style="display:none;background:#fff0f0;border:1px solid #f09595;border-radius:6px;padding:12px;margin-top:12px;font-size:12px;color:#c0392b;font-weight:600;"></div>
-  <div class="print-footer">Generated by Luminark Logistics Overwatch · SAP v3.0 · Meridian Axiom Alignment Technologies · LuminarkMeridian@gmail.com · © 2026 Richard Leroy Stanfield Jr.</div>
+
+  <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:16px;align-items:start;">
+    <div>
+      <div style="font-size:17px;font-weight:700;color:#111;margin-bottom:3px;" id="print-carrier-name"></div>
+      <div style="font-size:13px;font-weight:600;color:#555;margin-bottom:2px;" id="print-stage-label"></div>
+      <div style="font-size:11px;color:#888;" id="print-industry-term"></div>
+    </div>
+    <div style="text-align:right;">
+      <div class="print-score" id="print-score-num"></div>
+      <div style="font-size:10px;color:#888;text-transform:uppercase;letter-spacing:0.06em;">Axiom Yield Score</div>
+      <div style="font-size:11px;font-weight:600;margin-top:4px;" id="print-resilience-line"></div>
+    </div>
+  </div>
+
+  <div id="print-fields" style="margin-bottom:14px;"></div>
+
+  <!-- Strengths box -->
+  <div id="print-strength-box" class="advisory-box strength-box" style="margin-bottom:10px;display:none;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#1d9e75;margin-bottom:5px;">★ Stage Strengths</div>
+    <div id="print-strength-text" style="font-size:12px;color:#333;line-height:1.6;"></div>
+  </div>
+
+  <!-- Best For box -->
+  <div id="print-bestfor-box" class="advisory-box best-for-box" style="margin-bottom:10px;display:none;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#378add;margin-bottom:5px;">Best Load Types</div>
+    <div id="print-bestfor-text" style="font-size:12px;color:#333;line-height:1.6;"></div>
+  </div>
+
+  <!-- Dispatch action box -->
+  <div class="print-stage-box advisory-box" id="print-dispatch-box" style="margin-bottom:10px;"></div>
+
+  <!-- Stage 8 rigidity note (amber) -->
+  <div id="print-rigidity-note" class="advisory-box amber" style="display:none;margin-bottom:10px;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#c8841a;margin-bottom:5px;">⚠ Stage 8 Rigidity Advisory</div>
+    <div id="print-rigidity-text" style="font-size:12px;color:#333;line-height:1.6;"></div>
+  </div>
+
+  <!-- Route Lock confirmation (Stage 8 two-step) -->
+  <div id="print-routelock-section" style="display:none;border:2px solid #c8841a;border-radius:6px;padding:14px;margin-bottom:10px;background:#fffbf5;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#c8841a;margin-bottom:8px;">Route Lock Confirmation (Stage 8 Requirement)</div>
+    <div id="print-routelock-status" style="font-size:12px;color:#333;line-height:1.6;font-weight:600;"></div>
+  </div>
+
+  <!-- Broker Trust Override note -->
+  <div id="print-trust-note" style="display:none;border:1px solid #ddd;border-radius:6px;padding:12px;margin-bottom:10px;background:#f9f9f9;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#666;margin-bottom:5px;">Broker Relationship Override</div>
+    <div style="font-size:12px;color:#555;line-height:1.6;font-style:italic;">Manual Override: Existing business relationship established. Advisory notes acknowledged and overridden by broker discretion. Broker assumes full responsibility for this dispatch decision.</div>
+  </div>
+
+  <!-- FMCSA data section if available -->
+  <div id="print-fmcsa-section" style="display:none;border:1px solid #ddd;border-radius:6px;padding:12px;margin-bottom:10px;background:#f5f9ff;">
+    <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#378add;margin-bottom:5px;">FMCSA Verified Data</div>
+    <div id="print-fmcsa-text" style="font-size:12px;color:#333;line-height:1.6;"></div>
+  </div>
+
+  <div class="print-footer">
+    Luminark Sentinel Clarity Report · Luminark Logistics Overwatch · SAP v3.0 · Meridian Axiom Alignment Technologies<br>
+    LuminarkMeridian@gmail.com · © 2026 Richard Leroy Stanfield Jr. · All rights reserved.<br>
+    <em>This report is generated from broker-entered operational data and FMCSA public records. It is an advisory tool and does not constitute a legal guarantee of carrier performance.</em>
+  </div>
+</div>
+
+<!-- ── CLARITY AUDIT TOAST ── -->
+<div class="clarity-toast" id="clarity-toast">
+  <button class="clarity-toast-close" onclick="document.getElementById('clarity-toast').classList.remove('open')">✕</button>
+  <div class="clarity-toast-title">🔍 Clarity Audit Due</div>
+  <div class="clarity-toast-body" id="clarity-toast-body"></div>
+</div>
+
+<!-- ── ROUTE LOCK MODAL (Stage 8 High-Stakes Dispatch) ── -->
+<div class="modal-overlay" id="routelock-modal" onclick="if(event.target===this)closeModal('routelock-modal')">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="closeModal('routelock-modal')">✕</button>
+    <div class="modal-title" style="color:var(--amber);">⚠ High-Stakes Dispatch Advisory</div>
+    <div class="modal-sub">Stage 8 — Precision Operator</div>
+    <div class="strength-box">★ Flawless Performance Record · Systemic Consistency · Maximum Reliability History</div>
+    <div class="best-for-box">Best for: Fixed-route, non-negotiable schedules — same pick, same drop, same time, every time.</div>
+    <div class="advisory-box amber">Zero deviation tolerance. Any route change, schedule adjustment, or unexpected requirement will likely cause a total service failure. Reliability is at its historical peak — adaptability is at zero.</div>
+    <div class="route-lock-wrap" onclick="this.querySelector('input').click()">
+      <input type="checkbox" id="routeLockCheckbox">
+      <div class="route-lock-label"><strong>Confirm Route Lock:</strong> This load's route, pick-up time, and delivery window are fixed and non-negotiable. No changes will be requested from this carrier.</div>
+    </div>
+    <div class="trust-override-wrap" onclick="this.querySelector('input').click()">
+      <input type="checkbox" id="brokerTrustOverride">
+      <div class="trust-override-label"><strong>Existing Relationship Override:</strong> I have an established business relationship with this carrier and am overriding the advisory based on my direct knowledge of their current operational state.</div>
+    </div>
+    <div style="display:flex;gap:10px;margin-top:16px;">
+      <button class="btn-sm gold" style="flex:2;padding:11px;" onclick="proceedS8Dispatch()">Proceed with Dispatch</button>
+      <button class="btn-sm" style="flex:1;padding:11px;" onclick="closeModal('routelock-modal')">Cancel</button>
+    </div>
+    <div style="font-size:10px;color:var(--text-3);margin-top:10px;text-align:center;" id="routelock-carrier-id"></div>
+  </div>
+</div>
+
+<!-- PDF PREFLIGHT MODAL — Two-step Route Lock for Stage 8 + final export trigger -->
+<div class="modal-overlay" id="pdf-preflight-modal" onclick="if(event.target===this)closeModal('pdf-preflight-modal')">
+  <div class="modal" style="max-width:500px;">
+    <button class="modal-close" onclick="closeModal('pdf-preflight-modal')">✕</button>
+    <div class="modal-title">Generate Sentinel Clarity Report</div>
+    <div class="modal-sub" id="pdf-preflight-sub">Review and confirm before generating the PDF report.</div>
+
+    <!-- Stage 8 Route Lock second confirmation (shown only for S8) -->
+    <div id="pdf-s8-section" style="display:none;">
+      <div style="background:rgba(239,159,39,0.12);border:1px solid rgba(239,159,39,0.3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;">
+        <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">⚠ Stage 8 — Route Lock Required for PDF Export</div>
+        <div style="font-size:12px;color:var(--text-2);line-height:1.6;">This is the final audit confirmation. By checking this box, you confirm the route, pick-up time, and delivery window for this load are fixed and non-negotiable. This record will be attached to the load file.</div>
+      </div>
+      <div class="route-lock-wrap" onclick="this.querySelector('input').click()" style="margin-bottom:10px;">
+        <input type="checkbox" id="pdfRouteLockCheckbox">
+        <div class="route-lock-label"><strong>Route Lock Confirmed (Final Audit):</strong> This load's route is fixed and non-negotiable. No schedule or routing changes will be requested from this Stage 8 carrier.</div>
+      </div>
+    </div>
+
+    <!-- Broker Trust Override -->
+    <div class="trust-override-wrap" onclick="this.querySelector('input').click()" style="margin-bottom:14px;">
+      <input type="checkbox" id="pdfBrokerTrust">
+      <div class="trust-override-label"><strong>Existing Relationship Override:</strong> Note in the report that an established business relationship exists. Advisory notes are acknowledged but overridden by broker discretion.</div>
+    </div>
+
+    <!-- Report preview summary -->
+    <div style="background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;font-size:11px;color:var(--text-2);line-height:1.7;" id="pdf-preview-summary"></div>
+
+    <div style="display:flex;gap:10px;">
+      <button class="btn-sm gold" style="flex:2;padding:11px;font-size:13px;" onclick="executePDFExport()">⬇ Generate PDF Report</button>
+      <button class="btn-sm" style="flex:1;padding:11px;" onclick="closeModal('pdf-preflight-modal')">Cancel</button>
+    </div>
+    <div style="font-size:10px;color:var(--text-3);margin-top:10px;text-align:center;">Generated locally · No data transmitted · Attach to load file in your TMS</div>
+  </div>
 </div>
 
 <div class="app-shell">
@@ -518,13 +700,13 @@
         </div>
         <div class="table-scroll">
           <table>
-            <thead><tr><th>Carrier / MC#</th><th>Risk Stage</th><th>Yield Score</th><th>Operating Metrics</th><th>Risk Flag</th><th>Dispatch Action</th></tr></thead>
+            <thead><tr><th>Carrier / MC#</th><th>Risk Stage</th><th>Yield Score</th><th>Trend · Resilience</th><th>Operating Metrics</th><th>Risk Flag</th><th>Dispatch Action</th></tr></thead>
             <tbody id="carrier-tbody"></tbody>
           </table>
         </div>
       </div>
       <div class="alert alert-gold">
-        <strong>Blind Spot Alert — Stage 8 Carriers:</strong> Stage 8 carriers score clean on every surface metric — HOS is fine, delivery record looks good, they answer calls. That is the trap. Peak rigidity has set in. The carrier has stopped adapting. A breakdown, no-show, or sudden authority surrender is coming within 48–72 hours. Do not assign any load to a Stage 8 carrier regardless of their load board rating.
+        <strong>Luminark Advisory — Stage 8 Precision Operators:</strong> Stage 8 carriers score clean on every surface metric and have a flawless performance record. That record is real. What Luminark detects is that peak rigidity has set in — they are operating at 100% capacity with zero flexibility buffer. Their strength is systemic consistency on fixed routes. Their risk is zero adaptability to any change in schedule, route, or load requirements. Use them accordingly — and always source a backup carrier before tendering.
       </div>
     </div>
 
@@ -546,6 +728,39 @@
             <div class="input-top"><span>MC number (optional)</span></div>
             <input type="text" id="calc-mc-number" placeholder="e.g. MC-1042398" style="width:100%;background:var(--bg-3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:12px;outline:none;">
           </div>
+
+          <!-- FMCSA SECTION — QCMobile API Integration (optional, offline-first) -->
+          <div class="card" style="margin-bottom:14px;padding:14px 16px;border-color:rgba(55,138,221,0.3);">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px;">
+              <div>
+                <div style="font-size:12px;font-weight:600;color:#7ab8f0;">🔗 FMCSA QCMobile Lookup <span style="font-size:10px;font-weight:400;color:var(--text-3);">(optional)</span></div>
+                <div style="font-size:10px;color:var(--text-3);margin-top:2px;">Auto-populate stage data from official FMCSA records · WebKey stored locally only · Works offline without it</div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="font-size:10px;color:var(--text-3);">Enable</span>
+                <div class="fmcsa-toggle" id="fmcsa-toggle" onclick="toggleFMCSA()" title="Toggle FMCSA lookup">
+                  <div class="fmcsa-toggle-knob" id="fmcsa-toggle-knob"></div>
+                </div>
+              </div>
+            </div>
+            <div id="fmcsa-panel" style="display:none;">
+              <div style="display:flex;gap:8px;margin-bottom:8px;flex-wrap:wrap;">
+                <input type="password" id="fmcsa-webkey" placeholder="FMCSA WebKey (from mobile.fmcsa.dot.gov)" style="flex:1;min-width:200px;background:var(--bg-4);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;color:var(--text);font-family:'DM Mono',monospace;font-size:11px;outline:none;">
+                <button class="btn-sm" onclick="saveFMCSAKey()" title="Save WebKey to localStorage — never sent to any server">💾 Save Key</button>
+              </div>
+              <div style="font-size:10px;color:var(--text-3);margin-bottom:10px;">WebKey saved locally only · Never transmitted to Luminark servers · Get yours free at mobile.fmcsa.dot.gov → Sign in → My WebKeys</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn-sm gold" onclick="runFMCSALookup()" style="flex:1;padding:9px;">🔍 Lookup by MC# → Auto-fill Stage Data</button>
+                <button class="btn-sm" onclick="clearFMCSAData()" title="Clear auto-filled FMCSA data">Clear</button>
+              </div>
+              <div id="fmcsa-status" style="margin-top:8px;font-size:11px;color:var(--text-3);display:none;"></div>
+              <div id="fmcsa-result-bar" style="display:none;margin-top:10px;background:rgba(55,138,221,0.1);border:1px solid rgba(55,138,221,0.25);border-radius:var(--radius-sm);padding:10px 12px;">
+                <div style="font-size:10px;font-weight:600;color:#7ab8f0;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">✓ FMCSA Data Loaded</div>
+                <div id="fmcsa-result-text" style="font-size:11px;color:var(--text-2);line-height:1.7;font-family:'DM Mono',monospace;"></div>
+              </div>
+            </div>
+          </div>
+          <!-- /FMCSA SECTION -->
 
           <div class="input-group">
             <div class="input-top"><span>Hours of Service remaining (HOS)</span><span class="input-val" id="hos-v">6 hrs</span></div>
@@ -579,6 +794,10 @@
             </div>
           </div>
           <div class="saved-list" id="saved-list"></div>
+          <div class="trust-override-wrap" style="margin-top:12px;" onclick="this.querySelector('input').click()">
+            <input type="checkbox" id="calcBrokerTrust">
+            <div class="trust-override-label"><strong>Existing Relationship Override:</strong> Check to note an established relationship in the PDF risk report. Advisory notes are logged but not enforced.</div>
+          </div>
         </div>
 
         <div>
@@ -591,7 +810,7 @@
           <div class="card" style="margin-top:14px;">
             <div class="card-title">Score breakdown</div>
             <div id="calc-breakdown"></div>
-            <button class="btn-sm gold" style="margin-top:14px;width:100%;padding:10px;" onclick="exportPDF()">⬇ Download Risk Report (PDF)</button>
+            <button class="btn-sm gold" style="margin-top:14px;width:100%;padding:10px;" onclick="openPDFModal()">⬇ Generate Sentinel Clarity Report (PDF)</button>
           </div>
         </div>
       </div>
@@ -992,44 +1211,74 @@
 const STAGES=[
   {n:0,geo:'●',label:'Ghost / No Authority',industryTerm:'Ghost Carrier / New MC',
    assetDensity:'None',signalIntegrity:'None',tension:0,colorHex:'#888780',
+   strength:'N/A',
+   bestFor:'No load type — full vetting required before any assignment.',
+   advisory:'Require Carrier 411 + FMCSA bond verification and reference calls before proceeding.',
    desc:'No verifiable load history. Either brand-new authority with zero freight activity or a fraudulent shell operation. High double-broker and cargo theft risk.',
-   logistics:'Do not assign. Require Carrier 411 + FMCSA bond verification. Pilot load only after full vetting including reference calls to prior brokers.'},
-  {n:1,geo:'·',label:'New Entrant',industryTerm:'Startup Phase / Unproven',
+   logistics:'Full vetting required. Require Carrier 411 + FMCSA bond verification and reference calls to prior brokers before any pilot load.'},
+  {n:1,geo:'·',label:'New Entrant',industryTerm:'High-Intent Startup',
    assetDensity:'Low',signalIntegrity:'High',tension:28,colorHex:'#85B7EB',
+   strength:'High Intent · Strong Communication · Eager to Build Reputation',
+   bestFor:'Low-risk filler loads, short regional lanes, high-margin spot freight with flexible windows. Use to build loyalty early — this carrier will remember who gave them their first quality load.',
+   advisory:'High responsiveness is a genuine signal — new entrants are motivated to perform. Limit to pilot loads until three successful deliveries are logged. Avoid HAZMAT, temperature-controlled, or time-critical freight.',
    desc:'Recently issued operating authority. Clear intent, limited track record. High responsiveness, low verification baseline. Single-truck or micro-fleet entering the market.',
-   logistics:'Pilot loads only. Short-haul, forgiving windows, high-touch dispatch. Monitor first three loads before standard assignment. Avoid time-sensitive, HAZMAT, or temperature-controlled freight.'},
-  {n:2,geo:'—',label:'Growth Mode',industryTerm:'Scaling Carrier',
+   logistics:'Pilot loads only. Short-haul, forgiving windows, high-touch dispatch. Monitor first three loads before standard assignment.'},
+  {n:2,geo:'—',label:'Growth Engine',industryTerm:'Scaling Carrier',
    assetDensity:'Moderate',signalIntegrity:'Variable',tension:42,colorHex:'#B5D4F4',
+   strength:'Volume Hungry · Relationship Builder · Consistent Regional Presence',
+   bestFor:'Consistent high-volume contracts and lane partnerships. This carrier wants to grow with you — offer repeat freight and you will earn pricing leverage and priority capacity.',
+   advisory:'Best for standard lanes with predictable volume. Monitor load count vs stated fleet size. Watch for over-booking across multiple brokers — their ambition can outpace their capacity.',
    desc:'Established authority with growing load history. Adding capacity and seeking volume. Reliable but not yet predictable under pressure.',
-   logistics:'Standard volume lanes. Monitor load volume vs confirmed asset count. Watch for over-extension across multiple brokers. Avoid complex multi-stop or high-liability freight.'},
-  {n:3,geo:'△',label:'Rapid Expansion',industryTerm:'Hyper-Growth Risk',
+   logistics:'Standard volume lanes. Monitor load volume vs confirmed asset count. Watch for over-extension across multiple brokers.'},
+  {n:3,geo:'△',label:'Growth Engine',industryTerm:'Hyper-Growth Risk',
    assetDensity:'Growing',signalIntegrity:'Strong',tension:55,colorHex:'#FAC775',
+   strength:'High Energy · Strong Communication · Motivated to Perform',
+   bestFor:'Moderate-complexity lanes where you can verify assets in advance. Strong signal integrity means problems get disclosed — they will tell you before things go wrong.',
+   advisory:'Verify current equipment count and dispatcher-to-driver ratio before high-value tenders. The energy is real but the infrastructure may be lagging. Avoid multi-stop or complex coordinations.',
    desc:'Scaling faster than management infrastructure can support. Adding trucks and drivers at pace that outstrips dispatcher capacity. Energy is high but commitment reliability is declining.',
-   logistics:'Verify current equipment count before dispatch — do not rely on stated fleet size. Monitor breakdown patterns. Avoid complex multi-stop loads. Check dispatcher-to-driver ratio before high-value tender.'},
-  {n:4,geo:'□',label:'Tier 1 Reliable',industryTerm:'Optimal Operating Zone',
+   logistics:'Verify current equipment count before dispatch. Monitor breakdown patterns. Avoid complex multi-stop loads.'},
+  {n:4,geo:'□',label:'Gold Standard',industryTerm:'Optimal Operating Zone',
    assetDensity:'High',signalIntegrity:'High',tension:22,colorHex:'#97C459',
+   strength:'Total Reliability · Flawless Execution · Maximum Confidence',
+   bestFor:'Your highest-value, tightest-window, and most complex freight. Time-sensitive LTL, temperature-controlled, high-liability FTL, multi-stop. This carrier will execute without drama.',
+   advisory:'This is your prime window — do not waste it on easy freight. Stage 4 does not last indefinitely; assign your best loads now and maintain the relationship with recovery loads to preserve this stage.',
    desc:'Peak operational efficiency. Strong HOS, high Signal Integrity, low recovery debt, sustainable dispatch rhythms. Maximum confidence window.',
-   logistics:'Prime carrier zone. Assign highest-value, tightest-window, most complex freight. Time-sensitive LTL, temperature-controlled, high-liability FTL. This is the dispatch sweet spot.'},
-  {n:5,geo:'⬠',label:'Burnout Threshold',industryTerm:'Last Chance Recovery / Point of No Return',
+   logistics:'Prime carrier zone. Assign highest-value, tightest-window, most complex freight. Maintain with periodic recovery runs to preserve Stage 4 status.'},
+  {n:5,geo:'⬠',label:'Pivot Opportunity',industryTerm:'Last Chance Recovery / Point of No Return',
    assetDensity:'Declining',signalIntegrity:'Elevated',tension:88,colorHex:'#EF9F27',
-   desc:'The operational breakpoint. Hidden duality — carrier may appear capable on the surface while running on empty underneath. Last window to stabilize before breakdown. Two paths: recovery run pulls them back to Stage 4, or continued hard freight pushes them into Stage 6 collapse and rapid Stage 7–8 progression. The decision made at Stage 5 is irreversible.',
-   logistics:'Last off-ramp. Assign recovery run immediately — short haul, flexible window, guaranteed home time. Do NOT assign hard-deadline, multi-stop, or time-sensitive freight. Failure to intervene here results in a Stage 8 event within one to two dispatch cycles.'},
-  {n:6,geo:'⬡',label:'Peak Performance Window',industryTerm:'Hot Hand / Unsustainable Peak',
+   strength:'Elevated Signal Integrity · Honest About Limits · Loyal if Supported',
+   bestFor:'Recovery loads — short-haul, flexible windows, home time built in. A broker who routes correctly at Stage 5 earns a Stage 4 carrier for the next cycle. This is relationship capital.',
+   advisory:'This is the most important routing decision in the framework. One recovery run now preserves a reliable carrier. Hard freight now loses them to Stage 8 within one or two cycles. The carrier\'s Signal Integrity is elevated — they will tell you they need the break if you ask directly.',
+   desc:'The operational breakpoint. Hidden duality — carrier may appear capable while running on empty. Last window to stabilize. Two paths: recovery run pulls them to Stage 4, or hard freight accelerates Stage 7–8 collapse.',
+   logistics:'Assign recovery run immediately — short haul, flexible window, guaranteed home time. Do NOT assign hard-deadline or time-sensitive freight.'},
+  {n:6,geo:'⬡',label:'The Sprinter',industryTerm:'Hot Hand / High-Velocity Asset',
    assetDensity:'High',signalIntegrity:'Variable',tension:38,colorHex:'#5DCAA5',
-   desc:'Brief window of maximum output following a recovery cycle. Everything clicking — high responsiveness, strong delivery performance. Unsustainable. Hours to days before fatigue reasserts.',
-   logistics:'Assign your most complex or highest-value load immediately. Do not wait for next cycle. Rotate the next carrier into queue now — this window closes before the next dispatch day.'},
-  {n:7,geo:'⬢',label:'Isolated Specialist',industryTerm:'Mastery Under Pressure / Owner-Operator Mindset',
+   strength:'Peak Output · Maximum Execution · Expedite-Ready',
+   bestFor:'Expedited freight, time-critical loads, and your most complex single-pickup single-drop assignments. This carrier is executing at their absolute ceiling right now — use it.',
+   advisory:'This window closes within 24–72 hours. Do not wait for "a better load" — assign your best available load immediately. Rotate your next carrier into position now so you are not caught without coverage when this window closes.',
+   desc:'Brief window of maximum output following a recovery cycle. Everything clicking. Unsustainable. Hours to days before fatigue reasserts.',
+   logistics:'Assign most complex or highest-value load immediately. Rotate next carrier into queue — this window closes before the next dispatch day.'},
+  {n:7,geo:'⬢',label:'Autonomous Specialist',industryTerm:'Mastery Under Pressure / Solo Operator',
    assetDensity:'Low',signalIntegrity:'Selective',tension:62,colorHex:'#AFA9EC',
-   desc:'Peak isolation phase. Carrier has reached mastery under pressure — executing with high competence on preferred load types and lanes while withdrawing from broader communication cycles. Individuation is occurring: this carrier is developing a specialized operational identity. Check-call responsiveness drops not from disengagement but from deep operational focus. Risk of decision paralysis if pushed outside their defined zone.',
-   logistics:'Assign solo long-haul runs, dedicated lanes, or owner-operator specialty loads. Full autonomy, minimal dispatch touchpoints. Do not over-manage — micromanagement at Stage 7 accelerates Stage 8 progression. Avoid team freight or high-coordination multi-stop loads.'},
-  {n:8,geo:'∞',label:'Eye of the Storm',industryTerm:'Rigidity Risk / Illusion of Permanence / Imminent Collapse',
+   strength:'Deep Lane Mastery · High Execution Under Pressure · Zero Drama',
+   bestFor:'Solo long-haul, dedicated lanes, "quiet runs" with no hand-holding required. Also your best recovery specialist — when a load is abandoned or in crisis, Stage 7 carriers have the experience and composure to handle it without escalating.',
+   advisory:'Low check-call responsiveness is not disengagement — it is focus. Do not mistake silence for problems. This carrier performs best with full autonomy. Over-managing a Stage 7 carrier is the fastest path to Stage 8. Match to lanes they already know.',
+   desc:'Peak isolation. Mastery under pressure. Executing with high competence on preferred load types while withdrawing from broader communication cycles. Individuation in progress.',
+   logistics:'Assign solo long-haul, dedicated lanes, or crisis recovery loads. Full autonomy. Minimal dispatch touchpoints. Do not over-manage.'},
+  {n:8,geo:'∞',label:'Precision Operator',industryTerm:'Peak Rigidity / Fixed-Route Specialist',
    assetDensity:'High',signalIntegrity:'Compromised',tension:92,colorHex:'#F09595',
-   desc:'HIGHEST TRAP RISK. Surface metrics are clean across every dimension — HOS fine, delivery record on-time, carrier passes inspection, answers calls promptly. This is the illusion of permanence. Peak rigidity has set in: carrier has stopped adapting to route stress, driver fatigue, and operational demands. Signal Integrity is compromised beneath a functional surface. A service failure, breakdown, no-show, or authority surrender is incoming.',
-   logistics:'DO NOT ASSIGN. This carrier will appear fully bookable on every load board — that is the trap. Source a replacement now. Stage 9 failure event incoming within 24–72 hours. Do not tender any new loads regardless of scorecard or DAT history.'},
-  {n:9,geo:'◎',label:'Exit / Dissolution',industryTerm:'Dissolution / Bankruptcy / Pivot',
+   strength:'Flawless Performance Record · Systemic Consistency · Maximum Reliability History',
+   bestFor:'Fixed-route, unchanging schedules where zero deviations are expected — same pick, same drop, same time, every time. If your load has zero margin for route changes or schedule flexibility, this carrier\'s rigidity becomes an asset.',
+   advisory:'⚠ Rigidity Alert: This carrier is operating at 100% capacity with zero flexibility buffer. Any deviation from the planned route, schedule change, or unexpected requirement will likely result in a service failure. Reliability is at its historical peak — adaptability is at zero. Proceed only with loads where no changes will occur. Luminark recommends sourcing a backup carrier before tendering.',
+   desc:'Peak rigidity. Flawless surface metrics masking zero adaptability buffer. Signal Integrity compromised beneath functional surface. High reliability history, zero flexibility reserve.',
+   logistics:'High-Stakes Dispatch only — fixed route, unchanging schedule, zero deviation tolerance. Source a backup carrier before tendering. Do not assign loads with any possibility of schedule or route change.'},
+  {n:9,geo:'◎',label:'Reset Candidate',industryTerm:'Exit / Dissolution / Pivot',
    assetDensity:'Collapsed',signalIntegrity:'Transparent',tension:14,colorHex:'#3fd9a8',
-   desc:'Carrier exiting operations, restructuring, or in authority surrender. All operational pressure released — fully transparent about limits. Unpredictable in near-term capacity. Rare exception: Stage 9 signals a breakthrough reset carrier rebuilding with complete clarity.',
-   logistics:'Begin replacement sourcing immediately. Do not tender new loads. Rare exception: voluntary reset carrier returning from a self-initiated pause — treat as Stage 1, run pilot load with full vetting before standard dispatch.'},
+   strength:'Full Transparency · No Hidden Pressure · Honest About Capacity',
+   bestFor:'Rare exception only: voluntary reset carriers who self-initiated a pause and are rebuilding. If you have an existing relationship and trust, a Stage 9 pilot load may preserve a valuable long-term partner.',
+   advisory:'Begin replacement sourcing immediately — do not hold capacity for a Stage 9 carrier. For existing trusted partners, have a direct conversation about their timeline before committing any freight.',
+   desc:'All operational pressure released. Fully transparent about limits. Exiting, restructuring, or in voluntary pause. Rare exception: breakthrough reset with complete clarity.',
+   logistics:'Source replacement now. For trusted existing partners: direct conversation about timeline before any commitment. Pilot load only if relationship warrants.'},
 ];
 
 const CARRIERS=[
@@ -1081,26 +1330,31 @@ function fractalScore(g){
 }
 function riskFor(s){
   const m={
-    4:{label:'Low — Tier 1',cls:'r-low'},6:{label:'Low — Peak Window',cls:'r-low'},
-    2:{label:'Low — Standard',cls:'r-low'},1:{label:'Monitor — New Entry',cls:'r-watch'},
-    3:{label:'Monitor — Hyper-Growth',cls:'r-watch'},5:{label:'Critical — Last Off-Ramp',cls:'r-high'},
-    7:{label:'Caution — Isolated',cls:'r-med'},8:{label:'Do Not Dispatch',cls:'r-trap'},
-    9:{label:'Exit State',cls:'r-med'},0:{label:'Ghost — No MC',cls:'r-trap'}
+    4:{label:'Gold Standard',cls:'r-low'},
+    6:{label:'Peak Window — Act Now',cls:'r-low'},
+    2:{label:'Volume Ready',cls:'r-low'},
+    1:{label:'High-Intent Startup',cls:'r-watch'},
+    3:{label:'Growth Engine',cls:'r-watch'},
+    5:{label:'Pivot Opportunity',cls:'r-high'},
+    7:{label:'Autonomous Specialist',cls:'r-med'},
+    8:{label:'Precision Operator ⚠',cls:'r-trap'},
+    9:{label:'Reset Candidate',cls:'r-med'},
+    0:{label:'Unverified — Vetting Required',cls:'r-trap'}
   };
   return m[s]||{label:'Unknown',cls:'r-watch'};
 }
 function dispatchFor(s){
   const m={
-    4:'Assign highest-value / tightest-window loads. Prime dispatch window.',
-    5:'Recovery run only — short haul, home time guaranteed. Last off-ramp.',
-    6:'Assign most complex load NOW. Peak window closing within 24–72 hrs.',
-    7:'Solo long-haul only. Full autonomy. Minimal check-calls.',
-    8:'DO NOT ASSIGN. Eye of storm. Service failure incoming within 24–72 hrs.',
-    9:'Source replacement now. Do not tender new loads.',
-    2:'Standard volume lanes. Avoid expedited or high-liability freight.',
-    3:'Verify current asset count. Watch for over-booking across brokers.',
-    1:'Pilot load only. Short-haul, forgiving windows, high-touch dispatch.',
-    0:'Full vetting required. Bond + references before any assignment.'
+    4:'Gold Standard. Assign highest-value, tightest-window, most complex loads.',
+    5:'Pivot Opportunity. Assign recovery run now — preserve this carrier for Stage 4.',
+    6:'The Sprinter. Assign most complex load immediately. Window closes in 24–72 hrs.',
+    7:'Autonomous Specialist. Solo long-haul, crisis recovery. Full autonomy required.',
+    8:'Precision Operator. Fixed-route only — zero deviation tolerance. Source backup carrier.',
+    9:'Reset Candidate. Source replacement. Pilot load only for trusted existing partners.',
+    2:'Growth Engine. Consistent volume lanes. Build the relationship for long-term leverage.',
+    3:'Growth Engine. Verify assets first. Strong signal — they will disclose problems.',
+    1:'High-Intent Startup. Pilot load to build loyalty. They will remember who trusted them first.',
+    0:'Unverified. Full FMCSA + Carrier 411 vetting before any assignment.'
   };
   return m[s]||'Monitor';
 }
@@ -1125,16 +1379,60 @@ function renderDashboard(){
   document.getElementById('carrier-tbody').innerHTML=CARRIERS.map(c=>{
     const score=calcYield(c.hos,c.vol,c.comm,c.rest);
     const sData=STAGES[c.s]||STAGES[0],risk=riskFor(c.s),yc=yieldColor(score);
-    const rigidity=isRigidityRisk(c.hos,c.rest)?'<span style="font-size:10px;color:#f07a79;margin-left:6px;">⚠ Rigidity</span>':'';
+    const rigidity=isRigidityRisk(c.hos,c.rest);
+
+    // Wire in new intelligence functions
+    const trend=getStageTrend(c.mc,c.s);
+    const trendBadge=makeTrendBadge(trend);
+    const resilience=calculateResilienceScore({
+      turnoverRate: c.s>=7?65:c.s===5?45:20,
+      hosViolationsPer10k: c.vol>6?2.5:c.vol>3?0.8:0.2,
+      maxDetentionHours: 3,
+      ontimeUnderDelay: c.comm>7?92:c.comm>4?80:65,
+      communicativeness: c.comm
+    });
+    const resColor=resilience>=80?'#3fd9a8':resilience>=50?'#EF9F27':'#f07a79';
+    const resiBg=resilience>=80?'rgba(29,158,117,0.15)':resilience>=50?'rgba(239,159,39,0.15)':'rgba(226,75,74,0.15)';
+    const exitWatch=checkExitWatch(c.mc,c.s);
+    const s8warn=c.s===8?'<div style="font-size:10px;color:#f07a79;margin-top:3px;">⚠ Fixed-route only · Zero deviation tolerance · Source backup</div>':'';
+    const exitBadge=exitWatch?'<span style="font-size:9px;font-weight:600;background:rgba(127,119,221,0.2);color:#b0aaff;border:1px solid rgba(127,119,221,0.3);border-radius:4px;padding:2px 6px;margin-left:5px;">⚠ Exit Watch</span>':'';
+
+    // Log this check for trend tracking
+    logStageCheck(c.mc,c.s);
+
     return`<tr>
-      <td><div style="font-weight:500;">${c.name}</div><div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div></td>
-      <td><span class="stage-pill s-${c.s}">${sData.geo} S${c.s} · ${sData.label}</span></td>
-      <td><div class="yield-wrap"><div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div><span class="yield-num" style="color:${yc};">${score}</span>${rigidity}</div></td>
-      <td><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Sig:${c.comm} · Rec:${c.rest}d</div></td>
+      <td>
+        <div style="font-weight:500;">${c.name} ${exitBadge}</div>
+        <div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div>
+        <div style="font-size:10px;color:var(--text-3);margin-top:2px;font-style:italic;">${sData.strength||''}</div>
+      </td>
+      <td>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="stage-pill s-${c.s}">${sData.geo} S${c.s} · ${sData.label}</span>
+          ${trendBadge}
+        </div>
+      </td>
+      <td>
+        <div class="yield-wrap">
+          <div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div>
+          <span class="yield-num" style="color:${yc};">${score}</span>
+          ${rigidity?'<span style="font-size:10px;color:#f07a79;margin-left:4px;" title="System Rigidity: High HOS + 14+ days no recovery">⚠</span>':''}
+        </div>
+      </td>
+      <td>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Sig:${c.comm} · Rec:${c.rest}d</div>
+        <span class="resilience-badge" style="background:${resiBg};color:${resColor};margin-top:4px;display:inline-block;" title="Resilience Score: operational elasticity under pressure">R:${resilience}</span>
+      </td>
       <td><span class="risk-badge ${risk.cls}">${risk.label}</span></td>
-      <td style="font-size:12px;color:var(--text-2);max-width:160px;line-height:1.4;">${dispatchFor(c.s)}</td>
+      <td style="font-size:12px;color:var(--text-2);max-width:180px;line-height:1.5;">${dispatchFor(c.s)}${s8warn}</td>
     </tr>`;
   }).join('');
+  // Fire clarity audit check for any Stage 8 carriers
+  CARRIERS.filter(c=>c.s===8).forEach(c=>{
+    const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
+    const prev=checks.filter(x=>x.mc===c.mc).sort((a,b)=>b.ts-a.ts);
+    if(prev.length) showClarityAudit(c.mc,c.s,prev[0].ts);
+  });
 }
 
 /* ══════════════════════════════════════════════
@@ -1163,7 +1461,12 @@ function updateCalc(){
   document.getElementById('calc-score-num').textContent=score;
   document.getElementById('calc-score-num').style.color=yc;
   document.getElementById('calc-stage-label').textContent=`Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
-  document.getElementById('calc-analysis').innerHTML=sData.logistics;
+  document.getElementById('calc-analysis').innerHTML=`
+    <div style="margin-bottom:8px;">${sData.logistics}</div>
+    ${sData.strength?`<div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:4px;">★ Stage Strengths: ${sData.strength}</div>`:''}
+    ${sData.bestFor?`<div style="font-size:11px;color:var(--text-3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;margin-top:7px;"><strong style="color:var(--text-2);">Best for:</strong> ${sData.bestFor}</div>`:''}
+    ${sData.advisory&&sn===8?`<div style="font-size:11px;color:#f07a79;line-height:1.5;border-top:1px solid var(--border);padding-top:7px;margin-top:7px;font-weight:500;">${sData.advisory}</div>`:''}
+  `;
 
   const rflag=document.getElementById('rigidity-flag');
   rflag.style.display=rigidity?'block':'none';
@@ -1202,6 +1505,8 @@ function saveCurrentCalc(){
   arr.unshift({name,mc,hos,vol,comm,rest,score,stage:sn,ts:new Date().toLocaleTimeString()});
   if(arr.length>10)arr.pop();
   setSaved(arr);
+  // Log for stage momentum tracking
+  if(mc&&mc!=='—') logStageCheck(mc,sn);
   renderSavedList();
 }
 
@@ -1302,35 +1607,311 @@ function applyCommScore(){
 /* ══════════════════════════════════════════════
    PDF EXPORT
 ══════════════════════════════════════════════ */
-function exportPDF(){
-  const hos=+document.getElementById('sl-hos').value;
-  const vol=+document.getElementById('sl-vol').value;
-  const comm=+document.getElementById('sl-comm').value;
-  const rest=+document.getElementById('sl-rest').value;
-  const name=document.getElementById('calc-carrier-name').value||'Unknown Carrier';
-  const mc=document.getElementById('calc-mc-number').value||'—';
-  const score=calcYield(hos,vol,comm,rest);
-  const sn=stageFromYield(score);
-  const sData=STAGES[sn];
-  const rigidity=isRigidityRisk(hos,rest);
+/* ══════════════════════════════════════════════
+   FMCSA QCMobile API INTEGRATION
+   Offline-first: all keys stored in localStorage only.
+   No data is sent to Luminark servers.
+══════════════════════════════════════════════ */
+let fmcsaEnabled = false;
+let fmcsaWebKey = localStorage.getItem('lo_fmcsa_webkey') || '';
+let lastFmcsaData = null; // Holds last successful FMCSA result for PDF inclusion
 
-  document.getElementById('print-timestamp').textContent=new Date().toLocaleString()+' · Luminark Logistics Overwatch';
-  document.getElementById('print-carrier-name').textContent=name+' · '+mc;
-  document.getElementById('print-score-num').textContent=score;
-  document.getElementById('print-score-num').style.color=yieldColor(score);
-  document.getElementById('print-stage-label').textContent=`Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
-  document.getElementById('print-fields').innerHTML=`
-    <div class="print-field"><strong>Hours of Service:</strong>${hos} hrs remaining</div>
-    <div class="print-field"><strong>Route Volatility:</strong>${vol} / 10</div>
-    <div class="print-field"><strong>Signal Integrity:</strong>${comm} / 10</div>
-    <div class="print-field"><strong>Recovery Debt:</strong>${rest} days since last recovery run</div>
-    <div class="print-field"><strong>Blind Spot Pressure:</strong>${sData.tension}%</div>`;
-  document.getElementById('print-dispatch-box').innerHTML=`<strong>Dispatch Action:</strong> ${sData.logistics}`;
-  const rNote=document.getElementById('print-rigidity-note');
-  rNote.style.display=rigidity?'block':'none';
-  if(rigidity)rNote.textContent='⚠ SYSTEM RIGIDITY DETECTED — High Asset Density + 14+ days without recovery run. Maintenance or driver burnout imminent. Do not assign new loads.';
+function toggleFMCSA(){
+  fmcsaEnabled = !fmcsaEnabled;
+  const toggle = document.getElementById('fmcsa-toggle');
+  const panel  = document.getElementById('fmcsa-panel');
+  toggle.classList.toggle('on', fmcsaEnabled);
+  panel.style.display = fmcsaEnabled ? 'block' : 'none';
+  // Restore saved key into field if exists
+  if(fmcsaEnabled && fmcsaWebKey){
+    document.getElementById('fmcsa-webkey').value = fmcsaWebKey;
+  }
+}
+
+function saveFMCSAKey(){
+  const key = document.getElementById('fmcsa-webkey').value.trim();
+  if(!key){ setFMCSAStatus('No key entered.','warn'); return; }
+  localStorage.setItem('lo_fmcsa_webkey', key);
+  fmcsaWebKey = key;
+  setFMCSAStatus('✓ WebKey saved locally. Never transmitted to Luminark.','ok');
+}
+
+function setFMCSAStatus(msg, type){
+  const el = document.getElementById('fmcsa-status');
+  el.style.display = 'block';
+  el.style.color = type==='ok'?'var(--teal)':type==='warn'?'var(--amber)':'#f07a79';
+  el.textContent = msg;
+}
+
+async function runFMCSALookup(){
+  const mc = (document.getElementById('calc-mc-number').value||'').replace(/[^0-9]/g,'').trim();
+  if(!mc){ setFMCSAStatus('Enter an MC number first (numbers only).','warn'); return; }
+  if(!fmcsaWebKey){ setFMCSAStatus('Save your FMCSA WebKey first.','warn'); return; }
+
+  setFMCSAStatus('Looking up MC-'+mc+' via FMCSA QCMobile...','ok');
+  document.getElementById('fmcsa-result-bar').style.display = 'none';
+
+  try {
+    // Step 1: Get carrier by MC/docket number
+    const docketUrl = `https://mobile.fmcsa.dot.gov/qc/services/carriers/docket-number/${mc}?webKey=${fmcsaWebKey}`;
+    const res = await fetch(docketUrl);
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    const carrier = data.content?.[0] || data.Carriers?.[0];
+    if(!carrier) throw new Error('MC not found in FMCSA records.');
+
+    const usdot = carrier.dotNumber || carrier.DOTNumber;
+    const legalName = carrier.legalName || carrier.LegalName || 'Unknown';
+    const authStatus = carrier.carrierOperation?.description || carrier.allowedToOperate || 'Unknown';
+    const safetyRating = carrier.safetyRating || carrier.SafetyRating || 'Unrated';
+
+    // Step 2: Get BASIC scores for Resilience Score calculation
+    let basics = null;
+    let resilienceFromFMCSA = 65; // Default baseline
+    try {
+      const basicsRes = await fetch(`https://mobile.fmcsa.dot.gov/qc/services/carriers/${usdot}/basics?webKey=${fmcsaWebKey}`);
+      if(basicsRes.ok){
+        basics = await basicsRes.json();
+        // Map BASIC scores to Resilience — lower BASIC scores = better performance
+        const unsafeDriving = basics.UnsafeDrivingBasic?.measure || 0;
+        const hosScore      = basics.HoursOfServiceBasic?.measure || 0;
+        const maintenance   = basics.VehicleMaintenanceBasic?.measure || 0;
+        // Each point of BASIC score reduces resilience
+        resilienceFromFMCSA = Math.round(
+          100
+          - (unsafeDriving * 0.25)
+          - (hosScore * 0.30)
+          - (maintenance * 0.20)
+          + (authStatus === 'ACTIVE' ? 10 : -20)
+        );
+        resilienceFromFMCSA = Math.max(0, Math.min(100, resilienceFromFMCSA));
+      }
+    } catch(e){ /* Basics unavailable — use baseline */ }
+
+    // Step 3: Auto-suggest stage from data signals
+    let suggestedStage = 4; // Default: Established Regional
+    if(authStatus === 'INACTIVE' || authStatus === 'REVOKED') suggestedStage = 9;
+    else if(safetyRating === 'Unsatisfactory') suggestedStage = 8;
+    else if(resilienceFromFMCSA < 40) suggestedStage = 7;
+    else if(resilienceFromFMCSA > 85) suggestedStage = 4;
+
+    // Step 4: Auto-fill calculator fields
+    document.getElementById('calc-carrier-name').value = legalName;
+    // Adjust sliders based on FMCSA signals
+    if(basics){
+      const hosSlider = Math.round(11 - (basics.HoursOfServiceBasic?.measure||0)/10);
+      document.getElementById('sl-hos').value = Math.max(0, Math.min(11, hosSlider));
+    }
+    updateCalc();
+
+    // Store for PDF inclusion
+    lastFmcsaData = {
+      mc: 'MC-'+mc, usdot, legalName, authStatus, safetyRating,
+      resilience: resilienceFromFMCSA, suggestedStage,
+      checkedAt: new Date().toLocaleString(),
+      basics: basics ? {
+        unsafeDriving: basics.UnsafeDrivingBasic?.measure||'N/A',
+        hos: basics.HoursOfServiceBasic?.measure||'N/A',
+        maintenance: basics.VehicleMaintenanceBasic?.measure||'N/A',
+      } : null
+    };
+
+    // Display results
+    const resultText = [
+      `Legal Name: ${legalName}`,
+      `USDOT: ${usdot}  MC: ${mc}`,
+      `Authority: ${authStatus}  Safety Rating: ${safetyRating}`,
+      `FMCSA Resilience Score: ${resilienceFromFMCSA}/100`,
+      `Suggested Stage: Stage ${suggestedStage} — ${STAGES[suggestedStage]?.label||''}`,
+      basics ? `BASIC Scores — Unsafe Driving: ${lastFmcsaData.basics.unsafeDriving} · HOS: ${lastFmcsaData.basics.hos} · Maintenance: ${lastFmcsaData.basics.maintenance}` : 'BASIC scores: unavailable',
+    ].join('\n');
+
+    document.getElementById('fmcsa-result-text').textContent = resultText;
+    document.getElementById('fmcsa-result-bar').style.display = 'block';
+    setFMCSAStatus(`✓ Loaded: ${legalName} (USDOT ${usdot})`, 'ok');
+
+  } catch(err) {
+    // Graceful fallback — never crashes the app
+    setFMCSAStatus(`FMCSA lookup issue: ${err.message} — Enter metrics manually below.`, 'error');
+    lastFmcsaData = null;
+  }
+}
+
+function clearFMCSAData(){
+  lastFmcsaData = null;
+  document.getElementById('fmcsa-result-bar').style.display = 'none';
+  document.getElementById('fmcsa-status').style.display = 'none';
+}
+
+/* ══════════════════════════════════════════════
+   PDF GENERATION — Luminark Sentinel Clarity Report
+   Two-step: openPDFModal() → user confirms → executePDFExport()
+══════════════════════════════════════════════ */
+function openPDFModal(){
+  const score = +document.getElementById('calc-score-num').textContent;
+  const sn    = stageFromYield(score);
+  const sData = STAGES[sn];
+  const name  = document.getElementById('calc-carrier-name').value || 'Unknown Carrier';
+  const mc    = document.getElementById('calc-mc-number').value || '—';
+
+  // Show Stage 8 route lock section only for S8
+  const s8section = document.getElementById('pdf-s8-section');
+  s8section.style.display = sn === 8 ? 'block' : 'none';
+  if(sn === 8){
+    const pdfBox = document.getElementById('pdfRouteLockCheckbox');
+    if(pdfBox) pdfBox.checked = false;
+  }
+
+  // Build preview summary
+  document.getElementById('pdf-preview-summary').innerHTML = `
+    <strong style="color:var(--text);">${name}</strong> · ${mc}<br>
+    Stage ${sn} — ${sData.label} · ${sData.industryTerm}<br>
+    Axiom Yield Score: <strong style="color:${yieldColor(score)};">${score}</strong>
+    ${lastFmcsaData ? '<br><span style="color:#7ab8f0;">✓ FMCSA data will be included</span>' : ''}
+    ${sn === 8 ? '<br><strong style="color:var(--amber);">⚠ Route Lock confirmation required</strong>' : ''}
+  `;
+  document.getElementById('pdf-preflight-sub').textContent =
+    sn === 8
+      ? 'Stage 8 Precision Operator — Route Lock confirmation required before PDF export.'
+      : 'Review and confirm before generating the PDF report.';
+
+  openModal('pdf-preflight-modal');
+}
+
+function executePDFExport(){
+  const score  = +document.getElementById('calc-score-num').textContent;
+  const sn     = stageFromYield(score);
+
+  // VALIDATION: Stage 8 requires route lock
+  if(sn === 8){
+    const routeLocked   = document.getElementById('pdfRouteLockCheckbox')?.checked;
+    const trustOverride = document.getElementById('pdfBrokerTrust')?.checked;
+    if(!routeLocked && !trustOverride){
+      document.getElementById('pdf-preflight-sub').textContent =
+        '⚠ Stage 8 requires Route Lock confirmation or Relationship Override before export.';
+      document.getElementById('pdf-preflight-sub').style.color = '#f07a79';
+      return;
+    }
+    document.getElementById('pdf-preflight-sub').style.color = '';
+  }
+
+  const trustOverride = document.getElementById('pdfBrokerTrust')?.checked;
+  const routeLocked   = document.getElementById('pdfRouteLockCheckbox')?.checked;
+
+  closeModal('pdf-preflight-modal');
+  buildAndPrintReport(score, sn, routeLocked, trustOverride);
+}
+
+function buildAndPrintReport(score, sn, routeLocked, trustOverride){
+  const hos  = +document.getElementById('sl-hos').value;
+  const vol  = +document.getElementById('sl-vol').value;
+  const comm = +document.getElementById('sl-comm').value;
+  const rest = +document.getElementById('sl-rest').value;
+  const name = document.getElementById('calc-carrier-name').value || 'Unknown Carrier';
+  const mc   = document.getElementById('calc-mc-number').value || '—';
+  const sData    = STAGES[sn];
+  const rigidity = isRigidityRisk(hos, rest);
+  const yc       = yieldColor(score);
+
+  // Resilience score for this carrier
+  const resilience = calculateResilienceScore({
+    turnoverRate: sn>=7 ? 65 : sn===5 ? 45 : 20,
+    hosViolationsPer10k: vol>6 ? 2.5 : vol>3 ? 0.8 : 0.2,
+    maxDetentionHours: 3,
+    ontimeUnderDelay: comm>7 ? 92 : comm>4 ? 80 : 65,
+    communicativeness: comm
+  });
+  const finalResilience = lastFmcsaData?.resilience ?? resilience;
+  const resColor = finalResilience>=80?'#1a7a50':finalResilience>=50?'#a06800':'#c0392b';
+
+  // Populate Sentinel Clarity Report
+  document.getElementById('print-timestamp').textContent =
+    new Date().toLocaleString()+' · Luminark Logistics Overwatch SAP v3.0';
+  document.getElementById('print-carrier-name').textContent = name + ' · ' + mc;
+  document.getElementById('print-stage-label').textContent =
+    `Stage ${sn} — ${sData.label}`;
+  document.getElementById('print-industry-term').textContent = sData.industryTerm || '';
+  document.getElementById('print-score-num').textContent = score;
+  document.getElementById('print-score-num').style.color = yc;
+  document.getElementById('print-resilience-line').innerHTML =
+    `Resilience Score: <span style="color:${resColor};font-weight:700;">${finalResilience}/100</span>`;
+
+  // Operating fields
+  document.getElementById('print-fields').innerHTML = `
+    <div class="print-field"><strong>Hours of Service:</strong> ${hos} hrs remaining</div>
+    <div class="print-field"><strong>Route Volatility:</strong> ${vol} / 10</div>
+    <div class="print-field"><strong>Signal Integrity:</strong> ${comm} / 10</div>
+    <div class="print-field"><strong>Recovery Debt:</strong> ${rest} days since last recovery run</div>
+    <div class="print-field"><strong>Blind Spot Pressure:</strong> ${sData.tension || '—'}%</div>
+    <div class="print-field"><strong>Stage Resilience:</strong> ${finalResilience}/100</div>`;
+
+  // Strengths box
+  const strengthBox = document.getElementById('print-strength-box');
+  if(sData.strength && sData.strength !== 'None – requires full verification'){
+    strengthBox.style.display = 'block';
+    document.getElementById('print-strength-text').textContent = sData.strength;
+  } else { strengthBox.style.display = 'none'; }
+
+  // Best For box
+  const bestForBox = document.getElementById('print-bestfor-box');
+  if(sData.bestFor){
+    bestForBox.style.display = 'block';
+    document.getElementById('print-bestfor-text').textContent = sData.bestFor;
+  } else { bestForBox.style.display = 'none'; }
+
+  // Dispatch action
+  document.getElementById('print-dispatch-box').innerHTML =
+    `<strong>Dispatch Action:</strong> ${sData.logistics}${sData.advisory ? '<br><br><strong>Advisory:</strong> '+sData.advisory : ''}`;
+
+  // Stage 8 rigidity note
+  const rNote = document.getElementById('print-rigidity-note');
+  const rText = document.getElementById('print-rigidity-text');
+  if(sn===8 || rigidity){
+    rNote.style.display = 'block';
+    rText.textContent = sn===8
+      ? 'Stage 8 Precision Operator: Flawless record but zero flexibility buffer. Fixed-route, non-negotiable schedules only. Any deviation will likely cause service failure. Source a backup carrier before tendering.'
+      : '⚠ System Rigidity Detected — High Asset Density + 14+ days without recovery run. Maintenance or driver burnout imminent.';
+  } else { rNote.style.display = 'none'; }
+
+  // Route Lock section (Stage 8)
+  const rlSection = document.getElementById('print-routelock-section');
+  const rlStatus  = document.getElementById('print-routelock-status');
+  if(sn===8){
+    rlSection.style.display = 'block';
+    if(routeLocked){
+      rlStatus.textContent = '✓ ROUTE LOCK CONFIRMED — Broker has confirmed this load\'s route is fixed and non-negotiable. No changes will be requested from this carrier. This confirmation was made at the time of report generation.';
+      rlStatus.style.color = '#1a7a50';
+    } else if(trustOverride){
+      rlStatus.textContent = 'RELATIONSHIP OVERRIDE APPLIED — Route Lock bypassed via existing relationship declaration. See Broker Override section below.';
+      rlStatus.style.color = '#a06800';
+    }
+  } else { rlSection.style.display = 'none'; }
+
+  // Broker Trust Override
+  const trustNote = document.getElementById('print-trust-note');
+  trustNote.style.display = trustOverride ? 'block' : 'none';
+
+  // FMCSA Data section
+  const fmcsaSection = document.getElementById('print-fmcsa-section');
+  const fmcsaText    = document.getElementById('print-fmcsa-text');
+  if(lastFmcsaData){
+    fmcsaSection.style.display = 'block';
+    fmcsaText.innerHTML = [
+      `Legal Name: ${lastFmcsaData.legalName}`,
+      `USDOT: ${lastFmcsaData.usdot} · MC: ${lastFmcsaData.mc}`,
+      `Authority Status: ${lastFmcsaData.authStatus}`,
+      `Safety Rating: ${lastFmcsaData.safetyRating}`,
+      `FMCSA Resilience Score: ${lastFmcsaData.resilience}/100`,
+      lastFmcsaData.basics ? `BASIC Scores — Unsafe Driving: ${lastFmcsaData.basics.unsafeDriving} · HOS: ${lastFmcsaData.basics.hos} · Vehicle Maintenance: ${lastFmcsaData.basics.maintenance}` : '',
+      `Data retrieved: ${lastFmcsaData.checkedAt}`,
+    ].filter(Boolean).join('<br>');
+  } else { fmcsaSection.style.display = 'none'; }
+
   window.print();
 }
+
+/* Legacy alias — keeps any existing calls working */
+function exportPDF(){openPDFModal();}
 
 /* ══════════════════════════════════════════════
    GHOST FILTER
@@ -1439,7 +2020,17 @@ function showStageDetail(i){
         <div class="tension-track"><div class="tension-fill" style="width:${s.tension}%;background:${tc};"></div></div>
       </div>
       <div style="margin-top:14px;font-size:12px;color:var(--text-2);line-height:1.7;">${s.desc}</div>
-      <div class="alert alert-gold" style="margin-top:12px;"><strong>Dispatch action:</strong> ${s.logistics}</div>
+      ${s.strength?`<div style="margin-top:12px;background:var(--teal-dim);border:1px solid rgba(29,158,117,0.2);border-radius:var(--radius-sm);padding:10px 14px;">
+        <div style="font-size:10px;font-weight:600;color:#3fd9a8;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">Stage Strengths</div>
+        <div style="font-size:12px;color:var(--text-2);">${s.strength}</div>
+      </div>`:''}
+      ${s.bestFor?`<div style="margin-top:8px;background:var(--blue-dim);border:1px solid rgba(55,138,221,0.2);border-radius:var(--radius-sm);padding:10px 14px;">
+        <div style="font-size:10px;font-weight:600;color:#7ab8f0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:4px;">Best Load Types</div>
+        <div style="font-size:12px;color:var(--text-2);">${s.bestFor}</div>
+      </div>`:''}
+      <div class="alert ${s.n===8?'alert-warn':'alert-gold'}" style="margin-top:10px;">
+        <strong>${s.n===8?'⚠ Rigidity Advisory:':'Dispatch action:'}</strong> ${s.advisory||s.logistics}
+      </div>
     </div>`;
 }
 
@@ -1522,12 +2113,14 @@ function renderCheckinCard(c){
     </div>
 
     ${rigidity?'<div style="font-size:10px;color:#f07a79;margin-top:6px;font-weight:500;">⚠ Rigidity Flag — 14+ days no home time</div>':''}
+    ${sData.strength?`<div style="font-size:10px;color:var(--teal);margin-top:5px;font-style:italic;">★ ${sData.strength}</div>`:''}
 
     <span class="checkin-match-badge ${match.cls}">${match.label}</span>
 
     <div class="checkin-actions">
       ${isBlocked
-        ?`<button class="checkin-btn checkin-btn-blocked" style="flex:2;" disabled>⚠ Stage 8 — Do Not Dispatch</button>`
+        ?`<button class="checkin-btn" style="flex:2;background:var(--amber-dim);color:var(--amber);border:1px solid rgba(239,159,39,0.3);font-size:10px;" onclick="openS8Advisory('${c.name}','${c.mc}',${score},${stage})">⚠ High-Stakes Dispatch Advisory</button>
+          <button class="checkin-btn checkin-btn-secondary" onclick="loadCheckinToCalc(${c.id})">→ Calc</button>`
         :`<button class="checkin-btn checkin-btn-primary" onclick="contactCarrier('${c.name}','${c.mc}',${score},${stage})">Contact Carrier</button>
           <button class="checkin-btn checkin-btn-secondary" onclick="loadCheckinToCalc(${c.id})">→ Calculator</button>`
       }
@@ -1578,9 +2171,17 @@ function sortFeed(type){
   renderCheckinFeed();
 }
 
+
+function s8Advisory(name,mc){
+  const s8=STAGES[8];
+  alert(`⚠ LUMINARK RIGIDITY ADVISORY\n\n${name} · ${mc}\nStage 8 — Precision Operator\n\nSTRENGTHS: ${s8.strength}\n\nBEST FOR: Fixed-route, unchanging schedules — same pick, same drop, same time, every time.\n\nRIGIDITY ALERT: This carrier is operating at 100% capacity with zero flexibility buffer. Any schedule change, route deviation, or unexpected requirement will likely cause a service failure.\n\nLUMINARK RECOMMENDS: Proceed only if your load has zero possibility of route or schedule change. Source a backup carrier before tendering.\n\nProceeding is your decision — Luminark has logged this advisory.`);
+}
+
 function contactCarrier(name,mc,score,stage){
   const sData=STAGES[stage];
-  alert(`📞 Contact Request Logged\n\nCarrier: ${name} · ${mc}\nYield Score: ${score} · Stage ${stage} — ${sData.label}\n\nDispatch Guidance:\n${sData.logistics}\n\n(Phase 2: This will trigger an in-app notification to the carrier and log the contact in your CRM.)`);
+  const strengthLine=sData.strength?`\n★ Strengths: ${sData.strength}`:'';
+  const bestLine=sData.bestFor?`\nBest for: ${sData.bestFor.split('.')[0]}.`:'';
+  alert(`📞 Contact Request Logged\n\nCarrier: ${name} · ${mc}\nYield Score: ${score} · Stage ${stage} — ${sData.label}${strengthLine}${bestLine}\n\nDispatch: ${sData.logistics}\n\n(Phase 2: Triggers in-app notification to carrier and logs contact in your CRM.)`);
 }
 
 function loadCheckinToCalc(id){
@@ -1645,6 +2246,136 @@ function submitCheckin(){
   // Re-render feed with new entry
   renderCheckinFeed();
   res.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+/* ══════════════════════════════════════════════
+   DEEP SAP INTELLIGENCE — NEW FUNCTIONS
+══════════════════════════════════════════════ */
+
+/* 1. Micro-trend (81-stage fractal drift within stage) */
+function updateMicroTrend(mcNumber,currentMainStage,metrics){
+  let delta=0;
+  if(metrics.comm>7) delta+=0.5;
+  if(metrics.vol>7&&currentMainStage<8) delta+=0.3;
+  if(metrics.vol>7&&currentMainStage===5) delta+=0.8;
+  if(metrics.hos<3) delta-=0.4;
+  if(metrics.rest>10) delta-=0.6;
+  if(currentMainStage===8&&metrics.comm<4) delta-=0.7;
+  let store={};
+  try{store=JSON.parse(localStorage.getItem('luminark_micro')||'{}');}catch{}
+  const prev=store[mcNumber]||{micro:0};
+  const newMicro=Math.min(4,Math.max(-4,(prev.micro||0)+delta));
+  store[mcNumber]={stage:currentMainStage,micro:newMicro,updated:Date.now()};
+  localStorage.setItem('luminark_micro',JSON.stringify(store));
+  return newMicro;
+}
+function getMicroTrend(mcNumber){
+  try{return JSON.parse(localStorage.getItem('luminark_micro')||'{}')[mcNumber]?.micro||0;}catch{return 0;}
+}
+
+/* 2. Resilience Score (0-100 — operational elasticity) */
+function calculateResilienceScore(c){
+  let score=70;
+  if(c.hos>=9) score+=12; else if(c.hos>=6) score+=5; else if(c.hos<=2) score-=20;
+  if(c.vol<=2) score+=8; else if(c.vol>=7) score-=18;
+  if(c.comm>=8) score+=10; else if(c.comm<=3) score-=20;
+  if(c.rest<=2) score+=10; else if(c.rest>=12) score-=25;
+  if(c.s===8) score=Math.min(score,40);
+  if(c.s===4) score=Math.max(score,72);
+  return Math.min(100,Math.max(0,Math.round(score)));
+}
+function resilienceClass(r){return r>=80?'res-high':r>=50?'res-mid':'res-low';}
+
+/* 3. Stage Momentum Arrows */
+function getStageTrend(mcNumber,currentStage){
+  try{
+    const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
+    const prev=checks.filter(c=>c.mc===mcNumber&&c.stage!==undefined).sort((a,b)=>b.ts-a.ts);
+    if(!prev.length) return 'new';
+    const prevStage=prev[0].stage;
+    return currentStage>prevStage?'up':currentStage<prevStage?'down':'stable';
+  }catch{return 'new';}
+}
+function makeTrendBadge(trend){
+  const m={
+    up:{icon:'↑',cls:'trend-up',tip:'Stage rising — expanding capacity. Monitor quality.'},
+    down:{icon:'↓',cls:'trend-down',tip:'Stage falling — reliability declining. Reduce exposure.'},
+    stable:{icon:'→',cls:'trend-stable',tip:'Stage stable — consistent pattern.'},
+    new:{icon:'●',cls:'trend-new',tip:'First check — baseline established.'}
+  };
+  const t=m[trend]||m.new;
+  return`<span class="trend-badge ${t.cls}" title="${t.tip}">${t.icon}</span>`;
+}
+function logStageCheck(mcNumber,stage){
+  try{
+    const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
+    checks.unshift({mc:mcNumber,stage,ts:Date.now()});
+    if(checks.length>200) checks.pop();
+    localStorage.setItem('luminark_checks',JSON.stringify(checks));
+  }catch{}
+}
+
+/* 4. Container Rule — cross-MC identity fingerprint */
+function checkContainerViolation(newMc,companyName,phone,address){
+  try{
+    const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
+    const match=checks.find(c=>c.mc!==newMc&&
+      ((companyName&&c.companyName===companyName)||
+       (phone&&c.phone===phone)||
+       (address&&c.address===address)));
+    if(match) return{violation:true,matchedMC:match.mc};
+  }catch{}
+  return{violation:false};
+}
+
+/* 5. Exit Watch */
+function checkExitWatch(mcNumber,currentStage){
+  try{
+    const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
+    const prev=checks.filter(c=>c.mc===mcNumber&&c.stage!==undefined).sort((a,b)=>b.ts-a.ts);
+    if(!prev.length) return false;
+    const stageDrop=(prev[0].stage-currentStage)>=2;
+    return((currentStage===7||currentStage===8||currentStage===9)&&stageDrop)||currentStage===9;
+  }catch{return false;}
+}
+
+/* 6. Clarity Audit */
+function checkClarityAudit(mcNumber,currentStage,lastCheckTs){
+  if(currentStage!==8) return null;
+  const days=(Date.now()-(lastCheckTs||Date.now()))/(1000*60*60*24);
+  if(days>90) return{message:`${mcNumber} has been at Stage 8 for 90+ days. Request updated safety scores, driver feedback, and recent inspection reports before next dispatch. Prolonged Stage 8 without reset is a structural rigidity flag.`,severity:'warning'};
+  return null;
+}
+function showClarityAudit(mc,stage,ts){
+  const audit=checkClarityAudit(mc,stage,ts);
+  if(!audit) return;
+  document.getElementById('clarity-toast-body').textContent=audit.message;
+  document.getElementById('clarity-toast').classList.add('open');
+  setTimeout(()=>document.getElementById('clarity-toast').classList.remove('open'),9000);
+}
+
+/* 7. Route Lock + Broker Trust Override */
+let s8PendingCarrier=null;
+function openS8Advisory(name,mc,score,stage){
+  s8PendingCarrier={name,mc,score,stage};
+  document.getElementById('routeLockCheckbox').checked=false;
+  document.getElementById('brokerTrustOverride').checked=false;
+  document.getElementById('routelock-carrier-id').textContent=`${name} · ${mc} · Yield Score: ${score}`;
+  document.getElementById('routelock-carrier-id').style.color='var(--text-3)';
+  openModal('routelock-modal');
+}
+function proceedS8Dispatch(){
+  const routeLocked=document.getElementById('routeLockCheckbox').checked;
+  const trustOverride=document.getElementById('brokerTrustOverride').checked;
+  if(!routeLocked&&!trustOverride){
+    document.getElementById('routelock-carrier-id').textContent='⚠ Please confirm Route Lock or Existing Relationship before proceeding.';
+    document.getElementById('routelock-carrier-id').style.color='#f07a79';
+    return;
+  }
+  const c=s8PendingCarrier||{name:'Carrier',mc:'—',score:0};
+  const note=trustOverride?'RELATIONSHIP OVERRIDE ACTIVE':'ROUTE LOCK CONFIRMED';
+  alert(`✓ Dispatch Logged — ${note}\n\nCarrier: ${c.name} · ${c.mc}\n\nLuminark Advisory has been acknowledged. Ensure zero schedule or route changes are communicated to this carrier.\n\nThis action has been logged.`);
+  closeModal('routelock-modal');
 }
 
 /* ══════════════════════════════════════════════
