@@ -128,7 +128,10 @@
     .advisory-box.amber{background-color:#fff3cd!important;border-color:#ffc107!important;color:#856404!important}
     .strength-box{background-color:#d1e7dd!important;border-color:#badbcc!important;color:#0f5132!important}
     .best-for-box{background-color:#cfe2ff!important;border-color:#b6d4fe!important;color:#084298!important}
+    .print-fallback{display:inline!important;font-weight:700;color:#856404}
   }
+  /* print-fallback hidden on screen, shown in print via rule above */
+  .print-fallback{display:none}
   #print-report{display:none}
 
   /* SIDEBAR */
@@ -307,6 +310,10 @@
   .filter-pill{font-size:11px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid var(--border);background:var(--bg-3);color:var(--text-2);cursor:pointer;transition:all 0.15s;touch-action:manipulation;white-space:nowrap}
   .filter-pill:hover{border-color:var(--border-2);color:var(--text)}
   .filter-pill.active{background:var(--gold-dim);border-color:var(--gold);color:var(--gold-light)}
+  /* Lane region filter — same style, separate class for JS selector clarity */
+  .lane-filter-pill{font-size:11px;font-weight:500;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:var(--bg-3);color:var(--text-2);cursor:pointer;transition:all 0.15s;touch-action:manipulation;white-space:nowrap}
+  .lane-filter-pill:hover{border-color:var(--border-2);color:var(--text)}
+  .lane-filter-pill.active{background:var(--blue-dim);border-color:var(--blue);color:#7ab8f0}
   .checkin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-bottom:20px}
   .checkin-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;position:relative;transition:border-color 0.15s}
   .checkin-card:hover{border-color:var(--border-2)}
@@ -340,7 +347,7 @@
   .checkin-btn-primary:hover{background:var(--gold-light)}
   .checkin-btn-secondary{background:var(--bg-3);color:var(--text-2);border:1px solid var(--border)}
   .checkin-btn-secondary:hover{background:var(--bg-4);color:var(--text)}
-  .checkin-btn-blocked{background:var(--red-dim);color:#f07a79;cursor:not-allowed;border:1px solid rgba(226,75,74,0.2)}
+  .checkin-btn-precision{background:var(--amber-dim);color:var(--amber);border:1px solid rgba(239,159,39,0.3)}
   .hos-bar-wrap{margin:8px 0 4px}
   .hos-bar-track{height:4px;background:var(--bg-4);border-radius:2px;overflow:hidden}
   .hos-bar-fill{height:100%;border-radius:2px}
@@ -425,7 +432,7 @@
         <tr><td><span class="risk-badge r-low">S4 Tier 1</span></td><td style="color:var(--text);font-weight:500;">Prime Carrier</td><td style="color:var(--text-2);">Optimal operating zone. Max reliability. Best window.</td><td style="color:#6fcd80;font-weight:600;">Assign High-Value Loads</td></tr>
         <tr><td><span class="risk-badge r-low">S6 Peak Window</span></td><td style="color:var(--text);font-weight:500;">Hot Hand</td><td style="color:var(--text-2);">Brief peak — 24–72 hrs before fatigue closes the window.</td><td style="color:#3fd9a8;font-weight:600;">Assign Complex Load NOW</td></tr>
         <tr><td><span class="risk-badge r-med">S7 Isolated</span></td><td style="color:var(--text);font-weight:500;">Solo Specialist</td><td style="color:var(--text-2);">High competence, low comms. Needs autonomy to perform.</td><td style="color:#b0aaff;font-weight:600;">Solo Long-Haul Only</td></tr>
-        <tr><td><span class="risk-badge r-watch">S9 Exit</span></td><td style="color:var(--text);font-weight:500;">Dissolution</td><td style="color:var(--text-2);">Carrier exiting or restructuring. Capacity unpredictable.</td><td style="color:var(--gold-light);font-weight:600;">Source Replacement</td></tr>
+        <tr><td><span class="risk-badge r-watch">S9 Market Exit</span></td><td style="color:var(--text);font-weight:500;">Exit Watch</td><td style="color:var(--text-2);">Carrier winding down or restructuring. Verify business continuity before any booking.</td><td style="color:var(--gold-light);font-weight:600;">Verify &amp; Source Backup</td></tr>
         <tr><td><span class="risk-badge r-watch">S3 Scaling</span></td><td style="color:var(--text);font-weight:500;">Hyper-Growth Risk</td><td style="color:var(--text-2);">Expanding faster than management can handle.</td><td style="color:var(--amber);font-weight:600;">Verify Assets First</td></tr>
         <tr><td><span class="risk-badge r-trap">S0 Ghost</span></td><td style="color:var(--text);font-weight:500;">No MC History</td><td style="color:var(--text-2);">No verifiable load history. Fraud risk elevated.</td><td style="color:#f07a79;font-weight:600;">Full Vetting Required</td></tr>
       </tbody>
@@ -495,7 +502,7 @@
 <!-- PDF GENERATION — Luminark Sentinel Clarity Report (hidden except @media print) -->
 <div id="print-report">
   <div class="print-header">
-    <div style="font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;">Meridian Axiom Alignment Technologies · MAAT · SAP v3.0</div>
+    <div style="font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;">Meridian Axiom Alignment Technologies · MAAT · LLO v1.0</div>
     <div style="font-size:22px;font-weight:800;color:#c8841a;letter-spacing:-0.5px;">Luminark Sentinel Clarity Report</div>
     <div style="font-size:11px;color:#888;margin-top:4px;" id="print-timestamp"></div>
   </div>
@@ -555,9 +562,9 @@
   </div>
 
   <div class="print-footer">
-    Luminark Sentinel Clarity Report · Luminark Logistics Overwatch · SAP v3.0 · Meridian Axiom Alignment Technologies<br>
+    Luminark Sentinel Clarity Report · Luminark Logistics Overwatch · Meridian Axiom Alignment Technologies<br>
     LuminarkMeridian@gmail.com · © 2026 Richard Leroy Stanfield Jr. · All rights reserved.<br>
-    <em>This report is generated from broker-entered operational data and FMCSA public records. It is an advisory tool and does not constitute a legal guarantee of carrier performance.</em>
+    <em>This advisory is not a guarantee of carrier performance. The broker is responsible for the final dispatch decision. Generated from broker-entered operational data and available FMCSA public records.</em>
   </div>
 </div>
 
@@ -576,7 +583,7 @@
     <div class="modal-sub">Stage 8 — Precision Operator</div>
     <div class="strength-box">★ Flawless Performance Record · Systemic Consistency · Maximum Reliability History</div>
     <div class="best-for-box">Best for: Fixed-route, non-negotiable schedules — same pick, same drop, same time, every time.</div>
-    <div class="advisory-box amber">Zero deviation tolerance. Any route change, schedule adjustment, or unexpected requirement will likely cause a total service failure. Reliability is at its historical peak — adaptability is at zero.</div>
+    <div class="advisory-box amber">Zero deviation tolerance. Any route change, schedule adjustment, or unexpected requirement will likely cause a total service failure. Reliability is at its historical peak — adaptability is at zero.<span class="print-fallback"> ⚠ RIGIDITY ADVISORY — ZERO DEVIATION TOLERANCE</span></div>
     <div class="route-lock-wrap" onclick="this.querySelector('input').click()">
       <input type="checkbox" id="routeLockCheckbox">
       <div class="route-lock-label"><strong>Confirm Route Lock:</strong> This load's route, pick-up time, and delivery window are fixed and non-negotiable. No changes will be requested from this carrier.</div>
@@ -635,7 +642,7 @@
       <div class="brand-icon">LO</div>
       <div>
         <div class="brand-name">Luminark Logistics Overwatch</div>
-        <div class="brand-tag">Predictive Intelligence for the Modern Brokerage · SAP v3.0</div>
+        <div class="brand-tag">Predictive Intelligence for the Modern Brokerage · LLO v1.0</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -643,7 +650,7 @@
       <button class="comm-btn" onclick="openModal('comm-modal')">📞 Signal Check</button>
       <div class="status-dot"></div>
       <span class="status-label">Live</span>
-      <span class="version-badge">SAP v3.0</span>
+      <span class="version-badge">LLO v1.0</span>
     </div>
   </header>
 
@@ -854,7 +861,16 @@
         <div class="math-row">Lane pressure index = (demand_vol / 10 × 60) + (inverse_capacity / 10 × 40)</div>
         <div class="math-row">Rate multiplier = 1 + (pressure_score / 100 × 0.25) · Stage 8 lanes → 1.15x–1.25x base rate</div>
       </div>
+
+      <!-- Lane region filter tabs -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+        <div class="lane-filter-pill active" onclick="filterLanes('all',this)">All Lanes</div>
+        <div class="lane-filter-pill" onclick="filterLanes('florida',this)">📍 Florida Regional</div>
+        <div class="lane-filter-pill" onclick="filterLanes('national',this)">🌐 National Lanes</div>
+      </div>
+
       <div class="lane-grid" id="lane-grid"></div>
+
       <div id="lane-detail-card" class="card" style="display:none;">
         <div class="card-title" id="lane-detail-title">Lane analysis</div>
         <div id="lane-detail-content"></div>
@@ -915,7 +931,7 @@
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Blind Spot Metric</div>
-            <div class="gloss-alias">SAP: Inversion Principle · Hidden Risk Indicator</div>
+            <div class="gloss-alias">Hidden Risk Indicator · Good Metrics Masking Bad Operations</div>
             <div class="gloss-def">The core Stage 8 detection mechanism. When Asset Density is highest, Signal Integrity pressure accumulates invisibly underneath. A carrier's surface compliance score is inversely correlated with true failure risk at Stage 8. Good metrics masking bad operations — what load boards cannot see.</div>
           </div>
           <div class="gloss-item">
@@ -946,7 +962,7 @@
           <table class="trans-table">
             <thead><tr><th>SAP Concept</th><th>Logistics Translation</th><th>Industry Term</th></tr></thead>
             <tbody>
-              <tr><td>Stage 0 (Void)</td><td>No Operating History</td><td>Ghost Carrier / New MC</td></tr>
+              <tr><td>Stage 0 (Seed State)</td><td>No Operating History</td><td>Ghost Carrier / Identity Risk</td></tr>
               <tr><td>Stage 1 (Navigation)</td><td>Startup Phase</td><td>New Entrant / Unproven</td></tr>
               <tr><td>Stage 2 (Polarity)</td><td>Growth Mode</td><td>Scaling Carrier</td></tr>
               <tr><td>Stage 3 (Expression)</td><td>Rapid Expansion</td><td>Hyper-Growth Risk</td></tr>
@@ -955,15 +971,15 @@
               <tr><td>Stage 6 (Integration)</td><td>Peak Performance Window</td><td>Hot Hand / Unsustainable Peak</td></tr>
               <tr><td>Stage 7 (Analysis)</td><td>Mastery Under Pressure</td><td>Isolated Specialist / Owner-Operator Mindset</td></tr>
               <tr><td>Stage 8 (Unity/Trap)</td><td>Hidden Failure Risk</td><td>Eye of the Storm / Rigidity Risk / Imminent Collapse</td></tr>
-              <tr><td>Stage 9 (Release)</td><td>Exit / Restructure State</td><td>Dissolution / Bankruptcy / Pivot</td></tr>
+              <tr><td>Stage 9 (Market Exit)</td><td>Exit / Restructure State</td><td>Business Wind-Down / Pivot</td></tr>
               <tr><td>P.Stable</td><td>Asset Density</td><td>Equipment &amp; Driver Availability</td></tr>
               <tr><td>P.Unstable</td><td>Capacity Strain</td><td>Overbooked / Driver Shortage</td></tr>
               <tr><td>C.Stable</td><td>Signal Integrity</td><td>Dispatch Responsiveness</td></tr>
               <tr><td>C.Unstable</td><td>Signal Breakdown</td><td>Unresponsive / Ghosting Risk</td></tr>
               <tr><td>Entropy Accumulation</td><td>Risk Score Increase</td><td>Failure Probability Trending Up</td></tr>
-              <tr><td>Inversion Principle</td><td>Blind Spot Metric</td><td>Good Metrics Masking Bad Operations</td></tr>
+              <tr><td>Blind Spot Metric</td><td>Hidden Risk Indicator</td><td>Good Metrics Masking Bad Operations</td></tr>
               <tr><td>Axiom Yield</td><td>Carrier Reliability Score</td><td>Predictive Load Acceptance Rating</td></tr>
-              <tr><td>Fractal Fingerprint</td><td>Operating Pattern Analysis</td><td>Fraud Detection Algorithm</td></tr>
+              <tr><td>Operating Pattern Analysis</td><td>MC Operational Fingerprint</td><td>Fraud Detection Algorithm</td></tr>
               <tr><td>Lane Entropy</td><td>Corridor Capacity Tension</td><td>Market Tightness Index</td></tr>
               <tr><td>Tension Score</td><td>Operational Stress Level</td><td>Breakdown Probability</td></tr>
             </tbody>
@@ -981,7 +997,7 @@
       <div class="card">
         <div class="card-title">What this is</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:12px;">
-          Luminark Logistics Overwatch is a predictive carrier risk platform built on the <strong style="color:var(--text);font-weight:500;">Stanfield Axiom of Perpetuity (SAP)</strong> — a proprietary 10-stage operational risk framework developed by <strong style="color:var(--text);font-weight:500;">Meridian Axiom Alignment Technologies (MAAT)</strong>. Standard load board tools show historical compliance data. Overwatch shows where a carrier is <em>going</em> — scoring current operating conditions against a predictive failure model before the load is tendered.
+          Luminark Logistics Overwatch is a predictive carrier risk platform built on a proprietary 10-stage operational lifecycle framework developed by <strong style="color:var(--text);font-weight:500;">Meridian Axiom Alignment Technologies (MAAT)</strong>. Standard load board tools show historical compliance data. Overwatch shows where a carrier is <em>going</em> — scoring current operating conditions against a predictive failure model before the load is tendered.
         </p>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;">
           The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is booked. It also screens for ghost carrier MC patterns, tracks lane capacity pressure ahead of market visibility, and delivers dispatch-ready guidance for every risk stage.
@@ -1004,7 +1020,7 @@
       <div class="card">
         <div class="card-title">Intelligence parent — Meridian Axiom Alignment Technologies</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          Luminark Logistics Overwatch is one component of the LUMINARK ecosystem — a suite of interconnected intelligence platforms developed by MAAT applying the SAP framework to systemic risk analysis across logistics, financial infrastructure, and operational health monitoring. The underlying SAP v3.0 framework and NSDT five-dimensional analysis engine are proprietary to MAAT.
+          Luminark Logistics Overwatch is one component of the LUMINARK ecosystem — a suite of interconnected intelligence platforms developed by MAAT applying the SAP framework to systemic risk analysis across logistics, financial infrastructure, and operational health monitoring. The underlying predictive framework and multi-dimensional analysis engine are proprietary to MAAT.
         </p>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-top:10px;">
           <strong style="color:var(--text);font-weight:500;">Richard Leroy Stanfield Jr.</strong> — Founder, MAAT · LuminarkMeridian@gmail.com
@@ -1199,7 +1215,7 @@
 
 <!-- INTEL FEED CTA -->
 <div id="fixed-cta" style="position:fixed;bottom:20px;right:20px;z-index:999;">
-  <a href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank" style="display:inline-block;padding:13px 24px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#000;text-decoration:none;border-radius:8px;font-weight:700;font-size:0.85rem;box-shadow:0 4px 20px rgba(200,132,26,0.4);text-transform:uppercase;letter-spacing:1.5px;">
+  <a href="mailto:LuminarkMeridian@gmail.com?subject=Luminark%20Intel%20Access%20Request" target="_blank" style="display:inline-block;padding:13px 24px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#000;text-decoration:none;border-radius:8px;font-weight:700;font-size:0.85rem;box-shadow:0 4px 20px rgba(200,132,26,0.4);text-transform:uppercase;letter-spacing:1.5px;">
     Request Intel Access
   </a>
 </div>
@@ -1209,10 +1225,10 @@
    STAGE DATA
 ══════════════════════════════════════════════ */
 const STAGES=[
-  {n:0,geo:'●',label:'Ghost / No Authority',industryTerm:'Ghost Carrier / New MC',
+  {n:0,geo:'●',label:'Ghost / No Authority',industryTerm:'Ghost Carrier / Identity Risk',
    assetDensity:'None',signalIntegrity:'None',tension:0,colorHex:'#888780',
-   strength:'N/A',
-   bestFor:'No load type — full vetting required before any assignment.',
+   strength:'',
+   bestFor:'',
    advisory:'Require Carrier 411 + FMCSA bond verification and reference calls before proceeding.',
    desc:'No verifiable load history. Either brand-new authority with zero freight activity or a fraudulent shell operation. High double-broker and cargo theft risk.',
    logistics:'Full vetting required. Require Carrier 411 + FMCSA bond verification and reference calls to prior brokers before any pilot load.'},
@@ -1272,13 +1288,13 @@ const STAGES=[
    advisory:'⚠ Rigidity Alert: This carrier is operating at 100% capacity with zero flexibility buffer. Any deviation from the planned route, schedule change, or unexpected requirement will likely result in a service failure. Reliability is at its historical peak — adaptability is at zero. Proceed only with loads where no changes will occur. Luminark recommends sourcing a backup carrier before tendering.',
    desc:'Peak rigidity. Flawless surface metrics masking zero adaptability buffer. Signal Integrity compromised beneath functional surface. High reliability history, zero flexibility reserve.',
    logistics:'High-Stakes Dispatch only — fixed route, unchanging schedule, zero deviation tolerance. Source a backup carrier before tendering. Do not assign loads with any possibility of schedule or route change.'},
-  {n:9,geo:'◎',label:'Reset Candidate',industryTerm:'Exit / Dissolution / Pivot',
-   assetDensity:'Collapsed',signalIntegrity:'Transparent',tension:14,colorHex:'#3fd9a8',
+  {n:9,geo:'◎',label:'Market Exit Watch',industryTerm:'Market Exit / Business Wind-Down / Pivot',
+   assetDensity:'Winding Down',signalIntegrity:'Transparent',tension:14,colorHex:'#3fd9a8',
    strength:'Full Transparency · No Hidden Pressure · Honest About Capacity',
-   bestFor:'Rare exception only: voluntary reset carriers who self-initiated a pause and are rebuilding. If you have an existing relationship and trust, a Stage 9 pilot load may preserve a valuable long-term partner.',
-   advisory:'Begin replacement sourcing immediately — do not hold capacity for a Stage 9 carrier. For existing trusted partners, have a direct conversation about their timeline before committing any freight.',
-   desc:'All operational pressure released. Fully transparent about limits. Exiting, restructuring, or in voluntary pause. Rare exception: breakthrough reset with complete clarity.',
-   logistics:'Source replacement now. For trusted existing partners: direct conversation about timeline before any commitment. Pilot load only if relationship warrants.'},
+   bestFor:'No standard dispatch. For trusted existing partners only — verify business continuity and timeline before any load commitment beyond 14 days.',
+   advisory:'Predictive wind-down risk. Call the carrier directly. Ask: Are you still active in 30 days? Do you have drivers available for this lane? Get confirmation in writing. Do not book loads requiring completion beyond their confirmed operational window.',
+   desc:'Carrier winding down operations, restructuring, or transferring authority. Fully transparent about current limits — no hidden pressure. Near-term capacity is unpredictable. In rare cases, signals a deliberate operational reset with full clarity about the path forward.',
+   logistics:'Begin replacement sourcing immediately. Verify business continuity before any load commitment. Exception: a deliberate reset carrier returning with verified plans — treat as Stage 1 and run a full vetting pilot load.'},
 ];
 
 const CARRIERS=[
@@ -1299,12 +1315,20 @@ const GHOST_DATA=[
 ];
 
 const LANES=[
-  {name:'ATL → CHI',vol:8,cap:3,trend:'tightening',s:8},
-  {name:'LAX → DFW',vol:4,cap:7,trend:'stable',    s:4},
-  {name:'NYC → MIA',vol:6,cap:5,trend:'softening',  s:5},
-  {name:'CHI → HOU',vol:9,cap:2,trend:'critical',   s:9},
-  {name:'SEA → PHX',vol:3,cap:8,trend:'stable',     s:3},
-  {name:'DFW → ATL',vol:5,cap:6,trend:'rising',     s:6},
+  // National lanes
+  {name:'ATL → CHI',vol:8,cap:3,trend:'tightening',s:8,region:'national'},
+  {name:'LAX → DFW',vol:4,cap:7,trend:'stable',    s:4,region:'national'},
+  {name:'NYC → MIA',vol:6,cap:5,trend:'softening',  s:5,region:'national'},
+  {name:'CHI → HOU',vol:9,cap:2,trend:'critical',   s:9,region:'national'},
+  {name:'SEA → PHX',vol:3,cap:8,trend:'stable',     s:3,region:'national'},
+  {name:'DFW → ATL',vol:5,cap:6,trend:'rising',     s:6,region:'national'},
+  // Florida Regional — St. Pete / Tampa market
+  {name:'TPA → ATL', vol:7,cap:4,trend:'tightening',s:7,region:'florida'},
+  {name:'MIA → JAX', vol:5,cap:6,trend:'stable',    s:4,region:'florida'},
+  {name:'TPA → CHI', vol:8,cap:3,trend:'tightening',s:8,region:'florida'},
+  {name:'JAX → HOU', vol:6,cap:5,trend:'rising',    s:6,region:'florida'},
+  {name:'ORL → DFW', vol:4,cap:7,trend:'stable',    s:3,region:'florida'},
+  {name:'MIA → NYC', vol:9,cap:2,trend:'critical',  s:9,region:'florida'},
 ];
 
 /* ══════════════════════════════════════════════
@@ -1338,7 +1362,7 @@ function riskFor(s){
     5:{label:'Pivot Opportunity',cls:'r-high'},
     7:{label:'Autonomous Specialist',cls:'r-med'},
     8:{label:'Precision Operator ⚠',cls:'r-trap'},
-    9:{label:'Reset Candidate',cls:'r-med'},
+    9:{label:'Market Exit Watch',cls:'r-med'},
     0:{label:'Unverified — Vetting Required',cls:'r-trap'}
   };
   return m[s]||{label:'Unknown',cls:'r-watch'};
@@ -1350,7 +1374,7 @@ function dispatchFor(s){
     6:'The Sprinter. Assign most complex load immediately. Window closes in 24–72 hrs.',
     7:'Autonomous Specialist. Solo long-haul, crisis recovery. Full autonomy required.',
     8:'Precision Operator. Fixed-route only — zero deviation tolerance. Source backup carrier.',
-    9:'Reset Candidate. Source replacement. Pilot load only for trusted existing partners.',
+    9:'Market Exit Watch. Source replacement. Verify business continuity before any commitment.',
     2:'Growth Engine. Consistent volume lanes. Build the relationship for long-term leverage.',
     3:'Growth Engine. Verify assets first. Strong signal — they will disclose problems.',
     1:'High-Intent Startup. Pilot load to build loyalty. They will remember who trusted them first.',
@@ -1826,7 +1850,7 @@ function buildAndPrintReport(score, sn, routeLocked, trustOverride){
 
   // Populate Sentinel Clarity Report
   document.getElementById('print-timestamp').textContent =
-    new Date().toLocaleString()+' · Luminark Logistics Overwatch SAP v3.0';
+    new Date().toLocaleString()+' · Luminark Logistics Overwatch · MAAT';
   document.getElementById('print-carrier-name').textContent = name + ' · ' + mc;
   document.getElementById('print-stage-label').textContent =
     `Stage ${sn} — ${sData.label}`;
@@ -1940,20 +1964,6 @@ function renderGhost(){
 /* ══════════════════════════════════════════════
    LANES
 ══════════════════════════════════════════════ */
-function renderLanes(){
-  document.getElementById('lane-grid').innerHTML=LANES.map((l,i)=>{
-    const sData=STAGES[l.s]||STAGES[0];
-    const dots=Array(10).fill(0).map((_,j)=>`<div class="e-dot ${j<l.vol?(l.vol>=7?'hot':'on'):''}"></div>`).join('');
-    const tc=l.trend==='critical'?'var(--red)':l.trend==='tightening'||l.trend==='rising'?'var(--amber)':l.trend==='stable'?'var(--teal)':'var(--text-3)';
-    return`<div class="lane-card" onclick="showLane(${i})" id="lane-card-${i}">
-      <div class="lane-name">${l.name}</div>
-      <div class="lane-stage">Stage ${l.s} · ${sData.label}</div>
-      <div class="entropy-dots">${dots}</div>
-      <div class="lane-trend" style="color:${tc};">${l.trend}</div>
-    </div>`;
-  }).join('');
-}
-
 function showLane(i){
   document.querySelectorAll('.lane-card').forEach((c,idx)=>c.classList.toggle('selected',idx===i));
   const l=LANES[i],sData=STAGES[l.s];
@@ -2379,8 +2389,49 @@ function proceedS8Dispatch(){
 }
 
 /* ══════════════════════════════════════════════
-   INIT
+   FLORIDA LANE FILTER
 ══════════════════════════════════════════════ */
+let currentLaneFilter = 'all';
+
+function filterLanes(type, el){
+  currentLaneFilter = type;
+  document.querySelectorAll('.lane-filter-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderLanes();
+}
+
+function renderLanes(){
+  let lanes = LANES;
+  if(currentLaneFilter === 'florida')  lanes = LANES.filter(l => l.region === 'florida');
+  if(currentLaneFilter === 'national') lanes = LANES.filter(l => l.region === 'national');
+
+  document.getElementById('lane-grid').innerHTML = lanes.map((l,i) => {
+    const sData = STAGES[l.s] || STAGES[0];
+    const dots  = Array(10).fill(0).map((_,j) =>
+      `<div class="e-dot ${j < l.vol ? (l.vol >= 7 ? 'hot' : 'on') : ''}"></div>`).join('');
+    const tc = l.trend === 'critical' ? 'var(--red)'
+             : l.trend === 'tightening' || l.trend === 'rising' ? 'var(--amber)'
+             : l.trend === 'stable' ? 'var(--teal)' : 'var(--text-3)';
+    const regionTag = l.region === 'florida'
+      ? '<span style="font-size:9px;background:rgba(55,138,221,0.2);color:#7ab8f0;border-radius:3px;padding:1px 5px;margin-left:4px;">FL</span>' : '';
+    return `<div class="lane-card" onclick="showLane(${LANES.indexOf(l)})" id="lane-card-${LANES.indexOf(l)}">
+      <div class="lane-name">${l.name}${regionTag}</div>
+      <div class="lane-stage">Stage ${l.s} · ${sData.label}</div>
+      <div class="entropy-dots">${dots}</div>
+      <div class="lane-trend" style="color:${tc};">${l.trend}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════
+   INIT — localStorage first-run flag
+══════════════════════════════════════════════ */
+// On first load, initialize without wiping existing data
+if(!localStorage.getItem('luminark_initialized')){
+  localStorage.setItem('luminark_initialized','1');
+  localStorage.setItem('luminark_version','LLO_v1.0');
+}
+
 renderCheckinFeed();
 renderDashboard();
 renderGhost();
