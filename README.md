@@ -1,6 +1,6 @@
-# Luminark Logistics Overwatch (LLO)
+# Luminark Logistics Overwatch (LLO) — v1.0
 
-**Predictive Intelligence for the Modern Brokerage · SAP v3.0**
+**Predictive Carrier Risk Intelligence for the Modern Brokerage**
 
 **Live Demo:** https://foreverforward760-crypto.github.io/Axiom-yield-broker/
 
@@ -10,92 +10,94 @@
 
 ## What This Is
 
-A self-contained, offline-first carrier vetting and risk intelligence platform for freight brokers, 3PLs, and dispatch operations. Built on **Stanfield's Axiom of Perpetuity (SAP)** by Meridian Axiom Alignment Technologies (MAAT).
+A self-contained, offline-first carrier vetting and predictive risk platform for freight brokers, 3PLs, and dispatch operations. Built on a proprietary 10-stage operational lifecycle framework by **Meridian Axiom Alignment Technologies (MAAT)**.
 
-Single `index.html` file · No external dependencies · Works offline after first load · All data in localStorage
+**Single `index.html` · No external dependencies · Works offline after first load · All data in localStorage**
 
 ---
 
-## Full Feature Matrix
+## Feature Matrix — LLO v1.0
 
-### Core Intelligence
+### Core Risk Intelligence
 | Feature | Description |
 |---------|-------------|
-| **0–9 Stage Architecture** | Full SAP lifecycle with strength, best-for, advisory, logistics signature per stage |
-| **Axiom Yield Score (0–100)** | Composite from HOS, route volatility, Signal Integrity, recovery debt |
-| **Stage Momentum Arrows ↑↓→●** | Stage velocity per MC tracked in localStorage |
-| **Resilience Score (0–100)** | Operational elasticity — turnover, HOS violations, detention, comms |
-| **Carrier Exit Watch ⚠** | Predictive dissolution flag — Stage 7/8/9 + 2-stage drop |
-| **Clarity Audit Toast** | Fires when S8 carrier tracked for 90+ days |
-| **Micro-trend (81-stage)** | Sub-stage drift stored per MC |
-| **Container Rule** | Cross-MC identity fingerprint for phoenix carrier detection |
-| **System Rigidity Flag** | Auto: HOS ≥ 7 + recovery debt ≥ 14 days |
+| 0–9 Stage Architecture | Full lifecycle with strength, best-for, advisory, logistics signature per stage |
+| Axiom Yield Score (0–100) | Composite from HOS, route volatility, Signal Integrity, recovery debt |
+| Stage Momentum Arrows ↑↓→● | Stage velocity per MC tracked in localStorage across sessions |
+| Resilience Score (0–100) | Operational elasticity — Green/Yellow/Red with tooltip |
+| Carrier Exit Watch ⚠ | Predictive wind-down flag — Stage 7/8/9 + 2-stage drop detected |
+| Clarity Audit Toast | Fires when Stage 8 carrier tracked 90+ days |
+| Micro-trend (81-stage) | Sub-stage drift stored per MC |
+| Container Rule | Cross-MC identity fingerprint — flags phoenix/rebranded carriers |
+| System Rigidity Flag | Auto: HOS ≥ 7 + recovery debt ≥ 14 days |
+| Integrity Sync Violation | Real-time alert when check-in matches a different MC's company name |
 
 ### PDF — Luminark Sentinel Clarity Report
 | Feature | Description |
 |---------|-------------|
-| **Two-step Route Lock (S8)** | Step 1: Route Lock modal before dispatch · Step 2: Final confirmation before PDF export |
-| **Blocking S8 PDF gate** | Stage 8 PDF blocked without Route Lock or Relationship Override |
-| **Strength box** | Teal — stage-specific carrier strengths (print-color-exact) |
-| **Best-For box** | Blue — ideal load types for this stage |
-| **Dispatch advisory** | Full logistics guidance + stage advisory |
-| **Rigidity warning** | Amber advisory box for S8 and rigidity-flagged carriers |
-| **Route Lock confirmation** | Prints locked confirmation text in the report |
-| **Broker Trust Override** | Relationship override noted in PDF for legal protection |
-| **FMCSA data section** | Included if FMCSA lookup was performed |
-| **Resilience Score** | Printed with color coding |
+| Two-step Route Lock (S8) | Step 1: Dispatch modal · Step 2: Final gate before PDF export |
+| Blocking S8 PDF gate | Stage 8 PDF blocked without Route Lock or Relationship Override |
+| Strength box (teal) | Stage-specific carrier strengths — color-exact in print |
+| Best-For box (blue) | Ideal load types for current stage — color-exact in print |
+| Amber advisory box | Rigidity warning with `.print-fallback` text for B&W printers |
+| Route Lock confirmation | Printed in report for legal audit trail |
+| Broker Trust Override | Relationship override noted in PDF for legal protection |
+| FMCSA data section | Included in report when lookup was performed |
+| Legal disclaimer | "This advisory is not a guarantee. Broker responsible for final dispatch decision." |
 
 ### FMCSA QCMobile Integration (Optional)
 | Feature | Description |
 |---------|-------------|
-| **Toggle on/off** | Defaults off — never interferes with manual workflow |
-| **WebKey stored locally** | Saved to localStorage only · Never transmitted to Luminark |
-| **Lookup by MC#** | Calls `/carriers/docket-number/{MC}` endpoint |
-| **BASIC scores** | Calls `/carriers/{USDOT}/basics` for Unsafe Driving, HOS, Maintenance |
-| **Auto-map to Resilience** | FMCSA BASIC scores → Resilience Score calculation |
-| **Stage suggestion** | Auto-suggests stage from authority status + safety rating |
-| **Graceful fallback** | API failure → manual entry, never crashes the app |
-| **FMCSA data in PDF** | Included in Sentinel Clarity Report when lookup was performed |
-| **Get WebKey** | mobile.fmcsa.dot.gov → Sign in with Login.gov → My WebKeys |
+| Toggle on/off | Off by default — never interrupts manual workflow |
+| WebKey stored locally | Saved to localStorage only — never transmitted |
+| Lookup by MC# | Calls `/carriers/docket-number/{MC}` + `/carriers/{USDOT}/basics` |
+| BASIC score mapping | Unsafe Driving + HOS Compliance + Maintenance → Resilience Score |
+| Stage auto-suggestion | Authority status + safety rating → suggested stage |
+| Graceful fallback | API failure → manual entry, never crashes |
+
+### Lane Pressure Map
+| Feature | Description |
+|---------|-------------|
+| Florida Regional lanes | TPA→ATL, MIA→JAX, TPA→CHI, JAX→HOU, ORL→DFW, MIA→NYC |
+| National lanes | ATL→CHI, LAX→DFW, NYC→MIA, CHI→HOU, SEA→PHX, DFW→ATL |
+| Filter tabs | All Lanes / 📍 Florida Regional / 🌐 National Lanes |
+| Rate multipliers | Stage-based 1.0x–1.25x with 24–48hr advance signal |
 
 ### UX & Workflow
 | Feature | Description |
 |---------|-------------|
-| **Risk Legend Modal** | One-click mid-call dispatch reference (all stages) |
-| **Signal Check Modal** | 5-question comm vetting → applies score to calculator |
-| **Check-In Exchange** | 3-tap carrier portal → live SAP scoring → feed broadcast |
-| **Operational Velocity Matching** | Stabilizer / Volume / Prime / Peak / Red Flag |
-| **Ghost Carrier Filter** | MC fraud pattern screening with fractal score |
-| **Lane Pressure Map** | Corridor capacity forecasting + rate multipliers |
-| **Saved Checks** | localStorage — survives refresh, last 10 carriers |
-| **SAP Glossary** | 20-row SAP → Logistics → Industry translation |
-| **Advisory over Enforcement** | Every stage framed with strengths, broker autonomy preserved |
+| Risk Legend Modal | One-click mid-call dispatch reference (all stages) |
+| Signal Check Modal | 5-question live comm vetting → applies to calculator |
+| Check-In Exchange | 3-tap carrier portal → live SAP scoring → feed broadcast |
+| Operational Velocity Matching | Stabilizer / Volume / Prime / Peak match types |
+| Ghost Carrier Filter | MC fraud screening with fractal score |
+| Saved Checks | localStorage — survives refresh, last 10 carriers |
+| SAP Glossary | 20-row framework → Logistics → Industry translation |
 
 ---
 
 ## Stage Reference
 
-| Stage | Label | Strength | Best For | Advisory |
-|-------|-------|----------|---------|---------|
-| S0 | Ghost / Seed State | None | 3-point vetting only | Identity risk — FMCSA + selfie + 3 refs |
-| S1 | Emergent Startup | Directional intent | Short-haul pilot loads | Rapid tumble risk |
-| S2 | Standardized Operator | Vessel-stable, strong safety | Hazmat, gov, compliance freight | Long-term contract candidate |
-| S3 | Reliable Small Fleet | Consistent mid-volume | Regional weekly lanes | Monitor driver retention |
-| **S4** | **Established Regional** | **Workhorse · High on-time** | **Contracted freight, dedicated lanes** | **Core carrier program — healthiest stage** |
-| S5 | Scaling Pivot Point | Max adaptability if managed | Recovery / restoration loads | Critical decision point |
-| S6 | Optimized Enterprise | Strategic partner | Complex multi-stop, time-sensitive | Watch for brittle over-optimization |
-| S7 | Recovery Specialist | The Fixer | Crisis loads, emergency recovery | High risk/reward — verify insurance |
-| S8 | Precision Operator | Flawless record, systemic consistency | Fixed-route only | ⚠ Zero deviation tolerance |
-| S9 | Market Exit Watch | Experience, winding down | Trust only with 14-day confirmation | Predictive dissolution risk |
+| Stage | Label | Strength | Best For |
+|-------|-------|----------|---------|
+| S0 | Ghost / Seed State | — | 3-point vetting only (FMCSA + selfie + 3 refs) |
+| S1 | Emergent Startup | Directional intent | Short-haul pilot loads |
+| S2 | Standardized Operator | Vessel-stable, strong safety | Hazmat, gov, compliance freight |
+| S3 | Reliable Small Fleet | Consistent mid-volume | Regional weekly lanes |
+| **S4** | **Established Regional** | **Workhorse · High on-time** | **Contracted freight, dedicated lanes** |
+| S5 | Scaling Pivot Point | Max adaptability if managed | Recovery / restoration loads |
+| S6 | Optimized Enterprise | Strategic partner | Complex multi-stop, time-sensitive |
+| S7 | Recovery Specialist | The Fixer | Crisis loads, emergency recovery |
+| S8 | Precision Operator | Flawless record | Fixed-route only + backup required |
+| S9 | Market Exit Watch | Transparent, winding down | Verify business continuity only |
 
 ---
 
-## Technical Architecture
-- **Frontend:** HTML5 · CSS3 · Vanilla JavaScript (zero dependencies)
-- **Persistence:** localStorage only — checks, micro-trends, container fingerprints, FMCSA keys
-- **FMCSA:** QCMobile API (optional) — WebKey stored locally, never transmitted
-- **Offline:** Works fully offline after first load
-- **Backend Phase 2:** Flask/Python REST API — `/backend` folder, Render-ready via `render.yaml`
+## Tech Stack
+- **Frontend:** HTML5 · CSS3 · Vanilla JavaScript — zero dependencies
+- **Persistence:** localStorage — checks, micro-trends, FMCSA keys, stage history
+- **FMCSA:** QCMobile API (optional) — WebKey local only
+- **Backend (Phase 2):** Flask/Python — `/backend` folder, Render-ready via `render.yaml`
 
 ---
 
