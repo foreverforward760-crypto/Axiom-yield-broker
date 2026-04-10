@@ -793,6 +793,26 @@
             <div class="input-hint">0 = just had home time / recovery run · 14+ = no rest in two weeks — Stage 8 accelerator</div>
           </div>
 
+          <!-- SAP STAGE OVERRIDE — Stability / Adaptability / Tension -->
+          <div style="border-top:1px solid var(--border);margin:14px 0;padding-top:14px;">
+            <div style="font-size:11px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:12px;">Stage Calibration Inputs <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional — overrides stage calculation)</span></div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <div class="input-top"><span>Operational Stability — fleet consistency, on-time history</span><span class="input-val" id="stab-v">5 / 10</span></div>
+              <input type="range" min="1" max="10" value="5" step="1" id="sl-stab" oninput="updateCalc()">
+              <div class="input-hint">1 = highly unstable / new / restructuring · 10 = flawless track record, zero service failures</div>
+            </div>
+            <div class="input-group" style="margin-bottom:12px;">
+              <div class="input-top"><span>Operational Adaptability — flexibility under change</span><span class="input-val" id="adapt-v">5 / 10</span></div>
+              <input type="range" min="1" max="10" value="5" step="1" id="sl-adapt" oninput="updateCalc()">
+              <div class="input-hint">1 = rigid / fixed-route only · 10 = handles last-minute changes, route deviations, multi-stop complexity</div>
+            </div>
+            <div class="input-group" style="margin-bottom:0;">
+              <div class="input-top"><span>Operational Tension — current pressure / stress load</span><span class="input-val" id="tension-v">5 / 10</span></div>
+              <input type="range" min="1" max="10" value="5" step="1" id="sl-tension" oninput="updateCalc()">
+              <div class="input-hint">1 = fully rested, low pressure · 10 = overextended, high-stress, at capacity ceiling</div>
+            </div>
+          </div>
+
           <div class="saved-bar">
             <span class="saved-bar-label" id="saved-count-label">Recent checks: 0 saved</span>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -811,7 +831,13 @@
           <div class="score-result">
             <div class="score-num" id="calc-score-num">71</div>
             <div class="score-stage" id="calc-stage-label">Stage 4 — Tier 1 Reliable</div>
+            <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;">
+              <span style="font-size:11px;color:var(--text-3);">Resilience:</span>
+              <span id="calc-resilience-badge" class="resilience-badge" style="background:var(--green-dim);color:#6fcd80;">—</span>
+            </div>
             <div class="score-analysis-box" id="calc-analysis"></div>
+            <!-- Non-blocking advisory notices — always informational, never blocking -->
+            <div id="advisory-notice" style="display:none;margin-top:10px;background:rgba(239,159,39,0.12);border:1px solid rgba(239,159,39,0.3);border-radius:var(--radius-sm);padding:10px 14px;font-size:12px;color:var(--amber);line-height:1.6;text-align:left;"></div>
             <div class="score-rigidity-flag" id="rigidity-flag">⚠ System Rigidity Detected — 14+ days without a recovery run + high Asset Density. Maintenance or driver burnout imminent regardless of current HOS.</div>
           </div>
           <div class="card" style="margin-top:14px;">
@@ -1298,12 +1324,12 @@ const STAGES=[
 ];
 
 const CARRIERS=[
-  {name:'Meridian Freight LLC', mc:'MC-1042398',s:4,hos:9, vol:2,comm:9, rest:1},
-  {name:'Cascade Transport',    mc:'MC-2198473',s:5,hos:3, vol:7,comm:5, rest:8},
-  {name:'Apex Haulers Inc',     mc:'MC-3847291',s:8,hos:8, vol:3,comm:3, rest:12},
-  {name:'BlueSky Logistics',    mc:'MC-4920183',s:6,hos:10,vol:4,comm:8, rest:2},
-  {name:'Desert Run Carriers',  mc:'MC-7391024',s:7,hos:4, vol:8,comm:6, rest:7},
-  {name:'Ironclad Trucking',    mc:'MC-9012847',s:2,hos:7, vol:5,comm:7, rest:3},
+  {name:'Meridian Freight LLC', mc:'MC-1042398',s:4,hos:9, vol:2,comm:9, rest:1,  phone:'813-555-0101', insExpDays:45},
+  {name:'Cascade Transport',    mc:'MC-2198473',s:5,hos:3, vol:7,comm:5, rest:8,  phone:'904-555-0202', insExpDays:5},
+  {name:'Apex Haulers Inc',     mc:'MC-3847291',s:8,hos:8, vol:3,comm:3, rest:12, phone:'305-555-0303', insExpDays:90},
+  {name:'BlueSky Logistics',    mc:'MC-4920183',s:6,hos:10,vol:4,comm:8, rest:2,  phone:'407-555-0404', insExpDays:22},
+  {name:'Desert Run Carriers',  mc:'MC-7391024',s:7,hos:4, vol:8,comm:6, rest:7,  phone:'813-555-0101', insExpDays:120}, // same phone as Meridian — triggers sync alert
+  {name:'Ironclad Trucking',    mc:'MC-9012847',s:2,hos:7, vol:5,comm:7, rest:3,  phone:'727-555-0606', insExpDays:3},
 ];
 
 const GHOST_DATA=[
@@ -1400,12 +1426,16 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelect
    DASHBOARD
 ══════════════════════════════════════════════ */
 function renderDashboard(){
+  // Build phone map to detect Container Rule violations
+  const phoneMap={};
+  CARRIERS.forEach(c=>{if(c.phone){if(!phoneMap[c.phone])phoneMap[c.phone]=[];phoneMap[c.phone].push(c.mc);}});
+
   document.getElementById('carrier-tbody').innerHTML=CARRIERS.map(c=>{
     const score=calcYield(c.hos,c.vol,c.comm,c.rest);
     const sData=STAGES[c.s]||STAGES[0],risk=riskFor(c.s),yc=yieldColor(score);
     const rigidity=isRigidityRisk(c.hos,c.rest);
 
-    // Wire in new intelligence functions
+    // Intelligence functions
     const trend=getStageTrend(c.mc,c.s);
     const trendBadge=makeTrendBadge(trend);
     const resilience=calculateResilienceScore({
@@ -1418,16 +1448,39 @@ function renderDashboard(){
     const resColor=resilience>=80?'#3fd9a8':resilience>=50?'#EF9F27':'#f07a79';
     const resiBg=resilience>=80?'rgba(29,158,117,0.15)':resilience>=50?'rgba(239,159,39,0.15)':'rgba(226,75,74,0.15)';
     const exitWatch=checkExitWatch(c.mc,c.s);
-    const s8warn=c.s===8?'<div style="font-size:10px;color:#f07a79;margin-top:3px;">⚠ Fixed-route only · Zero deviation tolerance · Source backup</div>':'';
+
+    // Insurance expiry warning (insExpDays: days remaining)
+    const daysLeft=c.insExpDays??999;
+    const insWarn=daysLeft<=0
+      ?`<span title="Insurance EXPIRED" style="font-size:9px;font-weight:700;color:#f07a79;background:rgba(226,75,74,0.2);border:1px solid rgba(226,75,74,0.3);border-radius:4px;padding:2px 6px;margin-left:5px;animation:pulse 1s ease-in-out infinite;">🚨 INS EXPIRED</span>`
+      :daysLeft<=7
+      ?`<span title="Insurance expires in ${daysLeft} days" style="font-size:9px;font-weight:700;color:#f07a79;background:rgba(226,75,74,0.15);border:1px solid rgba(226,75,74,0.25);border-radius:4px;padding:2px 6px;margin-left:5px;animation:pulse 1s ease-in-out infinite;">🚨 INS ${daysLeft}d</span>`
+      :daysLeft<=30
+      ?`<span title="Insurance expires in ${daysLeft} days" style="font-size:9px;font-weight:600;color:var(--amber);background:var(--amber-dim);border-radius:4px;padding:2px 6px;margin-left:5px;">⚠ INS ${daysLeft}d</span>`
+      :'';
+
+    // Phone-sync integrity alert (Container Rule)
+    const phoneSiblings=(phoneMap[c.phone]||[]).filter(m=>m!==c.mc);
+    const phoneSyncAlert=phoneSiblings.length>0
+      ?`<span title="⚠ Phone matches MC: ${phoneSiblings.join(', ')} — run Container Rule vetting" style="font-size:9px;font-weight:700;color:#f07a79;background:rgba(226,75,74,0.12);border:1px solid rgba(226,75,74,0.25);border-radius:4px;padding:2px 6px;margin-left:5px;cursor:help;">🚨 Phone Sync</span>`
+      :'';
+
+    // Exit Watch badge
     const exitBadge=exitWatch?'<span style="font-size:9px;font-weight:600;background:rgba(127,119,221,0.2);color:#b0aaff;border:1px solid rgba(127,119,221,0.3);border-radius:4px;padding:2px 6px;margin-left:5px;">⚠ Exit Watch</span>':'';
 
-    // Log this check for trend tracking
+    // FMCSA SAFER link — one-click authority verification
+    const mcNum=(c.mc||'').replace(/[^0-9]/g,'');
+    const saferLink=mcNum?`<a href="https://safer.fmcsa.dot.gov/query.asp?query_type=queryCarrierSnapshot&query_param=MC_MX&query_string=${mcNum}" target="_blank" rel="noopener noreferrer" style="font-size:9px;color:#7ab8f0;text-decoration:none;display:inline-block;margin-top:2px;" title="Open FMCSA SAFER Web">🔍 FMCSA SAFER</a>`:'';
+
+    const s8warn=c.s===8?'<div style="font-size:10px;color:#f07a79;margin-top:3px;">⚠ Fixed-route only · Zero deviation tolerance · Source backup</div>':'';
+
     logStageCheck(c.mc,c.s);
 
     return`<tr>
       <td>
-        <div style="font-weight:500;">${c.name} ${exitBadge}</div>
+        <div style="font-weight:500;">${c.name} ${exitBadge}${insWarn}${phoneSyncAlert}</div>
         <div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div>
+        ${saferLink}
         <div style="font-size:10px;color:var(--text-3);margin-top:2px;font-style:italic;">${sData.strength||''}</div>
       </td>
       <td>
@@ -1440,18 +1493,19 @@ function renderDashboard(){
         <div class="yield-wrap">
           <div class="yield-track"><div class="yield-fill" style="width:${score}%;background:${yc};"></div></div>
           <span class="yield-num" style="color:${yc};">${score}</span>
-          ${rigidity?'<span style="font-size:10px;color:#f07a79;margin-left:4px;" title="System Rigidity: High HOS + 14+ days no recovery">⚠</span>':''}
+          ${rigidity?'<span style="font-size:10px;color:#f07a79;margin-left:4px;" title="System Rigidity">⚠</span>':''}
         </div>
       </td>
       <td>
         <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-3);">HOS:${c.hos} · Vol:${c.vol} · Sig:${c.comm} · Rec:${c.rest}d</div>
-        <span class="resilience-badge" style="background:${resiBg};color:${resColor};margin-top:4px;display:inline-block;" title="Resilience Score: operational elasticity under pressure">R:${resilience}</span>
+        <span class="resilience-badge" style="background:${resiBg};color:${resColor};margin-top:4px;display:inline-block;" title="Resilience Score">R:${resilience}</span>
       </td>
       <td><span class="risk-badge ${risk.cls}">${risk.label}</span></td>
       <td style="font-size:12px;color:var(--text-2);max-width:180px;line-height:1.5;">${dispatchFor(c.s)}${s8warn}</td>
     </tr>`;
   }).join('');
-  // Fire clarity audit check for any Stage 8 carriers
+
+  // Fire clarity audit for any Stage 8 carriers
   CARRIERS.filter(c=>c.s===8).forEach(c=>{
     const checks=JSON.parse(localStorage.getItem('luminark_checks')||'[]');
     const prev=checks.filter(x=>x.mc===c.mc).sort((a,b)=>b.ts-a.ts);
@@ -1462,50 +1516,134 @@ function renderDashboard(){
 /* ══════════════════════════════════════════════
    CALCULATOR
 ══════════════════════════════════════════════ */
+/* ── SAP Stage calculation from Stability/Adaptability/Tension ── */
+function sapStageFromSAT(stability, adaptability, tension){
+  // Edge cases first
+  if(tension >= 9) return 9;                                      // Exit Watch
+  if(stability <= 2 && adaptability <= 2) return 0;              // Ghost/Identity Risk
+  if(stability >= 9 && adaptability <= 3) return 8;              // Precision Operator trap
+  // General formula
+  const raw = (stability + adaptability) - tension;
+  return Math.max(0, Math.min(9, Math.floor(raw / 2.2)));
+}
+
+/* ── Resilience from SAT ── */
+function resilienceFromSAT(stability, adaptability, tension){
+  return Math.max(0, Math.min(100,
+    Math.round((stability * 5) + (adaptability * 5) - (tension * 2))
+  ));
+}
+
+/* ── Save analysis to LLO_STABLE_V1 (up to 50 entries) ── */
+function saveToStableStore(entry){
+  try{
+    const store = JSON.parse(localStorage.getItem('LLO_STABLE_V1')||'[]');
+    store.unshift({...entry, savedAt: Date.now()});
+    if(store.length > 50) store.pop();
+    localStorage.setItem('LLO_STABLE_V1', JSON.stringify(store));
+  }catch(e){}
+}
+
+function getStableStore(){
+  try{ return JSON.parse(localStorage.getItem('LLO_STABLE_V1')||'[]'); }
+  catch(e){ return []; }
+}
+
 function updateCalc(){
-  const hos=+document.getElementById('sl-hos').value;
-  const vol=+document.getElementById('sl-vol').value;
-  const comm=+document.getElementById('sl-comm').value;
-  const rest=+document.getElementById('sl-rest').value;
-  document.getElementById('hos-v').textContent=hos+' hrs';
-  document.getElementById('vol-v').textContent=vol+' / 10';
-  document.getElementById('comm-v').textContent=comm+' / 10';
-  document.getElementById('rest-v').textContent=rest+' days';
+  const hos    = +document.getElementById('sl-hos').value;
+  const vol    = +document.getElementById('sl-vol').value;
+  const comm   = +document.getElementById('sl-comm').value;
+  const rest   = +document.getElementById('sl-rest').value;
+  const stab   = +document.getElementById('sl-stab').value;
+  const adapt  = +document.getElementById('sl-adapt').value;
+  const tension= +document.getElementById('sl-tension').value;
 
-  const score=calcYield(hos,vol,comm,rest);
-  const sn=stageFromYield(score);
-  const sData=STAGES[sn];
-  const yc=yieldColor(score);
-  const pS=Math.round((hos/11)*100);
-  const ent=Math.round((vol/10)*100);
-  const cS=Math.round((comm/10)*100);
-  const debt=Math.round((rest/14)*100);
-  const rigidity=isRigidityRisk(hos,rest);
+  // Update display labels
+  document.getElementById('hos-v').textContent    = hos + ' hrs';
+  document.getElementById('vol-v').textContent    = vol + ' / 10';
+  document.getElementById('comm-v').textContent   = comm + ' / 10';
+  document.getElementById('rest-v').textContent   = rest + ' days';
+  document.getElementById('stab-v').textContent   = stab + ' / 10';
+  document.getElementById('adapt-v').textContent  = adapt + ' / 10';
+  document.getElementById('tension-v').textContent= tension + ' / 10';
 
-  document.getElementById('calc-score-num').textContent=score;
-  document.getElementById('calc-score-num').style.color=yc;
-  document.getElementById('calc-stage-label').textContent=`Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
-  document.getElementById('calc-analysis').innerHTML=`
+  // Determine stage — SAT sliders override yield-based if calibration inputs are non-default
+  const satDefault = (stab === 5 && adapt === 5 && tension === 5);
+  const score = calcYield(hos, vol, comm, rest);
+  const snFromYield = stageFromYield(score);
+  const snFromSAT   = sapStageFromSAT(stab, adapt, tension);
+  // If broker has moved the SAT sliders, use SAT stage; otherwise use yield-based
+  const sn = satDefault ? snFromYield : snFromSAT;
+  const sData = STAGES[sn];
+  const yc = yieldColor(score);
+
+  // Resilience from SAT (or estimated from yield inputs if SAT not set)
+  const resilience = satDefault
+    ? calculateResilienceScore({
+        turnoverRate: sn>=7?65:sn===5?45:20,
+        hosViolationsPer10k: vol>6?2.5:vol>3?0.8:0.2,
+        maxDetentionHours: 3,
+        ontimeUnderDelay: comm>7?92:comm>4?80:65,
+        communicativeness: comm
+      })
+    : resilienceFromSAT(stab, adapt, tension);
+
+  const resColor  = resilience>=80?'#3fd9a8':resilience>=50?'#EF9F27':'#f07a79';
+  const resBg     = resilience>=80?'rgba(29,158,117,0.15)':resilience>=50?'rgba(239,159,39,0.15)':'rgba(226,75,74,0.15)';
+
+  // Update score display
+  document.getElementById('calc-score-num').textContent  = score;
+  document.getElementById('calc-score-num').style.color  = yc;
+  document.getElementById('calc-stage-label').textContent= `Stage ${sn} — ${sData.label} · ${sData.industryTerm}`;
+
+  // Update resilience badge
+  const resBadge = document.getElementById('calc-resilience-badge');
+  resBadge.textContent = `Resilience: ${resilience}/100`;
+  resBadge.style.background = resBg;
+  resBadge.style.color = resColor;
+
+  // Analysis box — strengths, bestFor, advisory (non-blocking)
+  document.getElementById('calc-analysis').innerHTML = `
     <div style="margin-bottom:8px;">${sData.logistics}</div>
-    ${sData.strength?`<div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:4px;">★ Stage Strengths: ${sData.strength}</div>`:''}
-    ${sData.bestFor?`<div style="font-size:11px;color:var(--text-3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;margin-top:7px;"><strong style="color:var(--text-2);">Best for:</strong> ${sData.bestFor}</div>`:''}
-    ${sData.advisory&&sn===8?`<div style="font-size:11px;color:#f07a79;line-height:1.5;border-top:1px solid var(--border);padding-top:7px;margin-top:7px;font-weight:500;">${sData.advisory}</div>`:''}
+    ${sData.strength ? `<div style="font-size:11px;color:var(--teal);font-weight:500;margin-bottom:4px;">★ ${sData.strength}</div>` : ''}
+    ${sData.bestFor  ? `<div style="font-size:11px;color:var(--text-3);line-height:1.5;border-top:1px solid var(--border);padding-top:7px;margin-top:7px;"><strong style="color:var(--text-2);">Best for:</strong> ${sData.bestFor}</div>` : ''}
   `;
 
-  const rflag=document.getElementById('rigidity-flag');
-  rflag.style.display=rigidity?'block':'none';
+  // Advisory notice box (non-blocking — always informational)
+  const advEl = document.getElementById('advisory-notice');
+  const notices = [];
+  if(sn === 0) notices.push('⚠ Ghost / Identity Risk — No verifiable load history. Run 3-point vetting: FMCSA check + driver selfie + 3 broker references before any load assignment.');
+  if(sn === 8) notices.push(`⚠ Rigidity Advisory — ${sData.advisory||'Zero deviation tolerance. Fixed-route, non-negotiable schedules only. Source a backup carrier before tendering.'}`);
+  if(sn === 9) notices.push('⚠ Market Exit Watch — Verify business continuity before any load commitment. Do not book beyond 14 days without direct carrier confirmation.');
+  if(isRigidityRisk(hos, rest)) notices.push('⚠ System Rigidity Detected — High Asset Density + 14+ days without a recovery run. Driver burnout or maintenance failure imminent.');
+  if(tension >= 9) notices.push('⚠ Maximum Tension — Carrier is at operational ceiling. Exit Watch conditions active.');
+  if(notices.length > 0){
+    advEl.style.display = 'block';
+    advEl.innerHTML = notices.join('<br><br>');
+  } else {
+    advEl.style.display = 'none';
+  }
 
-  document.getElementById('calc-breakdown').innerHTML=`
+  // Rigidity flag (legacy — keep for existing PDF logic)
+  document.getElementById('rigidity-flag').style.display = isRigidityRisk(hos, rest) ? 'block' : 'none';
+
+  // Score breakdown
+  const pS   = Math.round((hos/11)*100);
+  const ent  = Math.round((vol/10)*100);
+  const cS   = Math.round((comm/10)*100);
+  const debt = Math.round((rest/14)*100);
+  document.getElementById('calc-breakdown').innerHTML = `
     <div class="math-row">Asset Density  (HOS × 0.30)       = ${pS} → ${Math.round(pS*0.30)} pts</div>
     <div class="math-row">Signal Integrity (comm × 0.25)    = ${cS} → ${Math.round(cS*0.25)} pts</div>
     <div class="math-row">Anti-entropy   (vol × 0.25)       = ${100-ent} → ${Math.round((100-ent)*0.25)} pts</div>
     <div class="math-row">Recovery index (rest × 0.20)      = ${100-debt} → ${Math.round((100-debt)*0.20)} pts</div>
-    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Axiom Yield Score = ${score} → Stage ${sn}: ${sData.label}${rigidity?' ⚠ RIGIDITY FLAG':''}</div>`;
+    ${!satDefault?`<div class="math-row">SAP Stage Override (S=${stab} A=${adapt} T=${tension}) = Stage ${sn} via calibration</div>`:''}
+    <div class="math-row" style="border-color:rgba(200,132,26,0.4);color:var(--gold-light);">Yield Score = ${score} · Resilience = ${resilience}/100 · Stage ${sn}: ${sData.label}</div>`;
 
-  // Auto-save to localStorage on every change
-  localStorage.setItem('lo_last_calc',JSON.stringify({hos,vol,comm,rest,
-    name:document.getElementById('calc-carrier-name').value,
-    mc:document.getElementById('calc-mc-number').value}));
+  // Auto-save last state
+  const mc   = document.getElementById('calc-mc-number').value;
+  const name = document.getElementById('calc-carrier-name').value;
+  localStorage.setItem('lo_last_calc', JSON.stringify({hos,vol,comm,rest,stab,adapt,tension,name,mc}));
 }
 
 /* ══════════════════════════════════════════════
@@ -1517,18 +1655,29 @@ function getSaved(){
 function setSaved(arr){localStorage.setItem('lo_saved_checks',JSON.stringify(arr));}
 
 function saveCurrentCalc(){
-  const hos=+document.getElementById('sl-hos').value;
-  const vol=+document.getElementById('sl-vol').value;
-  const comm=+document.getElementById('sl-comm').value;
-  const rest=+document.getElementById('sl-rest').value;
-  const name=document.getElementById('calc-carrier-name').value||'Unnamed Carrier';
-  const mc=document.getElementById('calc-mc-number').value||'—';
-  const score=calcYield(hos,vol,comm,rest);
-  const sn=stageFromYield(score);
-  const arr=getSaved();
-  arr.unshift({name,mc,hos,vol,comm,rest,score,stage:sn,ts:new Date().toLocaleTimeString()});
-  if(arr.length>10)arr.pop();
+  const hos    = +document.getElementById('sl-hos').value;
+  const vol    = +document.getElementById('sl-vol').value;
+  const comm   = +document.getElementById('sl-comm').value;
+  const rest   = +document.getElementById('sl-rest').value;
+  const stab   = +document.getElementById('sl-stab').value;
+  const adapt  = +document.getElementById('sl-adapt').value;
+  const tension= +document.getElementById('sl-tension').value;
+  const name   = document.getElementById('calc-carrier-name').value||'Unnamed Carrier';
+  const mc     = document.getElementById('calc-mc-number').value||'—';
+  const score  = calcYield(hos,vol,comm,rest);
+  const satDefault = (stab===5 && adapt===5 && tension===5);
+  const sn = satDefault ? stageFromYield(score) : sapStageFromSAT(stab,adapt,tension);
+  const resilience = satDefault
+    ? calculateResilienceScore({turnoverRate:sn>=7?65:20,hosViolationsPer10k:vol>6?2.5:0.5,maxDetentionHours:3,ontimeUnderDelay:comm>7?92:80,communicativeness:comm})
+    : resilienceFromSAT(stab,adapt,tension);
+
+  const entry = {name,mc,hos,vol,comm,rest,stab,adapt,tension,score,stage:sn,resilience,ts:new Date().toLocaleTimeString()};
+  const arr = getSaved();
+  arr.unshift(entry);
+  if(arr.length>10) arr.pop();
   setSaved(arr);
+  // Also save to LLO_STABLE_V1
+  saveToStableStore({...entry, phone:'', address:''});
   // Log for stage momentum tracking
   if(mc&&mc!=='—') logStageCheck(mc,sn);
   renderSavedList();
@@ -1578,12 +1727,15 @@ function restoreLastCalc(){
   try{
     const last=JSON.parse(localStorage.getItem('lo_last_calc'));
     if(!last)return;
-    if(last.name)document.getElementById('calc-carrier-name').value=last.name;
-    if(last.mc)document.getElementById('calc-mc-number').value=last.mc;
-    document.getElementById('sl-hos').value=last.hos||6;
-    document.getElementById('sl-vol').value=last.vol||4;
-    document.getElementById('sl-comm').value=last.comm||7;
-    document.getElementById('sl-rest').value=last.rest||3;
+    if(last.name) document.getElementById('calc-carrier-name').value=last.name;
+    if(last.mc)   document.getElementById('calc-mc-number').value=last.mc;
+    document.getElementById('sl-hos').value    = last.hos    ?? 6;
+    document.getElementById('sl-vol').value    = last.vol    ?? 4;
+    document.getElementById('sl-comm').value   = last.comm   ?? 7;
+    document.getElementById('sl-rest').value   = last.rest   ?? 3;
+    document.getElementById('sl-stab').value   = last.stab   ?? 5;
+    document.getElementById('sl-adapt').value  = last.adapt  ?? 5;
+    document.getElementById('sl-tension').value= last.tension?? 5;
     updateCalc();
   }catch{}
 }
@@ -1803,25 +1955,14 @@ function openPDFModal(){
 }
 
 function executePDFExport(){
+  // Non-blocking: always allow export — advisory is informational only
   const score  = +document.getElementById('calc-score-num').textContent;
   const sn     = stageFromYield(score);
-
-  // VALIDATION: Stage 8 requires route lock
-  if(sn === 8){
-    const routeLocked   = document.getElementById('pdfRouteLockCheckbox')?.checked;
-    const trustOverride = document.getElementById('pdfBrokerTrust')?.checked;
-    if(!routeLocked && !trustOverride){
-      document.getElementById('pdf-preflight-sub').textContent =
-        '⚠ Stage 8 requires Route Lock confirmation or Relationship Override before export.';
-      document.getElementById('pdf-preflight-sub').style.color = '#f07a79';
-      return;
-    }
-    document.getElementById('pdf-preflight-sub').style.color = '';
-  }
-
   const trustOverride = document.getElementById('pdfBrokerTrust')?.checked;
   const routeLocked   = document.getElementById('pdfRouteLockCheckbox')?.checked;
-
+  // Reset any prior error styling
+  const sub = document.getElementById('pdf-preflight-sub');
+  if(sub) sub.style.color = '';
   closeModal('pdf-preflight-modal');
   buildAndPrintReport(score, sn, routeLocked, trustOverride);
 }
@@ -2458,7 +2599,7 @@ function renderLanes(){
 ══════════════════════════════════════════════ */
 // On first load, initialize without wiping existing data
 if(!localStorage.getItem('luminark_initialized')){
-  localStorage.setItem('luminark_initialized','1');
+  localStorage.setItem('luminark_initialized','v1.0');
   localStorage.setItem('luminark_version','LLO_v1.0');
 }
 
