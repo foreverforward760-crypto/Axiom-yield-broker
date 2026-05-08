@@ -502,7 +502,7 @@
 <!-- PDF GENERATION — Luminark Sentinel Clarity Report (hidden except @media print) -->
 <div id="print-report">
   <div class="print-header">
-    <div style="font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;">Meridian Axiom Alignment Technologies · MAAT · LLO v1.0</div>
+    <div style="font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;">Meridian Axiom Alignment Technologies · MAAT · LLO v1.1</div>
     <div style="font-size:22px;font-weight:800;color:#c8841a;letter-spacing:-0.5px;">Luminark Sentinel Clarity Report</div>
     <div style="font-size:11px;color:#888;margin-top:4px;" id="print-timestamp"></div>
   </div>
@@ -642,7 +642,7 @@
       <div class="brand-icon">LO</div>
       <div>
         <div class="brand-name">Luminark Logistics Overwatch</div>
-        <div class="brand-tag">Predictive Intelligence for the Modern Brokerage · LLO v1.0</div>
+        <div class="brand-tag">Predictive Intelligence for the Modern Brokerage · LLO v1.1</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -650,7 +650,7 @@
       <button class="comm-btn" onclick="openModal('comm-modal')">📞 Signal Check</button>
       <div class="status-dot"></div>
       <span class="status-label">Live</span>
-      <span class="version-badge">LLO v1.0</span>
+      <span class="version-badge">LLO v1.1</span>
     </div>
   </header>
 
@@ -1467,18 +1467,30 @@ function renderDashboard(){
 
     // Exit Watch badge
     const exitBadge=exitWatch?'<span style="font-size:9px;font-weight:600;background:rgba(127,119,221,0.2);color:#b0aaff;border:1px solid rgba(127,119,221,0.3);border-radius:4px;padding:2px 6px;margin-left:5px;">⚠ Exit Watch</span>':'';
+    // Stage 5 Middle Path badge for dashboard
+    const s5badge = c.s === 5 ? '<span style="font-size:9px;font-weight:600;background:rgba(239,159,39,0.2);color:#EF9F27;border:1px solid rgba(239,159,39,0.35);border-radius:4px;padding:2px 6px;margin-left:5px;">⬠ Bifurcation Point</span>' : '';
 
     // FMCSA SAFER link — one-click authority verification
     const mcNum=(c.mc||'').replace(/[^0-9]/g,'');
     const saferLink=mcNum?`<a href="https://safer.fmcsa.dot.gov/query.asp?query_type=queryCarrierSnapshot&query_param=MC_MX&query_string=${mcNum}" target="_blank" rel="noopener noreferrer" style="font-size:9px;color:#7ab8f0;text-decoration:none;display:inline-block;margin-top:2px;" title="Open FMCSA SAFER Web">🔍 FMCSA SAFER</a>`:'';
 
-    const s8warn=c.s===8?'<div style="font-size:10px;color:#f07a79;margin-top:3px;">⚠ Fixed-route only · Zero deviation tolerance · Source backup</div>':'';
+    // Stage 8 chamber detection for dashboard card (uses default NSDT estimate from stage position)
+    let s8warn = '';
+    if(c.s === 8){
+      // Estimate chamber from available carrier data (stage 8 defaults)
+      const chamberEst = detectStage8Chamber(8, 2, 8, c.comm||3, c.vol||5);
+      if(chamberEst){
+        s8warn = `<div style="font-size:9px;margin-top:3px;padding:2px 5px;border-radius:3px;background:rgba(224,82,82,0.12);color:${chamberEst.color};border:1px solid rgba(224,82,82,0.25);">${chamberEst.icon} ${chamberEst.label} · ${chamberEst.industry.split('—')[0].trim()}</div>`;
+      } else {
+        s8warn = '<div style="font-size:9px;color:#f07a79;margin-top:3px;">⊛ Fixed-route only · Zero deviation tolerance · Source backup</div>';
+      }
+    }
 
     logStageCheck(c.mc,c.s);
 
     return`<tr>
       <td>
-        <div style="font-weight:500;">${c.name} ${exitBadge}${insWarn}${phoneSyncAlert}</div>
+        <div style="font-weight:500;">${c.name} ${exitBadge}${s5badge}${insWarn}${phoneSyncAlert}</div>
         <div style="font-size:10px;color:var(--text-3);font-family:'DM Mono',monospace;">${c.mc}</div>
         ${saferLink}
         <div style="font-size:10px;color:var(--text-3);margin-top:2px;font-style:italic;">${sData.strength||''}</div>
@@ -1613,7 +1625,22 @@ function updateCalc(){
   const advEl = document.getElementById('advisory-notice');
   const notices = [];
   if(sn === 0) notices.push('⚠ Ghost / Identity Risk — No verifiable load history. Run 3-point vetting: FMCSA check + driver selfie + 3 broker references before any load assignment.');
-  if(sn === 8) notices.push(`⚠ Rigidity Advisory — ${sData.advisory||'Zero deviation tolerance. Fixed-route, non-negotiable schedules only. Source a backup carrier before tendering.'}`);
+  if(sn === 8){
+    const chamber = detectStage8Chamber(stab, adapt, tension, comm, vol);
+    if(chamber && !satDefault){
+      notices.push(`${chamber.icon} Stage 8 · ${chamber.label} — ${chamber.guidance}`);
+    } else {
+      notices.push(`⚠ Stage 8 Rigidity Advisory — ${sData.advisory||'Zero deviation tolerance. Fixed-route, non-negotiable schedules only. Source a backup carrier before tendering.'}`);
+    }
+  }
+  if(sn === 5){
+    const path5 = analyzeStage5Path(stab, adapt, tension, hos, rest);
+    if(!satDefault){
+      notices.push(`⬠ Stage 5 · ${path5.label} · ${path5.action} — ${path5.guidance}`);
+    } else {
+      notices.push('⬠ Stage 5 Bifurcation Point — This is the most important routing decision. One recovery run now preserves a reliable carrier. Hard freight now risks Stage 8 within one or two cycles.');
+    }
+  }
   if(sn === 9) notices.push('⚠ Market Exit Watch — Verify business continuity before any load commitment. Do not book beyond 14 days without direct carrier confirmation.');
   if(isRigidityRisk(hos, rest)) notices.push('⚠ System Rigidity Detected — High Asset Density + 14+ days without a recovery run. Driver burnout or maintenance failure imminent.');
   if(tension >= 9) notices.push('⚠ Maximum Tension — Carrier is at operational ceiling. Exit Watch conditions active.');
@@ -2493,6 +2520,99 @@ function logStageCheck(mcNumber,stage){
   }catch{}
 }
 
+/* 4. Stage 8 Dual-Chamber Trap Detection
+   ─────────────────────────────────────────────────────────────────
+   Stage 8 (Precision Operator) contains two distinct trap states:
+   Chamber A — Illusion of Arrival
+     Carrier appears at peak. Flawless record, locked lanes, zero adaptation.
+     Signal: high stability + low adaptability + declining volume diversity.
+     Risk: not a failure signal — it IS the failure. Rigidity IS the trap.
+   Chamber B — Illusion of Permanence
+     Carrier is experiencing overload they believe will never end.
+     Signal: high tension + compromised signal integrity + withdrawal.
+     Risk: carrier may abandon load or go silent mid-run.
+   ─────────────────────────────────────────────────────────────────
+*/
+function detectStage8Chamber(stab, adapt, tension, comm, vol){
+  if(stab < 7) return null; // Not in Stage 8 range
+  // Chamber A: high stability, low adaptability, comm still present
+  // Pattern: appears gold-standard, but zero flexibility
+  const chamberAScore = (stab * 1.2) - (adapt * 2.0) + (comm * 0.5);
+  // Chamber B: high tension, signal integrity compromised (low comm)
+  // Pattern: overwhelmed, withdrawing, perceives no exit
+  const chamberBScore = (tension * 1.5) - (comm * 1.5) + (stab * 0.3);
+  if(chamberAScore > chamberBScore && adapt <= 4){
+    return {
+      chamber: 'A',
+      label: 'Illusion of Arrival',
+      industry: 'Peak Rigidity — Surface Reliability Masks Zero Adaptability',
+      guidance: 'This carrier believes they have arrived. Flawless record, locked lanes, zero tolerance for change. DO NOT tender loads with any possibility of route, schedule, or freight-type deviation. Their rigidity is not visible — it will only surface when you need them to flex. Source a backup carrier before any tender.',
+      color: '#F09595',
+      icon: '⊛'
+    };
+  }
+  if(chamberBScore > chamberAScore && tension >= 7 && comm <= 4){
+    return {
+      chamber: 'B',
+      label: 'Illusion of Permanence',
+      industry: 'Overload Withdrawal — Carrier Perceives No Exit',
+      guidance: 'This carrier is experiencing load pressure they believe will never end. Signal integrity is dropping not from deception but from exhaustion. They may go silent mid-run — not maliciously, but because they have stopped believing communication will help. Assign a check-call window every 2 hours. Do not add load complexity. If no response within 4 hours of scheduled pickup, activate backup.',
+      color: '#D07070',
+      icon: '⊘'
+    };
+  }
+  // Both elevated — dual-chamber active simultaneously
+  return {
+    chamber: 'AB',
+    label: 'Dual-Chamber Active',
+    industry: 'Maximum Trap Pressure — Both Chambers Elevated',
+    guidance: 'Both trap states are active. The carrier has a strong surface record (Chamber A: Illusion of Arrival) while simultaneously experiencing internal overload withdrawal (Chamber B: Illusion of Permanence). This combination produces the highest service failure risk in the framework — they appear reliable right up to the moment of failure. Assign backup carrier before tendering. Consider direct phone conversation to assess real-time state.',
+    color: '#E05252',
+    icon: '⊗'
+  };
+}
+
+/* 4a. Stage 5 Middle Path Analysis
+   Three explicit outcomes at the operational bifurcation point.
+*/
+function analyzeStage5Path(stab, adapt, tension, hos, rest){
+  // Path A: Recovery route possible — carrier can cross to Stage 4
+  const recoverySignal = (adapt >= 5) && (tension <= 7) && (rest < 10);
+  // Path B: Graceful retreat — carrier should step back to Stage 3 recalibration
+  const retreatSignal = (hos < 6) || (rest >= 12) || (tension >= 8 && adapt < 5);
+  // Path C: Bifurcation Lock — carrier is frozen, neither advancing nor retreating
+  const lockSignal = (tension >= 8) && (adapt <= 4) && (stab <= 5);
+
+  if(lockSignal) return {
+    path: 'C',
+    label: 'Bifurcation Lock',
+    action: 'DO NOT TENDER',
+    guidance: 'Carrier is frozen at the decision point. They are neither advancing toward recovery nor retreating to stabilize. This is the highest-risk path — a locked carrier will accept a load they cannot complete. Assign no freight. If relationship exists, direct conversation: ask them to take 48–72 hours off the board.',
+    color: '#E05252'
+  };
+  if(retreatSignal) return {
+    path: 'B',
+    label: 'Graceful Retreat → Stage 3',
+    action: 'ASSIGN RECOVERY LOAD',
+    guidance: 'Carrier needs to step back to rebuild. Assign a short-haul recovery run (under 300 miles, flexible window, guaranteed home time). This is not a failure signal — a correctly routed retreat produces a Stage 4 carrier within one or two cycles. This is your relationship-building opportunity.',
+    color: '#EF9F27'
+  };
+  if(recoverySignal) return {
+    path: 'A',
+    label: 'Advance Path → Stage 6',
+    action: 'RECOVERY RUN THEN PREMIUM',
+    guidance: 'Carrier has sufficient adaptability to cross the threshold. Assign one recovery run now to confirm, then escalate to a premium load. Monitor signal integrity after recovery — if it rises, you have a Stage 6 carrier in 24–48 hours.',
+    color: '#3fd9a8'
+  };
+  return {
+    path: 'B',
+    label: 'Retreat Recommended',
+    action: 'ASSIGN RECOVERY LOAD',
+    guidance: 'Carrier is at the decision point with insufficient data to confirm advance path. Default to recovery routing — the downside risk of forcing an advance is service failure; the downside of a recovery run is one easy load.',
+    color: '#EF9F27'
+  };
+}
+
 /* 4. Container Rule — cross-MC identity fingerprint */
 function checkContainerViolation(newMc,companyName,phone,address){
   try{
@@ -2599,7 +2719,7 @@ function renderLanes(){
 ══════════════════════════════════════════════ */
 // On first load, initialize without wiping existing data
 if(!localStorage.getItem('luminark_initialized')){
-  localStorage.setItem('luminark_initialized','v1.0');
+  localStorage.setItem('luminark_initialized','v1.1');
   localStorage.setItem('luminark_version','LLO_v1.0');
 }
 
