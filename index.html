@@ -662,7 +662,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
     <div class="sidebar-section-label">Operations</div>
     <button class="nav-item active" onclick="nav('dashboard',this)"><span class="nav-icon">◈</span> Carrier Board</button>
     <button class="nav-item" onclick="nav('calculator',this)"><span class="nav-icon">⊛</span> Yield Calculator</button>
-    <button class="nav-item" onclick="nav('ghost',this)"><span class="nav-icon">◎</span> Ghost Filter <span class="nav-badge">2</span></button>
+    <button class="nav-item" onclick="nav('ghost',this)"><span class="nav-icon">◎</span> Data Consistency Heuristic <span class="nav-badge">2</span></button>
     <button class="nav-item" onclick="nav('lanes',this)"><span class="nav-icon">⊞</span> Lane Pressure</button>
     <button class="nav-item" onclick="nav('checkin',this)"><span class="nav-icon">⬡</span> Check-In Exchange <span class="nav-badge" id="checkin-badge">6</span></button>
     <div class="sidebar-section-label">Intelligence</div>
@@ -862,13 +862,13 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
       <div class="card">
         <div class="card-title">How the detection algorithm works</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px;">
-          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The Ghost Filter scores the <em>absence of authentic operational variance</em> as the primary fraud signal.
+          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The Ghost Filter scores the <em>absence of authentic operational variance</em> as a prototype data-review flag.
         </p>
-        <div class="math-row">Ghost Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
+        <div class="math-row">Consistency Review Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
         <div class="math-row">authority_age = min(carrier_age_yrs × 20, 100) · volume_variance = normalized load history variance</div>
-        <div class="math-row">contact_anomaly = (10 − contact_quality) × 10 · Flag threshold: score &lt; 35 → Ghost pattern confirmed</div>
+        <div class="math-row">contact_anomaly = (10 − contact_quality) × 10 · Prototype threshold: score &lt; 35 → manual review flag only; not proof of fraud or misrepresentation</div>
         <div class="alert alert-warn" style="margin-top:10px;">
-          <strong>Primary signal:</strong> A carrier available on every lane, answering on the first ring, with zero capacity constraints is a red flag — not a green one. Unlimited availability = synthetic operation. Legitimate owner-operators have defined capacity windows.
+          <strong>Primary signal:</strong> A carrier profile with unusual availability or limited operating variance may warrant independent verification; this pattern alone is not proof of misconduct — not a green one. Unlimited availability = synthetic operation. Legitimate owner-operators have defined capacity windows.
         </div>
       </div>
       <div class="table-wrap">
@@ -911,14 +911,14 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
     <div id="page-sap" class="page">
       <div class="page-header">
         <div class="page-title">SAP Risk Stage Index</div>
-        <div class="page-sub">10-stage carrier risk framework — dispatch guidance, failure prediction, and recovery routing</div>
+        <div class="page-sub">10-stage framework-based review view — exploratory labels only, not dispatch guidance or failure prediction</div>
       </div>
       <div class="card">
-        <div class="card-title">The Blind Spot Metric — why perfect scorecards mask real risk</div>
+        <div class="card-title">Framework Hypothesis — how capacity and communication inputs may diverge</div>
         <div class="grid-2">
           <div class="inv-box inv-stable">
             <div class="inv-label">High Asset Density — Even stages (2, 4, 6, 8)</div>
-            <div class="inv-body">Fleet capacity present and bookable. HOS banked. Equipment available. Surface metrics look strong. <strong style="color:#6fcd80;">Stage 4 is the sweet spot.</strong> Stage 8 has the identical surface profile — with maximum failure risk underneath. Asset Density alone is never sufficient for dispatch decisions.</div>
+            <div class="inv-body">Fleet capacity present and bookable. HOS banked. Equipment available. Surface metrics look strong. <strong style="color:#6fcd80;">Stage 4 is the framework's baseline reference; no operational optimum is established.</strong> The framework hypothesizes that similar surface inputs may conceal different conditions; this has not been validated against carrier outcomes. Asset Density alone is never sufficient for dispatch decisions.</div>
           </div>
           <div class="inv-box inv-unstable">
             <div class="inv-label">Constrained Capacity — Odd stages (1, 3, 5, 7)</div>
@@ -1008,7 +1008,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
               <tr><td>C.Unstable</td><td>Signal Breakdown</td><td>Unresponsive / Ghosting Risk</td></tr>
               <tr><td>Entropy Accumulation</td><td>Risk Score Increase</td><td>Failure Probability Trending Up</td></tr>
               <tr><td>Blind Spot Metric</td><td>Hidden Risk Indicator</td><td>Good Metrics Masking Bad Operations</td></tr>
-              <tr><td>Axiom Yield</td><td>Carrier Reliability Score</td><td>Predictive Load Acceptance Rating</td></tr>
+              <tr><td>Axiom Yield</td><td>Carrier Reliability Score</td><td>Experimental Load Review Score</td></tr>
               <tr><td>Operating Pattern Analysis</td><td>MC Operational Fingerprint</td><td>Fraud Detection Algorithm</td></tr>
               <tr><td>Lane Entropy</td><td>Corridor Capacity Tension</td><td>Market Tightness Index</td></tr>
               <tr><td>Tension Score</td><td>Operational Stress Level</td><td>Breakdown Probability</td></tr>
@@ -1022,12 +1022,12 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
     <div id="page-about" class="page">
       <div class="page-header">
         <div class="page-title">About Luminark Logistics Overwatch</div>
-        <div class="page-sub">Predictive carrier risk intelligence for freight brokers, 3PLs, and dispatch operations — backed by MAAT</div>
+        <div class="page-sub">Experimental carrier review-scoring prototype for discussion and testing</div>
       </div>
       <div class="card">
         <div class="card-title">What this is</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;margin-bottom:12px;">
-          Luminark Logistics Overwatch is a predictive carrier risk platform built on a proprietary 10-stage operational lifecycle framework developed by <strong style="color:var(--text);font-weight:500;">Meridian Axiom Alignment Technologies (MAAT)</strong>. Standard load board tools show historical compliance data. Overwatch shows where a carrier is <em>going</em> — scoring current operating conditions against a predictive failure model before the load is tendered.
+          Luminark Logistics Overwatch is an experimental rule-based review prototype built around the owner's 0-9-0 / SAP framework. It applies manually entered operating indicators to produce heuristic scores and stage labels. It does not establish where a carrier is going or predict failure; it is not connected to verified live carrier data. The project owner states that the underlying concept originated with him and that AI systems generated the implementation code. The prototype scores current operating conditions against a predictive failure model before the load is tendered.
         </p>
         <p style="font-size:13px;color:var(--text-2);line-height:1.8;">
           The platform identifies Stage 8 carriers — those who appear fully compliant but are 24–72 hours from a service failure — before the load is booked. It also screens for ghost carrier MC patterns, tracks lane capacity pressure ahead of market visibility, and delivers dispatch-ready guidance for every risk stage.
@@ -1036,15 +1036,15 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px;">
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊛ Axiom Yield Score</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">0–100 predictive reliability score from four dispatch metrics. Replaces gut-feel carrier selection with a repeatable, data-driven protocol. Any score below 40 is a do-not-dispatch signal.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">0–100 predictive reliability score from four manually entered review inputs. The score is an experimental heuristic, not a validated reliability measure. A value below 40 is a manual-review prompt only, not a dispatch decision.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
-          <div class="card-title">◎ Ghost Carrier Filter</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier fraud patterns. The filter scores the absence of authentic operational variance as the primary fraud signal. Unlimited availability with no capacity constraints is the tell.</p>
+          <div class="card-title">◎ Data Consistency Review</div>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier fraud patterns. The filter scores the absence of authentic operational variance as a prototype data-review flag. Unlimited availability with no capacity constraints is the tell.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊞ Lane Pressure Intelligence</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Corridor-level capacity forecasting 24–48 hrs ahead of board visibility. Stage 8 lanes get a 1.15x–1.25x rate multiplier recommendation before the shortage is visible. Quote now. Negotiate later.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">Exploratory corridor-level scenario score. No 24–48 hour forecast has been validated. Rate multipliers are illustrative examples, not pricing recommendations.</p>
         </div>
       </div>
       <div class="card">
