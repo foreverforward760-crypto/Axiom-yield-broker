@@ -646,14 +646,14 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
       <div class="brand-icon">LO</div>
       <div>
         <div class="brand-name">Luminark Logistics Overwatch</div>
-        <div class="brand-tag">Predictive Intelligence for the Modern Brokerage · LLO v1.1</div>
+        <div class="brand-tag">Prototype Carrier Review Scoring · LLO v1.1</div>
       </div>
     </div>
     <div class="topbar-right">
       <button class="legend-btn" onclick="openModal('legend-modal')">▦ Risk Legend</button>
       <button class="comm-btn" onclick="openModal('comm-modal')">📞 Signal Check</button>
       <div class="status-dot"></div>
-      <span class="status-label">Live</span>
+      <span class="status-label">Demo</span>
       <span class="version-badge">LLO v1.1</span>
     </div>
   </header>
@@ -856,13 +856,13 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
     <!-- ── GHOST FILTER ── -->
     <div id="page-ghost" class="page">
       <div class="page-header">
-        <div class="page-title">Ghost Carrier Detection Filter</div>
-        <div class="page-sub">Fraudulent MC pattern screening — Operating Pattern Analysis algorithm</div>
+        <div class="page-title">Data Consistency Review</div>
+        <div class="page-sub">Manual MC-number and data-consistency review — experimental heuristic only</div>
       </div>
       <div class="card">
-        <div class="card-title">How the detection algorithm works</div>
+        <div class="card-title">How the review heuristic is calculated</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px;">
-          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The Ghost Filter scores the <em>absence of authentic operational variance</em> as a prototype data-review flag.
+          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The consistency heuristic scores the <em>absence of authentic operational variance</em> as a prototype data-review flag.
         </p>
         <div class="math-row">Consistency Review Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
         <div class="math-row">authority_age = min(carrier_age_yrs × 20, 100) · volume_variance = normalized load history variance</div>
@@ -952,7 +952,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
           <div class="gloss-item">
             <div class="gloss-term">Asset Density</div>
             <div class="gloss-alias">SAP: P.Stable · Equipment / Driver Availability</div>
-            <div class="gloss-def">An input category intended to represent reported carrier capacity. The prototype does not independently verify trucks, hours of service, operating authority, or equipment. The Stage 8 interpretation is a framework hypothesis, not a validated carrier behavior. maximum failure risk underneath. Asset Density alone never justifies a dispatch decision.</div>
+            <div class="gloss-def">An input category intended to represent reported carrier capacity. The prototype does not independently verify trucks, hours of service, operating authority, or equipment. The Stage 8 interpretation is a framework hypothesis, not a validated carrier behavior. an unvalidated hidden-pressure hypothesis. Asset Density alone never justifies a dispatch decision.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Signal Integrity</div>
@@ -975,7 +975,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
             <div class="gloss-def">Triggered when a carrier shows high Asset Density (strong HOS, clean metrics) combined with 14+ days without a recovery run. The calculator surfaces this automatically. A truck running perfectly for two weeks with no rest window is a ticking time bomb — the rigidity flag fires before Stage 8 is formally reached.</div>
           </div>
           <div class="gloss-item">
-            <div class="gloss-term">Ghost Score</div>
+            <div class="gloss-term">Consistency Review Score</div>
             <div class="gloss-alias">Operating Pattern Analysis / Fraud Detection</div>
             <div class="gloss-def">Composite fraud score from MC authority age, load volume variance, and contact anomaly index. Scores below 35 confirm a synthetic carrier — no authentic growth history, unlimited availability, recently issued authority with no verifiable freight activity. Primary signal: absence of legitimate operational variance.</div>
           </div>
@@ -1040,7 +1040,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
         </div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">◎ Data Consistency Review</div>
-          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC number screening against synthetic carrier fraud patterns. The filter scores the absence of authentic operational variance as a prototype data-review flag. Unlimited availability with no capacity constraints is the tell.</p>
+          <p style="font-size:12px;color:var(--text-2);line-height:1.6;">MC-number and input consistency checks using demonstration values; this is not fraud detection. The filter scores the absence of authentic operational variance as a prototype data-review flag. Unlimited availability with no capacity constraints is the tell.</p>
         </div>
         <div class="card" style="margin-bottom:0;">
           <div class="card-title">⊞ Lane Pressure Intelligence</div>
