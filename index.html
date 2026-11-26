@@ -646,7 +646,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
       <div class="brand-icon">LO</div>
       <div>
         <div class="brand-name">Luminark Logistics Overwatch</div>
-        <div class="brand-tag">Prototype Carrier Review Scoring · LLO v1.1</div>
+        <div class="brand-tag">Carrier Risk Intelligence Concept — Prototype · LLO v1.1</div>
       </div>
     </div>
     <div class="topbar-right">
@@ -856,15 +856,15 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
     <!-- ── GHOST FILTER ── -->
     <div id="page-ghost" class="page">
       <div class="page-header">
-        <div class="page-title">Data Consistency Review</div>
-        <div class="page-sub">Manual MC-number and data-consistency review — experimental heuristic only</div>
+        <div class="page-title">Ghost Carrier Pattern Review (Experimental)</div>
+        <div class="page-sub">Ghost Carrier Filter — experimental pattern heuristic using demonstration inputs; not fraud detection or proof of misconduct</div>
       </div>
       <div class="card">
         <div class="card-title">How the review heuristic is calculated</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:12px;">
-          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The consistency heuristic scores the <em>absence of authentic operational variance</em> as a prototype data-review flag.
+          Legitimate carriers build operational history through natural growth cycles — high volume periods followed by capacity contraction, route changes, and recovery. This creates measurable variance. <strong style="color:var(--text);font-weight:500;">Fraudulent carriers show none of it.</strong> Their MC history is artificially clean: recently issued authority, zero load variance, suspiciously high contact responsiveness across every lane. The Ghost Carrier heuristic scores the <em>absence of authentic operational variance</em> as a prototype data-review flag.
         </p>
-        <div class="math-row">Consistency Review Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
+        <div class="math-row">Ghost Pattern Review Score = (authority_age × 0.30) + (volume_variance × 0.40) + (contact_anomaly × 0.30)</div>
         <div class="math-row">authority_age = min(carrier_age_yrs × 20, 100) · volume_variance = normalized load history variance</div>
         <div class="math-row">contact_anomaly = (10 − contact_quality) × 10 · Prototype threshold: score &lt; 35 → manual review flag only; not proof of fraud or misrepresentation</div>
         <div class="alert alert-warn" style="margin-top:10px;">
@@ -946,7 +946,7 @@ Scores use hand-defined rules and user-entered or demonstration values. No verif
         <div class="glossary-grid">
           <div class="gloss-item">
             <div class="gloss-term">Axiom Yield Score (AYS)</div>
-            <div class="gloss-alias">Experimental Load Review Score</div>
+            <div class="gloss-alias">Axiom Yield Score (AYS) — Experimental Load Review Score</div>
             <div class="gloss-def">An experimental 0–100 heuristic score derived from four manually entered operating inputs. A score below 40 is a review flag only; it is not a validated dispatch rule or a substitute for carrier qualification, safety checks, or independent verification.</div>
           </div>
           <div class="gloss-item">
