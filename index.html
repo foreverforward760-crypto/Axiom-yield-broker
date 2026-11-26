@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luminark Logistics Overwatch — Predictive Carrier Risk Intelligence</title>
+<title>Luminark Logistics Overwatch — Carrier Scoring Prototype</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -417,6 +417,10 @@
 </style>
 </head>
 <body>
+<div role="note" aria-label="Prototype limitations" style="background:#3b1f12;color:#fff0df;border-bottom:1px solid #b66a32;padding:10px 18px;font:12px/1.6 Arial,sans-serif;">
+<strong>EXPERIMENTAL PROTOTYPE — NOT A DISPATCH OR PRICING DECISION TOOL.</strong>
+Scores use hand-defined rules and user-entered or demonstration values. No verified live ELD, carrier, load-board, or market feed is established; no predictive accuracy or 24–48 hour forecasting has been demonstrated. Independently verify all carrier and lane information before making operational decisions.
+</div>
 
 <!-- ── RISK LEGEND MODAL ── -->
 <div class="modal-overlay" id="legend-modal" onclick="if(event.target===this)closeModal('legend-modal')">
@@ -877,12 +881,12 @@
     <div id="page-lanes" class="page">
       <div class="page-header">
         <div class="page-title">Lane Pressure Map</div>
-        <div class="page-sub">Market Tightness Index by corridor — rate multipliers and capacity forecasting 24–48 hrs ahead of the board</div>
+        <div class="page-sub">Exploratory market-tightness score by corridor — no validated 24–48 hour forecast</div>
       </div>
       <div class="card">
         <div class="card-title">Reading lane pressure stages</div>
         <p style="font-size:13px;color:var(--text-2);line-height:1.7;">
-          Every freight corridor cycles through predictable capacity stages. A lane entering <strong style="color:var(--text);font-weight:500;">Stage 8 (Eye of the Storm)</strong> shows strong load board availability and flat spot rates — right before a capacity collapse. The Overwatch engine identifies this inflection 24–48 hours before it appears on the board. Quote the multiplier now. When the market sees the shortage, you already locked the rate.
+          This prototype explores a hypothesis that apparently healthy load-board availability and flat spot rates may coexist with underlying capacity pressure. The current code does not establish that it can identify a shortage 24–48 hours in advance. Verify current market data independently; do not treat the displayed multiplier as a rate recommendation.
         </p>
         <div class="math-row">Lane pressure index = (demand_vol / 10 × 60) + (inverse_capacity / 10 × 40)</div>
         <div class="math-row">Rate multiplier = 1 + (pressure_score / 100 × 0.25) · Stage 8 lanes → 1.15x–1.25x base rate</div>
@@ -942,23 +946,23 @@
         <div class="glossary-grid">
           <div class="gloss-item">
             <div class="gloss-term">Axiom Yield Score (AYS)</div>
-            <div class="gloss-alias">Predictive Load Acceptance Rating</div>
-            <div class="gloss-def">A composite 0–100 carrier reliability score from four operating inputs: HOS availability, route volatility, Signal Integrity, and recovery debt. Any score below 40 is a do-not-dispatch signal regardless of load board history.</div>
+            <div class="gloss-alias">Experimental Load Review Score</div>
+            <div class="gloss-def">An experimental 0–100 heuristic score derived from four manually entered operating inputs. A score below 40 is a review flag only; it is not a validated dispatch rule or a substitute for carrier qualification, safety checks, or independent verification.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Asset Density</div>
             <div class="gloss-alias">SAP: P.Stable · Equipment / Driver Availability</div>
-            <div class="gloss-def">The physical capacity of a carrier at the current moment — trucks available, HOS banked, active authority, equipment on the road. Critically: Stage 8 carriers have maximum Asset Density while concealing maximum failure risk underneath. Asset Density alone never justifies a dispatch decision.</div>
+            <div class="gloss-def">An input category intended to represent reported carrier capacity. The prototype does not independently verify trucks, hours of service, operating authority, or equipment. The Stage 8 interpretation is a framework hypothesis, not a validated carrier behavior. maximum failure risk underneath. Asset Density alone never justifies a dispatch decision.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Signal Integrity</div>
             <div class="gloss-alias">SAP: C.Stable · Dispatch Responsiveness</div>
-            <div class="gloss-def">The honesty, accuracy, and reliability of communication from driver or dispatcher. High Signal Integrity: check calls accurate, ETAs realistic, problems disclosed proactively. Signal Integrity degrading while Asset Density stays high is the Stage 8 early warning signature. Use the 📞 Signal Check tool to score this during every vetting call.</div>
+            <div class="gloss-def">A manually assessed communication-quality category. Check calls, ETAs, and problem disclosures should be verified independently. The Stage 8 relationship is a prototype hypothesis, not a validated early-warning signature; this score is not a substitute for a documented carrier-vetting process.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Blind Spot Metric</div>
             <div class="gloss-alias">Hidden Risk Indicator · Good Metrics Masking Bad Operations</div>
-            <div class="gloss-def">The core Stage 8 detection mechanism. When Asset Density is highest, Signal Integrity pressure accumulates invisibly underneath. A carrier's surface compliance score is inversely correlated with true failure risk at Stage 8. Good metrics masking bad operations — what load boards cannot see.</div>
+            <div class="gloss-def">An internal Stage 8 heuristic label. It describes a pattern hypothesized by the framework; the repository does not establish that it detects hidden carrier risk or predicts future events. A carrier's surface compliance score is inversely correlated with true failure risk at Stage 8. Good metrics masking bad operations — what load boards cannot see.</div>
           </div>
           <div class="gloss-item">
             <div class="gloss-term">Recovery Debt</div>
@@ -978,7 +982,7 @@
           <div class="gloss-item">
             <div class="gloss-term">Lane Pressure Index</div>
             <div class="gloss-alias">Market Tightness Index / Corridor Capacity Tension</div>
-            <div class="gloss-def">Corridor-level capacity risk score tracking demand volume against available carrier supply. Used to set rate multipliers 24–48 hours before market-visible shortages. Stage 8 lanes warrant 1.15x–1.25x base rate — booked before the board reflects the shortage.</div>
+            <div class="gloss-def">An experimental corridor-level score based on entered demand and capacity assumptions. It is not a live market feed or validated forecast. The suggested rate multipliers are scenario examples, not pricing recommendations.</div>
           </div>
         </div>
       </div>
