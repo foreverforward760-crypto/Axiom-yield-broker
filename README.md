@@ -20,6 +20,12 @@ A score or stage generated from user-entered or default values is not a verified
 
 The application should be treated as an exploratory decision-support prototype. It must not be used as the sole basis for dispatch, safety, insurance, lending, or other consequential decisions.
 
+## Conceptual provenance
+
+The project owner states that the underlying concepts, product idea, and 0-9-0 / SAP framework applications in this repository originated with him. AI systems generated the implementation code and suggested technical mechanisms used to express those concepts. NSDT and the Container Rule were introduced by AI as supporting implementation mechanisms within the owner's framework, not as independent conceptual origins.
+
+This records the project owner's account; it is not a legal determination of copyright ownership, inventorship, or exclusive rights.
+
 ## Validation required
 
 A credible pilot would require authorized carrier and ELD data, a defined prediction target and time window, time-separated test data, comparison with existing baselines, and prospective measurement of outcomes.
